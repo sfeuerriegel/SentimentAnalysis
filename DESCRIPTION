@@ -1,0 +1,38 @@
+Package: SentimentAnalysis
+Type: Package
+Title: Dictionary-based sentiment analysis
+Version: 1.0-0
+Date: 2016-06-26
+Authors@R: c(person("Stefan", "Feuerriegel", email="stefan.feuerriegel@is.uni-freiburg.de",
+                    role=c("aut", "cre")),
+             person("Nicolas", "Proellochs", email="nicolas.proellochs@is.uni-freiburg.de",
+                    role=c("aut")))
+Author: Stefan Feuerriegel [aut, cre],
+  Nicolas Proellochs [aut]
+Maintainer: Stefan Feuerriegel <stefan.feuerriegel@is.uni-freiburg.de>
+Description: Performs a sentiment analysis of textual contents in R. This implementation
+    utilizes various existing dictionaries, such as General Inquirer, Harvard IV or 
+    Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter 
+    uses LASSO regularization as a statistical approach to select relevant terms based on 
+    an exogeneous response variable. 
+License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Imports: 
+    tm (>= 0.6),
+    qdapDictionaries,
+    ngramrr (>= 0.1),
+    moments,
+    stringdist,
+    SnowballC,
+    XML,
+    glmnet,
+    ggplot2,
+    mgcv
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+LazyData: true
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr

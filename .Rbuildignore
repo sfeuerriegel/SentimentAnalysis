@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^source_data.*$
+^SentimentAnalysis\.pdf$
+^data-raw$
+^README\.Rmd$
+^README-.*\.png$

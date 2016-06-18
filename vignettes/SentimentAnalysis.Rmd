@@ -1,0 +1,231 @@
+---
+title: "Introduction to SentimentAnalysis"
+author: 
+- "Stefan Feuerriegel"
+- "Nicolas Pröllochs"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to SentimentAnalysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+**SentimentAnalysis** performs a sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms  based on an exogeneous response variable. 
+
+## Install
+Using the **devtools** package, you can easily install the latest development version of **SentimentAnalysis** with
+
+```{r,eval=FALSE}
+library(devtools)
+
+# Option 1: download and install latest version from GitHub
+install_github("TODO")
+
+# Option 2: install directly from bundled archive
+install_local("SentimentAnalysis_1.0.0.tar.gz")
+```
+
+Note: that you have to specify the path either to the directory of **SentimentAnalysis** or to the bundled archive **SentimentAnalysis_1.0.0.tar.gz**
+
+## Usage
+
+This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published the latest. 
+
+```{r}
+library(SentimentAnalysis)
+```
+
+## Brief demonstration
+
+```{r}
+# Analyze a single string to obtain a binary response (positive / negative)
+sentiment <- analyzeSentiment("Yeah, this was a great soccer game of the German team!")
+convertToBinaryResponse(sentiment)$SentimentGI
+```
+
+```{r}
+# Create a vector of strings
+documents <- c("Wow, I really like the new light sabers!",
+               "That book was excellent.",
+               "R is a fantastic language.",
+               "The service in this restaurant was miserable.",
+               "This is neither positive or negative.",
+               "The waiter forget about my a dessert -- what a poor service!")
+
+# Analyze sentiment
+sentiment <- analyzeSentiment(documents)
+
+# Extract dictionary-based sentiment according to the Harvard-IV dictionary
+sentiment$SentimentGI
+
+# View sentiment direction (i.e. positive, neutral and negative)
+convertToDirection(sentiment$SentimentGI)
+
+response <- c(+1, +1, +1, -1, 0, -1)
+
+compareToResponse(sentiment, response)
+
+plotSentimentResponse(sentiment$SentimentGI, response)
+```
+
+The **SentimentAnalysis** package works very clever and neatly here in order to remove the effort
+for the user: it recognizes that the user has inserted
+a vector of strings and thus automatically performs a set of default preprocessing operations from
+text mining. Hence, it tokenizes each document and finally converts the input into a 
+document-term matrix. All of the previous operations are undertaken without manual specification. 
+The **analyzeSentiment** routine also accepts other input formats in case the user has already
+performed a preprocessing or wants to specify a specific set of operations.
+
+## Interface
+
+dtm
+VectorSource
+stirngs
+
+## Built-in dictionaries
+
+The **SentimentAnalysis** package entails three different dictionaries:
+* Harvard-IV dictionary as used in the General Inquirer program
+* Henry's Financial dictionary
+* Loughran-McDonald Financial dictionary
+All of them can be manually inspected and even accessed as follows:
+
+```{r}
+# Make dictionary available in the current R environment
+data(DictionaryGI)
+# Display the internal structure 
+str(DictionaryGI)
+# Access dictionary as an object of type SentimentDictionary
+dict.GI <- loadDictionaryGI()
+# Print summary statistics of dictionary
+summary(dict.GI)
+
+data(DictionaryHE)
+str(DictionaryHE)
+
+data(DictionaryLM)
+str(DictionaryLM)
+```
+
+## Sentiment analysis with built-in dictionaries
+
+## Dictionary generation
+
+```{r}
+# Create a vector of strings
+documents <- c("This is a good thing!",
+               "This is a very good thing!",
+               "This is okay.",
+               "This is a bad thing.",
+               "This is a very bad thing.")
+response <- c(1, 0.5, 0, -0.5, -1)
+
+# Generate dictionary with LASSO regularization
+dict <- generateDictionary(documents, response)
+
+dict
+
+summary(dict)
+
+compareDictionaries(dict,
+                    loadDictionaryGI())
+
+sentiment <- predict(dict, documents)
+compareToResponse(sentiment, response)
+plotSentimentResponse(sentiment, response)
+```
+
+```{r}
+test_documents <- c("This is neither good nor bad",
+                    "What a good idea!",
+                    "Not bad")
+test_response <- c(0, 1, 1)
+
+pred <- predict(dict, test_documents)
+
+compareToResponse(pred, test_response)
+plotSentimentResponse(pred, test_response)
+
+# TODO: compare to static dictionary
+```
+
+## Performance evaluation
+
+## Visualizations
+
+## Aggregation of documents
+
+## Worked examples
+
+Reuters oil
+
+```{r}
+library(tm)
+data(crude)
+
+# Analyze sentiment
+sentiment <- analyzeSentiment(crude)
+
+# Count positive and negative news releases
+table(convertToBinaryResponse(sentiment$SentimentLM))
+
+# News releases with highest and lowest sentiment
+crude[[which.max(sentiment$SentimentLM)]]$meta$heading
+crude[[which.min(sentiment$SentimentLM)]]$meta$heading
+
+# View summary statistics of sentiment variable
+summary(sentiment$SentimentLM)
+
+# Visualize distribution of standardized sentiment variable
+hist(scale(sentiment$SentimentLM))
+
+# Compute cross-correlation 
+cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentGI")])
+
+# TODO: crude oil returns 1987-02-26 until 1987-03-02 with aggregate
+datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
+plotSentiment(sentiment$SentimentLM)
+plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
+```
+
+IMDb
+```{r}
+imdb <- loadImdb()
+# Save locally for further usages: save(imdb, file="imdb.Rdata")
+
+# Analyze sentiment
+sentiment <- analyzeSentiment(imdb$Corpus)
+compareToResponse(sentiment, imdb$Rating)
+plotSentimentResponse(sentiment$SentimentGI, imdb$Rating)
+
+# Generate Dictionary
+dict_imdb <- generateDictionary(imdb$Corpus, imdb$Rating, family="poisson")
+summary(dict_imdb)
+
+compareDictionaries(dict_imdb,
+                    loadDictionaryGI())
+
+# Show estimated coefficients with Kernel Density Estimation (KDE)
+plot(dict_imdb)
+plot(dict_imdb) + xlim(c(-0.1, 0.1))
+
+# Compute in-sample performance
+pred_sentiment <- predict(dict_imdb, imdb$Corpus)
+plotSentimentResponse(pred_sentiment, imdb$Rating)
+
+perf_dictionary <- compareToResponse(pred_sentiment, imdb$Rating)
+perf_sentimentGI <- compareToResponse(sentiment$SentimentGI, imdb$Rating)
+
+```
+library(tm)
+## References
+
+For further information refer to
+
+* [TODO DictGen](http://www.dgap.de/dgap/News/?newsType=ADHOC)
+
+## License
+
+**SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
+Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs
