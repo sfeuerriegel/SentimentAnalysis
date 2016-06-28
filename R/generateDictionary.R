@@ -68,6 +68,10 @@
 #' dictionary <- generateDictionary(documents, response, s="lambda.min")
 #' sentiment <- predict(dictionary, documents)
 #' compareToResponse(sentiment, response)
+#' 
+#' # Generate dictionary without LASSO intercept
+#' dictionary <- generateDictionary(documents, response, intercept=FALSE)
+#' dictionary$intercept
 #'  
 #' \dontrun{
 #' imdb <- loadImdb()
@@ -93,12 +97,14 @@
 #' pred_sentiment <- predict(dict_imdb, imdb$Corpus)
 #' compareToResponse(pred_sentiment, imdb$Rating)
 #' }
-#' @references Proellochs, Feuerriegel and Neumann (2015) \emph{Generating 
-#' Domain-Specific Dictionaries Using Bayesian Learning}, Proceedings of the 
-#' 23rd European Conference on Information Systems (ECIS 2015), Muenster, 
-#' Germany. URL: \url{http://dx.doi.org/10.2139/ssrn.2522884}
-#' @seealso \code{\link{analyzeSentiment}} \code{\link{predict.SentimentDictionaryWeighted}}
-#' \code{\link{plot.SentimentDictionaryWeighted}}  \code{\link{compareToResponse}} 
+#' @references Pr{\"o}llochs and Feuerriegel (2015). Generating Domain-Specific 
+#' Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
+#' Systems (ECIS 2015).
+#' @source \url{http://dx.doi.org/10.2139/ssrn.2522884}
+#' @keywords sentiment evaluation dictionary
+#' @seealso \code{\link{analyzeSentiment}}, \code{\link{predict.SentimentDictionaryWeighted}}, 
+#' \code{\link{plot.SentimentDictionaryWeighted}} and \code{\link{compareToResponse}} for
+#' advanced evaluations
 #' @rdname generateDictionary
 #' @export
 generateDictionary <- function(x, response, language="english", 
@@ -112,7 +118,7 @@ generateDictionary <- function(x, response, language="english",
 generateDictionary.Corpus <- function(x, response, language="english", 
                                       alpha=1, s="lambda.min", family="gaussian",
                                       minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  corpus <- preprocessCorpus(x, language, ...)
+  corpus <- preprocessCorpus(x, language)
   
   dtm <- tm::DocumentTermMatrix(corpus,
                                 control=list(minWordLength=minWordLength,
@@ -129,7 +135,7 @@ generateDictionary.Corpus <- function(x, response, language="english",
 generateDictionary.character <- function(x, response, language="english", 
                                          alpha=1, s="lambda.min", family="gaussian",
                                          minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  corpus <- transformIntoCorpus(x, ...)
+  corpus <- transformIntoCorpus(x)
   return(generateDictionary(corpus, response, language,
                             alpha, s, family,
                             minWordLength, sparsity, weighting, ...))

@@ -25,7 +25,8 @@ numNegativeEntries(SentimentDictionary(c("increase", "decrease", "exit"),
                                rep(NA, 3))) # returns 2
 }
 \seealso{
-\code{\link{numEntries}} 
-\code{\link{numPositiveEntries}}
+\code{\link{numEntries}} and 
+\code{\link{numPositiveEntries}} for more option to count the number of entries
 }
+\keyword{dictionary}
 

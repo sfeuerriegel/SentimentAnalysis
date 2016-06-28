@@ -26,4 +26,5 @@ summary(d)
 \seealso{
 \code{\link{SentimentDictionary}}
 }
+\keyword{dictionary}
 

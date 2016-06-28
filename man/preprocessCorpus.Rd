@@ -22,6 +22,9 @@ This helper function groups all standard preprocessing steps such that the usage
 package is more convenient. The result is a document-term matrix.
 }
 \seealso{
-\code{\link[tm]{DocumentTermMatrix}} \code{\link[tm]{TermDocumentMatrix}}
+\code{\link[tm]{DocumentTermMatrix}} and \code{\link[tm]{TermDocumentMatrix}} for
+the underlying class
 }
+\keyword{corpus}
+\keyword{preprocessing}
 

@@ -23,6 +23,8 @@
 #' # Extend plot with additional layout options
 #' plotSentiment(sentiment) + ggtitle("Evolving sentiment")
 #' plotSentiment(sentiment) + theme_void() 
+#' @keywords evaluation plots
+#' @seealso \code{\link{plotSentimentResponse}} and \code{\link{plot.SentimentDictionaryWeighted}} for further plotting options
 #' @export
 plotSentiment <- function(sentiment, 
                           x=NULL, 
@@ -81,6 +83,8 @@ plotSentiment <- function(sentiment,
 #' # Extend plot with additional layout options
 #' plotSentimentResponse(sentiment, response) + ggtitle("Scatterplot")
 #' plotSentimentResponse(sentiment, response) + theme_void() 
+#' @keywords evaluation plots
+#' @seealso \code{\link{plotSentiment}} and \code{\link{plot.SentimentDictionaryWeighted}} for further plotting options
 #' @export
 plotSentimentResponse <- function(sentiment, response,
                                   smoothing="gam",
@@ -120,6 +124,8 @@ plotSentimentResponse <- function(sentiment, response,
 #' # Extend plot with additional layout options
 #' plot(d) + ggtitle("KDE plot")
 #' plot(d) + theme_void() 
+#' @keywords evaluation plots
+#' @seealso \code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for further plotting options
 #' @export
 plot.SentimentDictionaryWeighted <- function(d, color="gray60", theme=ggplot2::theme_bw()) {
   scores <- NULL # surpress note "no visible binding"

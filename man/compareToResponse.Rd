@@ -51,4 +51,5 @@ compareToResponse(sentiment, response)
 response <- c(TRUE, TRUE, FALSE, FALSE)
 compareToResponse(sentiment, response)
 }
+\keyword{evaluation}
 

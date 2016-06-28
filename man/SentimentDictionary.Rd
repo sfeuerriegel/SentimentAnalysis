@@ -15,8 +15,9 @@ SentimentDictionary(...)
 Depending on the input, this function creates a new sentiment dictionary of different type.
 }
 \seealso{
-\code{\link{SentimentDictionaryWordlist}} 
-\code{\link{SentimentDictionaryBinary}} 
+\code{\link{SentimentDictionaryWordlist}}, 
+\code{\link{SentimentDictionaryBinary}}, 
 \code{\link{SentimentDictionaryWeighted}}
 }
+\keyword{dictionary}
 

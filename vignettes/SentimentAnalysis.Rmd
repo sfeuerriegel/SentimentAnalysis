@@ -2,7 +2,7 @@
 title: "Introduction to SentimentAnalysis"
 author: 
 - "Stefan Feuerriegel"
-- "Nicolas Pröllochs"
+- "Nicolas Proellochs"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -20,7 +20,7 @@ Using the **devtools** package, you can easily install the latest development ve
 library(devtools)
 
 # Option 1: download and install latest version from GitHub
-install_github("TODO")
+install_github("sfeuerriegel/SentimentAnalysis")
 
 # Option 2: install directly from bundled archive
 install_local("SentimentAnalysis_1.0.0.tar.gz")
@@ -64,9 +64,9 @@ convertToDirection(sentiment$SentimentGI)
 
 response <- c(+1, +1, +1, -1, 0, -1)
 
-compareToResponse(sentiment, response)
+#TODO: compareToResponse(sentiment, response)
 
-plotSentimentResponse(sentiment$SentimentGI, response)
+#TODO: plotSentimentResponse(sentiment$SentimentGI, response)
 ```
 
 The **SentimentAnalysis** package works very clever and neatly here in order to remove the effort
@@ -128,12 +128,13 @@ dict
 
 summary(dict)
 
-compareDictionaries(dict,
-                    loadDictionaryGI())
-
-sentiment <- predict(dict, documents)
-compareToResponse(sentiment, response)
-plotSentimentResponse(sentiment, response)
+#TODO
+# compareDictionaries(dict,
+#                     loadDictionaryGI())
+# 
+# sentiment <- predict(dict, documents)
+# compareToResponse(sentiment, response)
+# plotSentimentResponse(sentiment, response)
 ```
 
 ```{r}
@@ -189,35 +190,12 @@ plotSentiment(sentiment$SentimentLM)
 plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
 ```
 
-IMDb
-```{r}
-imdb <- loadImdb()
-# Save locally for further usages: save(imdb, file="imdb.Rdata")
+ngram
 
-# Analyze sentiment
-sentiment <- analyzeSentiment(imdb$Corpus)
-compareToResponse(sentiment, imdb$Rating)
-plotSentimentResponse(sentiment$SentimentGI, imdb$Rating)
+standardize and intercept
 
-# Generate Dictionary
-dict_imdb <- generateDictionary(imdb$Corpus, imdb$Rating, family="poisson")
-summary(dict_imdb)
+aggregate
 
-compareDictionaries(dict_imdb,
-                    loadDictionaryGI())
-
-# Show estimated coefficients with Kernel Density Estimation (KDE)
-plot(dict_imdb)
-plot(dict_imdb) + xlim(c(-0.1, 0.1))
-
-# Compute in-sample performance
-pred_sentiment <- predict(dict_imdb, imdb$Corpus)
-plotSentimentResponse(pred_sentiment, imdb$Rating)
-
-perf_dictionary <- compareToResponse(pred_sentiment, imdb$Rating)
-perf_sentimentGI <- compareToResponse(sentiment$SentimentGI, imdb$Rating)
-
-```
 library(tm)
 ## References
 

@@ -37,9 +37,11 @@
 #' negative). Hence, consider using the functions \code{\link{convertToBinaryResponse}} and
 #' \code{\link{convertToDirection}}, which can convert a vector of continuous sentiment
 #' scores into a factor object.
-#' @seealso \code{\link{compareToResponse}}, \code{\link{convertToBinaryResponse}}, 
-#' \code{\link{convertToDirection}} \code{\link{generateDictionary}} 
-#' \code{\link{plotSentiment}} \code{\link{plotSentimentResponse}}  
+#' @keywords sentiment
+#' @seealso \code{\link{compareToResponse}} for evaluating the results, 
+#' \code{\link{convertToBinaryResponse}} and \code{\link{convertToDirection}} for
+#' for getting binary results, \code{\link{generateDictionary}} for dictionary generation, 
+#' \code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for visualization
 #' @rdname analyzeSentiment
 #' @export
 "analyzeSentiment" <- function(x, language="english", aggregate=NULL, ...) {
@@ -89,9 +91,11 @@
     }
   }
   
-  return(as.data.frame(t(do.call(rbind, sent)), 
-                       stringsAsFactors=FALSE,
-                       row.names=NULL))
+  df <- as.data.frame(t(do.call(rbind, sent)), 
+                      stringsAsFactors=FALSE,
+                      row.names=NULL)
+  rownames(df) <- NULL
+  return(df)
 }
 
 #' Convert continuous sentiment to direction
@@ -118,6 +122,7 @@
 #' df
 #' convertToBinaryResponse(df)
 #' convertToDirection(df)
+#' @keywords sentiment evaluation
 #' @seealso \code{\link{convertToDirection}}
 #' @export
 convertToBinaryResponse <- function(sentiment) {
@@ -170,6 +175,7 @@ convertToBinaryResponse <- function(sentiment) {
 #' df
 #' convertToBinaryResponse(df)
 #' convertToDirection(df)
+#' @keywords sentiment evaluation
 #' @seealso \code{\link{convertToBinaryResponse}}
 #' @export
 convertToDirection <- function(sentiment) {
@@ -221,6 +227,7 @@ convertToDirection <- function(sentiment) {
 #' # binary response variable
 #' response <- c(TRUE, TRUE, FALSE, FALSE)
 #' compareToResponse(sentiment, response)
+#' @keywords evaluation
 #' @rdname compareToResponse
 #' @export 
 "compareToResponse" <- function(sentiment, response) {

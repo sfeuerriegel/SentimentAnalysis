@@ -44,4 +44,5 @@ unlink("example.dict")
 \seealso{
 \code{\link{write}} for creating such a file
 }
+\keyword{dictionary}
 

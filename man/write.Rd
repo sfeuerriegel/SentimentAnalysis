@@ -51,4 +51,5 @@ unlink("example.dict")
 \seealso{
 \code{\link{read}} for later access
 }
+\keyword{dictionary}
 

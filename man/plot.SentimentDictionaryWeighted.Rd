@@ -35,4 +35,9 @@ library(ggplot2)
 plot(d) + ggtitle("KDE plot")
 plot(d) + theme_void() 
 }
+\seealso{
+\code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for further plotting options
+}
+\keyword{evaluation}
+\keyword{plots}
 

@@ -45,7 +45,10 @@ sentiment <- predict(dictionary, documents)
 compareToResponse(sentiment, response)
 }
 \seealso{
-\code{\link{SentimentDictionaryWeighted}} \code{\link{generateDictionary}}
-\code{\link{compareToResponse}}
+\code{\link{SentimentDictionaryWeighted}}, \code{\link{generateDictionary}} and
+\code{\link{compareToResponse}} for default dictionary generations
 }
+\keyword{dictionary}
+\keyword{evaluation}
+\keyword{sentiment}
 

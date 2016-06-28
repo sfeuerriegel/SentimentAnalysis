@@ -52,4 +52,5 @@ Systems (ECIS 2015).
 \seealso{
 \code{\link{SentimentDictionary}}
 }
+\keyword{dictionary}
 

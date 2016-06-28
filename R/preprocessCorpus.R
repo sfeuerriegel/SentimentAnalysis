@@ -8,7 +8,9 @@
 #' @param stemming perform stemming (default: TRUE)
 #' @param language default language used for preprocessing (i.e. stop word removal and stemming)
 #' @param verbose print preprocessing status information
-#' @seealso \code{\link[tm]{DocumentTermMatrix}} \code{\link[tm]{TermDocumentMatrix}} 
+#' @keywords corpus preprocessing
+#' @seealso \code{\link[tm]{DocumentTermMatrix}} and \code{\link[tm]{TermDocumentMatrix}} for
+#' the underlying class
 #' @export
 "preprocessCorpus" <- function(corpus, language="english", stemming=TRUE, verbose=FALSE)  {  
   if (!inherits(corpus, "Corpus")) {

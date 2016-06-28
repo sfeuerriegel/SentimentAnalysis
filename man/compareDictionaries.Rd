@@ -7,11 +7,11 @@
 compareDictionaries(d1, d2)
 }
 \arguments{
-\item{d1}{is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}},
+\item{d1}{is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 \code{\link{SentimentDictionaryBinary}} or
 \code{\link{SentimentDictionaryWeighted}}}
 
-\item{d2}{is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}},
+\item{d2}{is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 \code{\link{SentimentDictionaryBinary}} or
 \code{\link{SentimentDictionaryWeighted}}}
 }
@@ -47,8 +47,9 @@ d2 <- SentimentDictionary(c("increase", "decrease", "drop", "neutral"),
 cmp <- compareDictionaries(d1, d2)
 }
 \seealso{
-\code{\link{SentimentDictionaryWordlist}} 
-\code{\link{SentimentDictionaryBinary}} 
-\code{\link{SentimentDictionaryWeighted}}
+\code{\link{SentimentDictionaryWordlist}}, 
+\code{\link{SentimentDictionaryBinary}}, 
+\code{\link{SentimentDictionaryWeighted}} for the specific classes
 }
+\keyword{dictionary}
 

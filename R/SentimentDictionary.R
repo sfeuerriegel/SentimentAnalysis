@@ -7,8 +7,9 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' @param ... Arguments as passed to one of the three functions 
 #' \code{\link{SentimentDictionaryWordlist}}, \code{\link{SentimentDictionaryBinary}} or
 #' \code{\link{SentimentDictionaryWeighted}}
-#' @seealso \code{\link{SentimentDictionaryWordlist}} 
-#' \code{\link{SentimentDictionaryBinary}} 
+#' @keywords dictionary
+#' @seealso \code{\link{SentimentDictionaryWordlist}}, 
+#' \code{\link{SentimentDictionaryBinary}}, 
 #' \code{\link{SentimentDictionaryWeighted}}
 #' @export
 "SentimentDictionary" <- function(...) {
@@ -35,6 +36,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' # alternative call
 #' d <- SentimentDictionary(c("uncertain", "possible", "likely"))
 #' summary(d)
+#' @keywords dictionary
 #' @seealso \code{\link{SentimentDictionary}}
 #' @export
 "SentimentDictionaryWordlist" <-  function(wordlist) {
@@ -63,6 +65,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' d <- SentimentDictionary(c("increase", "rise", "more"),
 #'                          c("fall", "drop"))
 #' summary(d)
+#' @keywords dictionary
 #' @seealso \code{\link{SentimentDictionary}}
 #' @export
 "SentimentDictionaryBinary" <-  function(positiveWords, negativeWords) {
@@ -107,6 +110,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
 #' Systems (ECIS 2015).
 #' @source \url{http://dx.doi.org/10.2139/ssrn.2522884}
+#' @keywords dictionary
 #' @seealso \code{\link{SentimentDictionary}}
 #' @export
 "SentimentDictionaryWeighted" <-  function(words, scores, idf, intercept=0) {
@@ -121,6 +125,12 @@ cat0 <- function(...) cat(..., "\n", sep="")
   }
   if (is.null(intercept) || !is.numeric(intercept) || length(intercept) > 1) {
     stop("Input variable intercept does not match expected format")
+  }
+  if (length(words) != length(scores)) {
+    stop("Arguments 'words' and 'scores' must be of same length.")
+  }
+  if (length(words) != length(idf)) {
+    stop("Arguments 'words' and 'idf' must be of same length.")
   }
 
   d <- structure(list(words=words, scores=scores, idf=idf, intercept=intercept),
@@ -137,7 +147,6 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' @return Dictionary of type \code{\link{SentimentDictionaryWordlist}},
 #' \code{\link{SentimentDictionaryBinary}} or
 #' \code{\link{SentimentDictionaryWeighted}}
-#' @seealso \code{\link{write}} for creating such a file
 #' @examples
 #' d.out <- SentimentDictionary(c("uncertain", "possible", "likely"))
 #' write(d.out, "example.dict")
@@ -159,6 +168,8 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' print(d.in)
 #' 
 #' unlink("example.dict")
+#' @keywords dictionary
+#' @seealso \code{\link{write}} for creating such a file
 #' @importFrom utils read.table
 #' @export
 "read" <- function(file) {
@@ -184,7 +195,6 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' \code{\link{SentimentDictionaryBinary}} or
 #' \code{\link{SentimentDictionaryWeighted}}
 #' @param file File to which the dictionary should be exported
-#' @seealso \code{\link{read}} for later access
 #' @examples
 #' d.out <- SentimentDictionary(c("uncertain", "possible", "likely"))
 #' write(d.out, "example.dict")
@@ -206,6 +216,8 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' print(d.in)
 #' 
 #' unlink("example.dict")
+#' @keywords dictionary
+#' @seealso \code{\link{read}} for later access
 #' @rdname write
 #' @export
 "write" <- function(d, file) {
@@ -259,8 +271,9 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' numEntries(SentimentDictionary(c("increase", "decrease", "exit"),
 #'                                c(+1, -1, -10),
 #'                                rep(NA, 3))) # returns 3
-#' @seealso \code{\link{numPositiveEntries}} 
-#' \code{\link{numNegativeEntries}} 
+#' @keywords dictionary
+#' @seealso \code{\link{numPositiveEntries}} and 
+#' \code{\link{numNegativeEntries}} for more option to count the number of entries
 #' @export
 "numEntries" <- function(d) {
   if (inherits(d, "SentimentDictionaryBinary")) {
@@ -287,8 +300,9 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' numPositiveEntries(SentimentDictionary(c("increase", "decrease", "exit"),
 #'                                c(+1, -1, -10),
 #'                                rep(NA, 3))) # returns 1
-#' @seealso \code{\link{numEntries}} 
-#' \code{\link{numNegativeEntries}}
+#' @keywords dictionary
+#' @seealso \code{\link{numEntries}} and
+#' \code{\link{numNegativeEntries}} for more option to count the number of entries
 #' @export
 "numPositiveEntries" <- function(d) {
   if (inherits(d, "SentimentDictionaryBinary")) {
@@ -313,8 +327,9 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' numNegativeEntries(SentimentDictionary(c("increase", "decrease", "exit"),
 #'                                c(+1, -1, -10),
 #'                                rep(NA, 3))) # returns 2
-#' @seealso \code{\link{numEntries}} 
-#' \code{\link{numPositiveEntries}}
+#' @keywords dictionary
+#' @seealso \code{\link{numEntries}} and 
+#' \code{\link{numPositiveEntries}} for more option to count the number of entries
 #' @export
 "numNegativeEntries" <- function(d) {
   if (inherits(d, "SentimentDictionaryBinary")) {
@@ -332,7 +347,6 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' @param x Sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 #' \code{\link{SentimentDictionaryBinary}} or \code{\link{SentimentDictionaryWeighted}}
 #' @param ... Additional parameters passed to specific sub-routines
-#' @seealso \code{\link{summary}} for showing a brief summary
 #' @examples
 #' print(SentimentDictionary(c("uncertain", "possible", "likely")))
 #' print(SentimentDictionary(c("increase", "rise", "more"),
@@ -340,6 +354,8 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' print(SentimentDictionary(c("increase", "decrease", "exit"),
 #'                           c(+1, -1, -10),
 #'                           rep(NA, 3)))
+#' @keywords dictionary
+#' @seealso \code{\link{summary}} for showing a brief summary
 #' @rdname print
 #' @export
 "print.SentimentDictionaryWordlist" <- function(x, ...) {
@@ -376,6 +392,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' @param object Sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 #' \code{\link{SentimentDictionaryBinary}} or \code{\link{SentimentDictionaryWeighted}}
 #' @param ... Additional parameters passed to specific sub-routines
+#' @keywords dictionary
 #' @seealso \code{\link{print}} for output the entries of a dictionary
 #' @examples
 #' summary(SentimentDictionary(c("uncertain", "possible", "likely")))
@@ -451,18 +468,15 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' Routine compares two dictionaries in terms of how similarities and differences. Among the 
 #' calculated measures are the total of distinct words, the overlap between both 
 #' dictionaries, etc. 
-#' @param d1 is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}},
+#' @param d1 is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 #' \code{\link{SentimentDictionaryBinary}} or
 #' \code{\link{SentimentDictionaryWeighted}}
-#' @param d2 is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}},
+#' @param d2 is the first sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 #' \code{\link{SentimentDictionaryBinary}} or
 #' \code{\link{SentimentDictionaryWeighted}}
 #' @return Returns list with different metrics depending on dictionary type
 #' @note Currently, this routine only supports the case where both dictionaries are of the
 #' same type
-#' @seealso \code{\link{SentimentDictionaryWordlist}} 
-#' \code{\link{SentimentDictionaryBinary}} 
-#' \code{\link{SentimentDictionaryWeighted}}
 #' @examples 
 #' d1 <- SentimentDictionary(c("uncertain", "possible", "likely"))
 #' d2 <- SentimentDictionary(c("rather", "intend", "likely"))
@@ -481,6 +495,10 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #'                           c(+2, -5, -1, 0),
 #'                           rep(NA, 4))
 #' cmp <- compareDictionaries(d1, d2)
+#' @keywords dictionary
+#' @seealso \code{\link{SentimentDictionaryWordlist}}, 
+#' \code{\link{SentimentDictionaryBinary}}, 
+#' \code{\link{SentimentDictionaryWeighted}} for the specific classes
 #' @importFrom stats cor
 #' @export
 "compareDictionaries" <- function(d1, d2) {

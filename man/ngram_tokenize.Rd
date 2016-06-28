@@ -39,4 +39,5 @@ tdm <- TermDocumentMatrix(ch.corpus,
                                                                            ngmin=1, ngmax=2)))
 inspect(tdm)
 }
+\keyword{preprocessing}
 

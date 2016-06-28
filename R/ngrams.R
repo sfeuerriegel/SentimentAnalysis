@@ -37,6 +37,7 @@ rep_grams <- function(text, ngmin=1, ngmax=2) {
 #'                                        tokenize=function(x) ngram_tokenize(x, char=TRUE, 
 #'                                                                            ngmin=1, ngmax=2)))
 #' inspect(tdm)
+#' @keywords preprocessing
 #' @export
 ngram_tokenize <- function(x, char=FALSE, ngmin=1, ngmax=3) {
   if (ngmin > ngmax) {

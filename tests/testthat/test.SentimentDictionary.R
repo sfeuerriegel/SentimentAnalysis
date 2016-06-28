@@ -101,6 +101,9 @@ test_that("weighted dictionary works correctly", {
   expect_equivalent(d$scores, scores)
   expect_equivalent(d$intercept, 3)
   expect_equivalent(d$idf, idf)  
+  
+  expect_error(SentimentDictionary(letters, 1:25, 1:26))
+  expect_error(SentimentDictionary(letters, 1:26, 1:25))
 })
 
 test_that("wordlist works correctly", {

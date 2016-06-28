@@ -32,4 +32,5 @@ print(SentimentDictionary(c("increase", "decrease", "exit"),
 \seealso{
 \code{\link{summary}} for showing a brief summary
 }
+\keyword{dictionary}
 

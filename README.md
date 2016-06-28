@@ -3,7 +3,8 @@
 Sentiment Analysis
 ==================
 
-[![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/rvest) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](http://cran.r-project.org/package=SentimentAnalysis) [![Coverage Status](https://img.shields.io/codecov/c/github/sfeuerriegel/SentimentAnalysis/master.svg)](https://codecov.io/github/sfeuerriegel/SentimentAnalysis?branch=master)
+<!-- [![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis) -->
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](http://cran.r-project.org/package=SentimentAnalysis) [![Coverage Status](https://img.shields.io/codecov/c/github/sfeuerriegel/SentimentAnalysis/master.svg)](https://codecov.io/github/sfeuerriegel/SentimentAnalysis?branch=master)
 
 **SentimentAnalysis** performs a **sentiment analysis** of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms based on an exogeneous response variable.
 
@@ -38,11 +39,6 @@ This section shows the basic functionality of how to perform a sentiment analysi
 
 ``` r
 library(SentimentAnalysis)
-#> 
-#> Attaching package: 'SentimentAnalysis'
-#> The following object is masked from 'package:base':
-#> 
-#>     write
 ```
 
 ### Quick demonstration
@@ -63,8 +59,6 @@ convertToBinaryResponse(sentiment)$SentimentGI
 The following demonstrates some of the functionality provided by **SentimentAnalysis**. It also shows its visualization and evaluation capabilities.
 
 ``` r
-library(SentimentAnalysis)
-
 # Create a vector of strings
 documents <- c("Wow, I really like the new light sabers!",
                "That book was excellent.",
@@ -99,9 +93,11 @@ Research in finance and social sciences nowadays utilizes content analysis to un
 
 The approach utilizes LASSO regularization to extract words from documents that statistically feature a positive and negative polarity. This immediately reveals manifold implications for practitioners, finance research and social sciences: researchers can use R to extract text components that are relevant for readers and test their hypothesis based on these.
 
--   Proellochs, Feuerriegel and Neumann (2015) \[Generating Domain-Specific Dictionaries Using Bayesian Learning\]{<http://dx.doi.org/10.2139/ssrn.2522884>}, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany.
+-   Proellochs, Feuerriegel and Neumann (2015) Generating Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. \[DOI: 10.2139/ssrn.2522884\]{<http://dx.doi.org/10.2139/ssrn.2522884>}
 
 License
 -------
 
-**SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs
+**SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs

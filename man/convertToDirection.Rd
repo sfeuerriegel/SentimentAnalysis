@@ -39,4 +39,6 @@ convertToDirection(df)
 \seealso{
 \code{\link{convertToBinaryResponse}}
 }
+\keyword{evaluation}
+\keyword{sentiment}
 

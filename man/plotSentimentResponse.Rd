@@ -47,4 +47,9 @@ library(ggplot2)
 plotSentimentResponse(sentiment, response) + ggtitle("Scatterplot")
 plotSentimentResponse(sentiment, response) + theme_void() 
 }
+\seealso{
+\code{\link{plotSentiment}} and \code{\link{plot.SentimentDictionaryWeighted}} for further plotting options
+}
+\keyword{evaluation}
+\keyword{plots}
 

@@ -41,4 +41,9 @@ library(ggplot2)
 plotSentiment(sentiment) + ggtitle("Evolving sentiment")
 plotSentiment(sentiment) + theme_void() 
 }
+\seealso{
+\code{\link{plotSentimentResponse}} and \code{\link{plot.SentimentDictionaryWeighted}} for further plotting options
+}
+\keyword{evaluation}
+\keyword{plots}
 

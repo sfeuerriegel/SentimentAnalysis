@@ -39,4 +39,6 @@ convertToDirection(df)
 \seealso{
 \code{\link{convertToDirection}}
 }
+\keyword{evaluation}
+\keyword{sentiment}
 

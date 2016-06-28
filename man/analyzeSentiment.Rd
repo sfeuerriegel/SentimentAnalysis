@@ -75,8 +75,10 @@ sentiment <- analyzeSentiment(dtm)
 compareToResponse(sentiment, c(TRUE, FALSE))
 }
 \seealso{
-\code{\link{compareToResponse}}, \code{\link{convertToBinaryResponse}}, 
-\code{\link{convertToDirection}} \code{\link{generateDictionary}} 
-\code{\link{plotSentiment}} \code{\link{plotSentimentResponse}}
+\code{\link{compareToResponse}} for evaluating the results, 
+\code{\link{convertToBinaryResponse}} and \code{\link{convertToDirection}} for
+for getting binary results, \code{\link{generateDictionary}} for dictionary generation, 
+\code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for visualization
 }
+\keyword{sentiment}
 
