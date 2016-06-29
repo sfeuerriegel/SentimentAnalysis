@@ -1,19 +1,56 @@
 ---
-title: "Introduction to SentimentAnalysis"
+title: "SentimentAnalysis Vignette"
 author: 
 - "Stefan Feuerriegel"
 - "Nicolas Proellochs"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+bibliography: bibliography.bib
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Introduction to SentimentAnalysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-**SentimentAnalysis** performs a sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms  based on an exogeneous response variable. 
+The **SentimentAnalysis** package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms  based on an exogeneous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
 
-## Install
+# Introduction
+
+Sentiment analysis is a research branch located at the heart of natural language processing (NLP), computational linguistics and text mining. It refers to any measure that extract subjective information from textual documents. In other words, it extracts the polarity of the expressed opinion in the range from being positive to negative. As a result, one refers to sentiment analysis also as *opinion mining* [@Pang.2008].
+
+## Applications in research
+
+Sentiment analysis has received great traction lately [@Ravi.2015; @Pang.2008], which we explore in the following. Current research in finance and the social sciences utilizes sentiment analysis to understand human decisions in response to textual materials. This immediately reveals manifold implications for practitioners, as well as those involved in the fields of finance research and the social sciences: researchers can use R to extract text components that are relevant for readers and test their hypotheses on this basis. By the same token, practitioners can measure which wording actually matters to their readership and enhance their writing accordingly [@ECIS.2015]. We demonstrate the added benefits in two case studies drawn from finance and the social sciences below.
+
+## Applications in practice
+
+Several applications demonstrate the use cases of sentiment analysis for organizations and enterprises:
+
+* **Finance:** Investors in financial markets refer to textual information in the form of financial news disclosures before exercising ownership in stocks. Interestingly, they not only rely on quantitiative numbers, but also soft information strongly influences stock prices, such as tone and sentiment [@Henry.2008; @Loughran.2011; @Tetlock.2007]. Automated traders then can automatically analyze the sentiment conveyed in financial disclosures in order to trigger investment decisions within milliseconds. 
+
+* **Marketing:** Marketing departments are often interested in tracking the brand image. For that purpose, they collect large volumes of user opinions from social media and evaluate the opinions of individuals towards brands, products and services. Furthermore, practioners from marketing can exploit the insights to enhance their wording according to the feedback of their readingship.
+
+* **Rating and review platforms:** Rating and review platforms support individuals by collecting user ratings or preferences towards products and services. Here, one can automatically process large volumes of user-generated content and exploit the knowledge there it. For example, one can identify which cues convey a positive and and negative opinion, or even automatically validate their credibility. 
+
+# Methods for sentiment analysis
+
+As sentiment analysis is applied to a broad variety of domains and textual sources, research has devised various approaches to measure sentiment. A recent literature overview [@Pang.2008] provides a comprehensive domain-independent survey. 
+
+TODO: dictionary-based (with formula)
+
+TODO: ML, including deep learning ref
+
+Common preprocessing
+
+
+# Setup of the SentimentAnalysis package
+
+Even though sentiment analysis has received great traction lately, the available tools are not yet living up to the needs of researchers. The **SentimentAnalysis** package is intended to partially close this gap and contributed capabilities that most research desires.
+
+# Installation
+
 Using the **devtools** package, you can easily install the latest development version of **SentimentAnalysis** with
 
 ```{r,eval=FALSE}
@@ -28,9 +65,7 @@ install_local("SentimentAnalysis_1.0.0.tar.gz")
 
 Note: that you have to specify the path either to the directory of **SentimentAnalysis** or to the bundled archive **SentimentAnalysis_1.0.0.tar.gz**
 
-## Usage
-
-This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published the latest. 
+Afterwards, one merely needs to load the **SentimentAnalysis** package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published the latest. 
 
 ```{r}
 library(SentimentAnalysis)
@@ -122,11 +157,11 @@ documents <- c("This is a good thing!",
 response <- c(1, 0.5, 0, -0.5, -1)
 
 # Generate dictionary with LASSO regularization
-dict <- generateDictionary(documents, response)
+#dict <- generateDictionary(documents, response)
 
-dict
+#dict
 
-summary(dict)
+#summary(dict)
 
 #TODO
 # compareDictionaries(dict,
@@ -138,15 +173,15 @@ summary(dict)
 ```
 
 ```{r}
-test_documents <- c("This is neither good nor bad",
-                    "What a good idea!",
-                    "Not bad")
-test_response <- c(0, 1, 1)
+#test_documents <- c("This is neither good nor bad",
+#                    "What a good idea!",
+#                    "Not bad")
+#test_response <- c(0, 1, 1)
 
-pred <- predict(dict, test_documents)
+#pred <- predict(dict, test_documents)
 
-compareToResponse(pred, test_response)
-plotSentimentResponse(pred, test_response)
+#compareToResponse(pred, test_response)
+#plotSentimentResponse(pred, test_response)
 
 # TODO: compare to static dictionary
 ```
@@ -186,8 +221,8 @@ cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentGI")])
 
 # TODO: crude oil returns 1987-02-26 until 1987-03-02 with aggregate
 datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
-plotSentiment(sentiment$SentimentLM)
-plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
+#plotSentiment(sentiment$SentimentLM)
+#plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
 ```
 
 ngram
@@ -197,13 +232,24 @@ standardize and intercept
 aggregate
 
 library(tm)
-## References
 
-For further information refer to
+# Language support and extensibility
 
-* [TODO DictGen](http://www.dgap.de/dgap/News/?newsType=ADHOC)
 
-## License
+
+# Outlook
+
+The current version still opens avenues for further enhancement. In the future, we see the following items as subject to improvements:
+
+* **Negations:** We envision a generic negation rule object, that can be injected to negate fixed windows or apply complex negation rules [@DSS.2016].
+
+* **Multi-language support:** The current version has built-in dictionaries for the English language only. We think that the package can greatly benefit from support of further languages. As such, one does not need to adapt the preprocessing routines as the underlying **tm** package has already support for further languages. Instead, it is only required to tailored dictionarie.
+
+We cordially invite everyone to contribute source code, dictionaries and further demos. 
+
+# License
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
 Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs
+
+# References

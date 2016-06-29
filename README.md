@@ -11,6 +11,18 @@ Sentiment Analysis
 Overview
 --------
 
+The most important functions in **SentimentAnalysis** are:
+
+-   Compute sentiment scores from contents stored in different formats with `analyzeSentiment()`.
+
+-   If desired, convert the continuous scores to either binary sentiment classes (negative or positive) or tertiary directions (negative, neutral or positive). This conversion can be done with `convertToBinary()` or `convertToDirection()` respectively.
+
+-   Compare the calculated sentiment socres with a baseline (i.e. a gold standard). Here, `compareToResponse()` performs a statistical evaluation, while `plotSentimentResponse()` enables a visual comparison.
+
+-   Generate customized dictionaries with the help of `generateDictionary()` as part of an advanced analysis. However, this prerequisites a response variable (i.e. the baseline).
+
+To see examples of these functions in use, check out the help pages, the demos and the vignette.
+
 Installation
 ------------
 
@@ -93,7 +105,7 @@ Research in finance and social sciences nowadays utilizes content analysis to un
 
 The approach utilizes LASSO regularization to extract words from documents that statistically feature a positive and negative polarity. This immediately reveals manifold implications for practitioners, finance research and social sciences: researchers can use R to extract text components that are relevant for readers and test their hypothesis based on these.
 
--   Proellochs, Feuerriegel and Neumann (2015) Generating Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. \[DOI: 10.2139/ssrn.2522884\]{<http://dx.doi.org/10.2139/ssrn.2522884>}
+-   Proellochs, Feuerriegel and Neumann (2015): Generating Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. \[DOI: 10.2139/ssrn.2522884\]{<http://dx.doi.org/10.2139/ssrn.2522884>}
 
 License
 -------

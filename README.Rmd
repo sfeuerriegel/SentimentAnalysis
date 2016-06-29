@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # Sentiment Analysis
 
-<!-- [![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis) -->
+[![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](http://cran.r-project.org/package=SentimentAnalysis)
 [![Coverage Status](https://img.shields.io/codecov/c/github/sfeuerriegel/SentimentAnalysis/master.svg)](https://codecov.io/github/sfeuerriegel/SentimentAnalysis?branch=master)
 
@@ -108,7 +108,7 @@ Research in finance and social sciences nowadays utilizes content analysis to un
 
 The approach utilizes LASSO regularization to extract words from documents that statistically feature a positive and negative polarity. This immediately reveals manifold implications for practitioners, finance research and social sciences: researchers can use R to extract text components that are relevant for readers and test their hypothesis based on these. 
 
-* Proellochs, Feuerriegel and Neumann (2015): Generating  Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. [DOI: 10.2139/ssrn.2522884]{http://dx.doi.org/10.2139/ssrn.2522884}
+* Proellochs, Feuerriegel and Neumann (2015): Generating  Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. [DOI: 10.2139/ssrn.2522884](http://dx.doi.org/10.2139/ssrn.2522884)
 
 ## License
 
