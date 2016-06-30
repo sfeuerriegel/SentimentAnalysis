@@ -9,22 +9,23 @@
 \alias{analyzeSentiment.data.frame}
 \title{Sentiment analysis}
 \usage{
-analyzeSentiment(x, language = "english", aggregate = NULL, ...)
+analyzeSentiment(x, language = "english", aggregate = NULL,
+  rules = defaultSentimentRules(), ...)
 
 \method{analyzeSentiment}{Corpus}(x, language = "english", aggregate = NULL,
-  ...)
+  rules = defaultSentimentRules(), ...)
 
 \method{analyzeSentiment}{character}(x, language = "english",
-  aggregate = NULL, ...)
+  aggregate = NULL, rules = defaultSentimentRules(), ...)
 
 \method{analyzeSentiment}{data.frame}(x, language = "english",
-  aggregate = NULL, ...)
+  aggregate = NULL, rules = defaultSentimentRules(), ...)
 
 \method{analyzeSentiment}{TermDocumentMatrix}(x, language = "english",
-  aggregate = NULL, ...)
+  aggregate = NULL, rules = defaultSentimentRules(), ...)
 
 \method{analyzeSentiment}{DocumentTermMatrix}(x, language = "english",
-  aggregate = NULL, ...)
+  aggregate = NULL, rules = defaultSentimentRules(), ...)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
@@ -37,6 +38,10 @@ English)}
 \item{aggregate}{A factor variable by which documents can be grouped. 
 This helpful when joining e.g. news from the same day or move reviews
 by the same author}
+
+\item{rules}{A named list containing individual sentiment metrics. 
+Therefore, each entry connsists itself of a list with first a method,
+followed by an optional dictionary.}
 
 \item{...}{Additional parameters passed to function for e.g. 
 preprocessing}
@@ -73,6 +78,8 @@ reuters <- Corpus(DirSource(reut21578),
 dtm <- DocumentTermMatrix(Corpus(VectorSource(c("posit posit", "negat neutral")))) 
 sentiment <- analyzeSentiment(dtm)
 compareToResponse(sentiment, c(TRUE, FALSE))
+
+# TODO add example with custom rule
 }
 \seealso{
 \code{\link{compareToResponse}} for evaluating the results, 

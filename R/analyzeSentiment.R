@@ -11,6 +11,9 @@
 #' @param aggregate A factor variable by which documents can be grouped. 
 #' This helpful when joining e.g. news from the same day or move reviews
 #' by the same author
+#' @param rules A named list containing individual sentiment metrics. 
+#' Therefore, each entry connsists itself of a list with first a method,
+#' followed by an optional dictionary.
 #' @param ... Additional parameters passed to function for e.g. 
 #' preprocessing 
 #' @return Result is a matrix which sentiment values for each document across
@@ -31,6 +34,8 @@
 #' dtm <- DocumentTermMatrix(Corpus(VectorSource(c("posit posit", "negat neutral")))) 
 #' sentiment <- analyzeSentiment(dtm)
 #' compareToResponse(sentiment, c(TRUE, FALSE))
+#' 
+#' # TODO add example with custom rule
 #' @details This function returns a data.frame with continuous values. If one desires 
 #' other formats, one needs to convert these. Common examples of such formats are
 #' binary response values (positive / negative) or tertiary (positive, neutral, 
@@ -44,43 +49,48 @@
 #' \code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for visualization
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment" <- function(x, language="english", aggregate=NULL, ...) {
+"analyzeSentiment" <- function(x, language="english", aggregate=NULL, 
+                               rules=defaultSentimentRules(), ...) {
   UseMethod("analyzeSentiment", x)
 }
   
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment.Corpus" <- function(x, language="english", aggregate=NULL, ...) {  
+"analyzeSentiment.Corpus" <- function(x, language="english", aggregate=NULL, 
+                                      rules=defaultSentimentRules(), ...) {  
   corpus <- preprocessCorpus(x, language)
   dtm <- tm::DocumentTermMatrix(corpus)
-  return(analyzeSentiment(dtm, language, aggregate, ...))
+  return(analyzeSentiment(dtm, language, aggregate, rules, ...))
 }
 
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment.character" <- function(x, language="english", aggregate=NULL, ...) {
+"analyzeSentiment.character" <- function(x, language="english", aggregate=NULL, 
+                                         rules=defaultSentimentRules(), ...) {
   corpus <- transformIntoCorpus(x)
-  return(analyzeSentiment(corpus, language, aggregate, ...))
+  return(analyzeSentiment(corpus, language, aggregate, rules, ...))
 }
 
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment.data.frame" <- function(x, language="english", aggregate=NULL, ...) {
+"analyzeSentiment.data.frame" <- function(x, language="english", aggregate=NULL, 
+                                          rules=defaultSentimentRules(), ...) {
   corpus <- transformIntoCorpus(x)
-  return(analyzeSentiment(corpus, language, aggregate, ...))  
+  return(analyzeSentiment(corpus, language, aggregate, rules, ...))  
 }
 
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment.TermDocumentMatrix" <- function(x, language="english", aggregate=NULL, ...) {
-  analyzeSentiment(t(x), language, aggregate, ...)
+"analyzeSentiment.TermDocumentMatrix" <- function(x, language="english", aggregate=NULL, 
+                                                  rules=defaultSentimentRules(), ...) {
+  analyzeSentiment(t(x), language, aggregate, rules, ...)
 }
 
 #' @rdname analyzeSentiment
 #' @export
-"analyzeSentiment.DocumentTermMatrix" <- function(x, language="english", aggregate=NULL, ...) {
+"analyzeSentiment.DocumentTermMatrix" <- function(x, language="english", aggregate=NULL, 
+                                                  rules=defaultSentimentRules(), ...) {
   sent <- list()
-  rules <- allSentimentRules()
   
   for (n in names(rules)) {
     rule <- rules[[n]]

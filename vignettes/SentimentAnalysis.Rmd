@@ -49,7 +49,7 @@ Common preprocessing
 
 Even though sentiment analysis has received great traction lately, the available tools are not yet living up to the needs of researchers. The **SentimentAnalysis** package is intended to partially close this gap and contributed capabilities that most research desires.
 
-# Installation
+## Installation
 
 Using the **devtools** package, you can easily install the latest development version of **SentimentAnalysis** with
 
@@ -65,13 +65,15 @@ install_local("SentimentAnalysis_1.0.0.tar.gz")
 
 Note: that you have to specify the path either to the directory of **SentimentAnalysis** or to the bundled archive **SentimentAnalysis_1.0.0.tar.gz**
 
+## Package loading
+
 Afterwards, one merely needs to load the **SentimentAnalysis** package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published the latest. 
 
 ```{r}
 library(SentimentAnalysis)
 ```
 
-## Brief demonstration
+# Brief demonstration
 
 ```{r}
 # Analyze a single string to obtain a binary response (positive / negative)
@@ -112,18 +114,58 @@ document-term matrix. All of the previous operations are undertaken without manu
 The **analyzeSentiment** routine also accepts other input formats in case the user has already
 performed a preprocessing or wants to specify a specific set of operations.
 
+# Functionality
+
+The following sections present the functionality to work with different input formats and the underlying dictionaries.
+
 ## Interface
 
-dtm
-VectorSource
-stirngs
+The **SentimentAnalysis** package provides interfaces to several other input formats, among these are
+
+* Vector of strings.
+
+* DocumentTermMatrix and TermDocumentMatrix as implemented in the **tm** package [@Feinerer.2008].
+
+* Corpus object as implemented by the **tm** package [@Feinerer.2008].
+
+We provide examples in the following.
+
+### Vector of strings
+
+```{r}
+documents <- c("This is good",
+               "This is bad",
+               "This is inbetween")
+convertToDirection(analyzeSentiment(documents)$SentimentGI)
+```
+
+### Document-term matrix
+
+```{r}
+library(tm)
+corpus <- Corpus(VectorSource(documents))
+convertToDirection(analyzeSentiment(corpus)$SentimentGI)
+```
+
+### Corpus object
+
+```{r}
+dtm <- preprocessCorpus(corpus)
+convertToDirection(analyzeSentiment(dtm)$SentimentGI)
+```
+
+Since the package can directly work with a document-term matrix, this allows to use customized preprocessing operations in the first place. Afterwards, one can utilize the **SentimentAnalysis** package for the computation of sentiment scores. For instance, one can replace the stopwords by a different list, or even perform tailored synonym merging among others. By default, the package uses the built-in routines **transformIntoCorpus** to convert the input into a **Corpus** object and **preprocessCorpus** to convert it into a **DocumentTermMatrix**.
 
 ## Built-in dictionaries
 
 The **SentimentAnalysis** package entails three different dictionaries:
+
 * Harvard-IV dictionary as used in the General Inquirer program
+
 * Henry's Financial dictionary
+
 * Loughran-McDonald Financial dictionary
+
 All of them can be manually inspected and even accessed as follows:
 
 ```{r}
@@ -143,9 +185,56 @@ data(DictionaryLM)
 str(DictionaryLM)
 ```
 
-## Sentiment analysis with built-in dictionaries
+## Dictionary functions
 
-## Dictionary generation
+The **SentimentAnalysis** packgae distinguishes between three different types of dictionaries. All of them differ by the data they store, which finally also controls what methods for sentiment analysis one can apply. The dictionaries are as follows:
+
+* **SentimentDictionaryWordlist** contains a list of words belonging to a single category. For instance, it can bundle a list of uncertainty words in order to compute the ratio of uncertainty words in that documents. 
+
+* **SentimentDictionaryBinary** stores two list of words, one for positive and one for negative entries. This allows to later compute the polarity of the document on a scale from very positive to very negative. However, each category is not further distinguished or rated, i.e. all positive words are assigned the same degree of positivity. 
+
+* **SentimentDictionaryWeighted** allows words to take on continuous sentiment scores. This allows, for instance, to rate *increase* as being more positive than *improve*. These weights can then be transformed into a linear model. For that purpose, the **SentimentDictionaryWeighted** also entails an intercept. It can also store an additional factor in order to revert the weighting by an inverse document frequency. 
+
+### SentimentDictionaryWordlist
+
+```{r}
+d <- SentimentDictionaryWordlist(c("uncertain", "possible", "likely"))
+summary(d)
+
+# Alternative call
+d <- SentimentDictionary(c("uncertain", "possible", "likely"))
+summary(d)
+```
+
+### SentimentDictionaryBinary
+
+```{r}
+d <- SentimentDictionaryBinary(c("increase", "rise", "more"),
+                               c("fall", "drop"))
+summary(d)
+
+# Alternative call
+d <- SentimentDictionary(c("increase", "rise", "more"),
+                         c("fall", "drop"))
+summary(d)
+```
+
+### SentimentDictionaryWeighted
+
+```{r}
+d <- SentimentDictionaryWeighted(c("increase", "decrease", "exit"),
+                                 c(+1, -1, -10),
+                                 rep(NA, 3))
+summary(d)
+
+# Alternative call
+d <- SentimentDictionary(c("increase", "decrease", "exit"),
+                         c(+1, -1, -10),
+                         rep(NA, 3))
+summary(d)                         
+```
+
+# Dictionary generation
 
 ```{r}
 # Create a vector of strings
@@ -235,7 +324,29 @@ library(tm)
 
 # Language support and extensibility
 
+**SentimentAnalyiss** can be adapted for the use with languages other than English. For that, one needs to introduce changes at two points:
 
+* **Preprocessing:** The built-in routines use a parameter **language="english"** to perform all preprocessing operations for the English language. Instead, one might prefer to change stemming and stopwords to the specific language. If one wants to make further changes to the preprocessing, it might be beneficial to replace the automatic preprocessing by one's own routines which then return a **DocumentTermMatrix**.
+
+* **Dictionary:** If one has a response or baseline variable, one can use from the dictionary generation approach that is shipped with **SentimentAnalysis**. This can then automatically generate a dictionary of positive and negative words that can be applied to the given language. Otherwise, if one has not baseline variable at hand, one needs to load a dictionary for that langauge. It might be worthwhile to search online for pre-defined lists of positive and negative words.
+
+The following example demonstrates how **SentimentAnalysis** can be adapted to work with an example in German. Here, we supply a positive and negative document in the variable **documents**. Afterwards, we introduce a very small dictionary of positive and negative words, that is stored in **dictionaryGerman**. Finally, we use **analyzeSentiment* to perform a sentiment analysis, where we introduce to changes as follows: on the hand, we supply **language="german"** to switch all preprocessing operations being made for the German language. On the other hand, we define our custom rule for **GermanSentiment** that uses our previous, customized dictionary. 
+
+```{r}
+documents <- c("Das ist ein gutes Resultat",
+               "Das Ergebnis war schlecht")
+dictionaryGerman <- SentimentDictionaryBinary(c("gut"), 
+                                              c("schlecht"))
+
+sentiment <- analyzeSentiment(documents,
+                              language="german",
+                              rules=list("GermanSentiment"=list(ruleSentiment, dictionaryGerman)))
+sentiment
+
+convertToBinaryResponse(sentiment$GermanSentiment)
+```
+
+Note: the argument **rules** is a named list of approaches, where each entry specifies a combination of a rule and a dictionary.
 
 # Outlook
 
@@ -243,7 +354,7 @@ The current version still opens avenues for further enhancement. In the future, 
 
 * **Negations:** We envision a generic negation rule object, that can be injected to negate fixed windows or apply complex negation rules [@DSS.2016].
 
-* **Multi-language support:** The current version has built-in dictionaries for the English language only. We think that the package can greatly benefit from support of further languages. As such, one does not need to adapt the preprocessing routines as the underlying **tm** package has already support for further languages. Instead, it is only required to tailored dictionarie.
+* **Multi-language support:** The current version has built-in dictionaries for the English language only. We think that the package can greatly benefit from support of further languages. As such, one does not need to adapt the preprocessing routines as the underlying **tm** package has already support for further languages [@Feinerer.2008]. Instead, it is only required to tailored dictionaries.
 
 We cordially invite everyone to contribute source code, dictionaries and further demos. 
 

@@ -17,11 +17,16 @@ test_that("sentiment analysis returns correct values for Reuters corpus", {
   expect_equal(nrow(sentiment), 20)
   expect_equal(ncol(sentiment), 14)
   expect_equal(rownames(sentiment), as.character(1:nrow(sentiment)))
-  
+
+  # TODO  
 #  expect_equal(sentiment, c(-0.6000000, -0.3333333, 1.0000000, 1.0000000, NaN, 
 #                            -1.0000000, -0.3333333, -0.6000000, -0.7500000, -0.2500000, 
 #                            -1.0000000, NaN, 0.3333333, -1.0000000, -1.0000000,
 #                            -1.0000000, -1.0000000, 0.0000000, 0.0000000, NaN))
+})
+
+test_that("sentiment analysis works with custom rules", {
+  # TODO 
 })
 
 test_that("comparison with response variable works correctly", {
