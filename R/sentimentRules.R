@@ -105,7 +105,7 @@ ruleLinearModel <- function(dtm, d) {
   # TODO check formula -> tdf?
   idx <- intersect(d$words, colnames(dtm))
   return(ifelse(is.null(d$intercept), 0, d$intercept) 
-         + rowSums(d$scores[which(d$words %in% idx)] %*% as.matrix(dtm[, which(colnames(dtm) %in% idx)])))
+         + rowSums(as.matrix(dtm[, which(colnames(dtm) %in% idx)]) %*% d$scores[which(d$words %in% idx)]))
 }
 
 defaultSentimentRules <- function() {

@@ -18,15 +18,33 @@ test_that("sentiment analysis returns correct values for Reuters corpus", {
   expect_equal(ncol(sentiment), 14)
   expect_equal(rownames(sentiment), as.character(1:nrow(sentiment)))
 
-  # TODO  
-#  expect_equal(sentiment, c(-0.6000000, -0.3333333, 1.0000000, 1.0000000, NaN, 
-#                            -1.0000000, -0.3333333, -0.6000000, -0.7500000, -0.2500000, 
-#                            -1.0000000, NaN, 0.3333333, -1.0000000, -1.0000000,
-#                            -1.0000000, -1.0000000, 0.0000000, 0.0000000, NaN))
+  expect_equal(sentiment$WordCount, c(123, 419, 92, 102, 118, 
+                                      421, 409, 172, 313, 338, 
+                                      371, 136, 141, 130, 136,
+                                      167, 210, 117, 287, 96))
 })
 
 test_that("sentiment analysis works with custom rules", {
-  # TODO 
+  documents <- c("Alice works much better",
+                 "Novel algorithms work absolutely good")
+  dictionaryAmplifiers <- SentimentDictionary(c("absolut", "much"))
+  sentiment <- analyzeSentiment(documents,
+                                rules=list("Amplifiers"=list(ruleRatio,
+                                                             dictionaryAmplifiers)))
+  expect_is(sentiment, "data.frame")
+  expect_equal(colnames(sentiment), "Amplifiers")
+  expect_equal(sentiment$Amplifiers, c(0.25, 0.2))
+
+  documents <- c("Das ist ein gutes Resultat",
+                 "Das Ergebnis war schlecht")
+  dictionaryGerman <- SentimentDictionaryBinary(c("gut"), 
+                                                c("schlecht"))
+  sentiment <- analyzeSentiment(documents,
+                                language="german",
+                                rules=list("GermanSentiment"=list(ruleSentiment, dictionaryGerman)))
+  expect_is(sentiment, "data.frame")
+  expect_equal(colnames(sentiment), "GermanSentiment")
+  expect_equal(sentiment$GermanSentiment, c(0.5, -0.5))
 })
 
 test_that("comparison with response variable works correctly", {

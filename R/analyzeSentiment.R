@@ -35,7 +35,20 @@
 #' sentiment <- analyzeSentiment(dtm)
 #' compareToResponse(sentiment, c(TRUE, FALSE))
 #' 
-#' # TODO add example with custom rule
+#' # By adapting the parameter rules, one can incorporate customized dictionaries
+#' # e.g. in order to adapt to arbitrary languages
+#' dictionaryAmplifiers <- SentimentDictionary(c("more", "much"))
+#' sentiment <- analyzeSentiment(documents,
+#'                               rules=list("Amplifiers"=list(ruleRatio,
+#'                                                            dictionaryAmplifiers)))
+#' 
+#' # On can also restrict the number of computed methods to the ones of interest
+#' # in order to achieve performance optimizations
+#' sentiment <- analyzeSentiment(documents,
+#'                               rules=list("SentimentLM"=list(ruleSentiment, 
+#'                                                             loadDictionaryLM())))
+#' sentiment
+#' 
 #' @details This function returns a data.frame with continuous values. If one desires 
 #' other formats, one needs to convert these. Common examples of such formats are
 #' binary response values (positive / negative) or tertiary (positive, neutral, 
