@@ -5,7 +5,7 @@
 \title{Line plot with sentiment scores}
 \usage{
 plotSentiment(sentiment, x = NULL, cumsum = FALSE, xlab = "",
-  ylab = paste0("Sentiment (", colnames(sentiment)[1], ")"))
+  ylab = "Sentiment")
 }
 \arguments{
 \item{sentiment}{\code{data.frame} or numeric vector with sentiment scores}

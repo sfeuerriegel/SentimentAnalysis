@@ -64,7 +64,7 @@ test_that("comparison with response variable works correctly", {
   expect_equal(cmp["Accuracy", "Sentiment"], 1)
   
   # binary response variable
-  response <- c(TRUE, TRUE, FALSE, FALSE)
+  response <- convertToBinaryResponse(c(+1, +1, -1, -1))
   cmp <- compareToResponse(sentiment, response)
   expect_equal(cmp["Accuracy", "Sentiment"], 0.5)
   expect_equal(cmp["Sensitivity", "Sentiment"], 0)
@@ -74,16 +74,16 @@ test_that("comparison with response variable works correctly", {
 })
 
 test_that("binary classifier is evaluated correctly", {
-  r <- evalBinaryClassifier(factor(c("TRUE", "TRUE", "TRUE", "TRUE"), levels=c("FALSE", "TRUE")),
-                            factor(c("FALSE", "FALSE", "FALSE", "FALSE"), levels=c("FALSE", "TRUE")))
+  r <- evalBinaryClassifier(convertToBinaryResponse(c(+1, +1, +1, +1)),
+                            convertToBinaryResponse(c(-1, -1, -1, -1)))
   expect_equivalent(as.numeric(r), c(0, NaN, 0, NaN, NaN, NaN))
 
-  r <- evalBinaryClassifier(factor(c("TRUE", "TRUE", "TRUE", "TRUE"), levels=c("FALSE", "TRUE")),
-                            factor(c("TRUE", "TRUE", "TRUE", "TRUE"), levels=c("FALSE", "TRUE")))
+  r <- evalBinaryClassifier(convertToBinaryResponse(c(+1, +1, +1, +1)),
+                            convertToBinaryResponse(c(+1, +1, +1, +1)))
   expect_equivalent(as.numeric(r), c(1, NaN, NaN, 1, 0, NaN))
   
-  r <- evalBinaryClassifier(factor(c("TRUE", "FALSE", "TRUE", "FALSE"), levels=c("FALSE", "TRUE")),
-                            factor(c("FALSE", "TRUE", "TRUE", "FALSE"), levels=c("FALSE", "TRUE")))
+  r <- evalBinaryClassifier(convertToBinaryResponse(c(+1, -1, +1, -1)),
+                            convertToBinaryResponse(c(-1, +1, +1, -1)))
   expect_equivalent(as.numeric(r), c(0.5, 0.5, 0.5, 0.5, 0.5, 0.5))  
 })
 

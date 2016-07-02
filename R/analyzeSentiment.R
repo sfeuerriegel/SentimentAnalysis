@@ -22,7 +22,7 @@
 #' # via vector of strings
 #' corpus <- c("Positive text", "Neutral but uncertain text", "Negative text")
 #' sentiment <- analyzeSentiment(corpus)
-#' compareToResponse(sentiment, c(+1, 0, -1))
+#' compareToResponse(sentiment, c(+1, 0, -2))
 #' 
 #' # via Corpus from tm package
 #' library(tm)
@@ -33,18 +33,18 @@
 #' # via DocumentTermMatrix (with stemmed entries)
 #' dtm <- DocumentTermMatrix(Corpus(VectorSource(c("posit posit", "negat neutral")))) 
 #' sentiment <- analyzeSentiment(dtm)
-#' compareToResponse(sentiment, c(TRUE, FALSE))
+#' compareToResponse(sentiment, convertToBinaryResponse(c(+1, -1)))
 #' 
 #' # By adapting the parameter rules, one can incorporate customized dictionaries
 #' # e.g. in order to adapt to arbitrary languages
 #' dictionaryAmplifiers <- SentimentDictionary(c("more", "much"))
-#' sentiment <- analyzeSentiment(documents,
+#' sentiment <- analyzeSentiment(corpus,
 #'                               rules=list("Amplifiers"=list(ruleRatio,
 #'                                                            dictionaryAmplifiers)))
 #' 
 #' # On can also restrict the number of computed methods to the ones of interest
 #' # in order to achieve performance optimizations
-#' sentiment <- analyzeSentiment(documents,
+#' sentiment <- analyzeSentiment(corpus,
 #'                               rules=list("SentimentLM"=list(ruleSentiment, 
 #'                                                             loadDictionaryLM())))
 #' sentiment
@@ -260,23 +260,26 @@ convertToDirection <- function(sentiment) {
 #' @rdname compareToResponse
 #' @export 
 "compareToResponse.logical" <- function(sentiment, response) {
-  compareToResponse.factor(sentiment, factor(response, levels=c("FALSE", "TRUE")))
+  compareToResponse.factor(sentiment, factor(response, levels=c("negative", "positive")))
 }
 
 #' @rdname compareToResponse
 #' @export 
 "compareToResponse.factor" <- function(sentiment, response) {
-  if (!all(levels(response) == c("FALSE", "TRUE"))) {
+  r <- list()    
+  
+  if (all(levels(response) == c("negative", "positive"))) {
+    for (n in colnames(sentiment)) {
+      r[[n]] <- c(evalBinaryClassifier(convertToBinaryResponse(sentiment[, n]), response),
+                  "avg.sentiment.pos.response"=mean(sentiment[response == "positive", n]),
+                  "avg.sentiment.neg.response"=mean(sentiment[response == "negative", n]))
+    }    
+  } else if (all(levels(response) == c("negative", "neutral", "positive"))) {
+    stop("Not yet implemented; use binary response instead.")
+  } else {
     stop("Factor levels do not match expected format")
   }
-  
-  r <- list()    
-  for (n in colnames(sentiment)) {
-    r[[n]] <- c(evalBinaryClassifier(factor(sentiment[, n] >= 0, levels=c("FALSE", "TRUE")), response),
-                "avg.sentiment.pos.response"=mean(sentiment[response == "TRUE",n]),
-                "avg.sentiment.neg.response"=mean(sentiment[response == "FALSE",n]))
-  }
-  
+
   return(t(do.call(rbind, r)))
 }
 
@@ -300,19 +303,28 @@ convertToDirection <- function(sentiment) {
                  "cor.t.statistic"=unlist(lapply(colnames(sentiment), function(x) cor.test(sentiment[, x], response)$statistic)),
                  "cor.p.value"=unlist(lapply(colnames(sentiment), function(x) cor.test(sentiment[, x], response)$statistic)),
 
-                 "lm.t.value"=unlist(lapply(colnames(sentiment), function(x) summary(lm(response ~ sentiment[, x]))$coefficients[2,3])),
+                 "lm.t.value"=unlist(lapply(colnames(sentiment), function(x) {
+                   tryCatch(
+                     {
+                       return(summary(lm(response ~ sentiment[, x]))$coefficients[2,3])
+                     },
+                     error = function(e) {
+                       return(NA)
+                     })
+                 })),
                  "r.squared"=(cor(sentiment, response)^2)[,1],
                  
                  "RMSE"=unlist(lapply(colnames(sentiment), function(x) sqrt(mean((sentiment[, x]-response)^2)))),
                  "MAE"=unlist(lapply(colnames(sentiment), function(x) mean(abs(sentiment[, x]-response)))))
     
   return(rbind(do.call(rbind, result),
-               compareToResponse(sentiment, response >= 0)))
+               compareToResponse(sentiment, convertToBinaryResponse(response))))
 }
 
 "evalBinaryClassifier" <- function(pred, true) {
   cm <- table(pred, true)
   
+  # TODO: Make possible for tertiary
   r <- c("Accuracy"=(cm[1,1]+cm[2,2])/(cm[1,1]+cm[1,2]+cm[2,1]+cm[2,2]),
          "Precision"=cm[1,1]/(cm[1,1]+cm[1,2]),
          "Sensitivity"=cm[1,1]/(cm[1,1]+cm[2,1]),

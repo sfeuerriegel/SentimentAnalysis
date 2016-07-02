@@ -29,7 +29,7 @@
 plotSentiment <- function(sentiment, 
                           x=NULL, 
                           cumsum=FALSE,
-                          xlab="", ylab=paste0("Sentiment (", colnames(sentiment)[1], ")")) {
+                          xlab="", ylab="Sentiment") {
   if (is.data.frame(sentiment)) {
     sentiment <- sentiment[[1]]
   }
@@ -88,7 +88,7 @@ plotSentiment <- function(sentiment,
 #' @export
 plotSentimentResponse <- function(sentiment, response,
                                   smoothing="gam",
-                                  xlab=paste0("Sentiment (", colnames(sentiment)[1], ")"), ylab="Response") {
+                                  xlab="Sentiment", ylab="Response") {
   x <- NULL # surpress note "no visible binding"
   y <- NULL # surpress note "no visible binding"
   p <- ggplot2::ggplot(data.frame(x=unname(sentiment), y=response), 

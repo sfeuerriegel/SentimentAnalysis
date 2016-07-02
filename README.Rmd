@@ -73,6 +73,7 @@ This simple example shows how to perform a sentiment analysis of a single string
 sentiment <- analyzeSentiment("Yeah, this was a great soccer game of the German team!")
 convertToBinaryResponse(sentiment)$SentimentGI
 ```
+
 ### Small example
 
 The following demonstrates some of the functionality provided by **SentimentAnalysis**. It also shows its visualization and evaluation capabilities.
@@ -97,9 +98,9 @@ convertToDirection(sentiment$SentimentGI)
 
 response <- c(+1, +1, +1, -1, 0, -1)
 
-# TODO: compareToResponse(sentiment, response)
+compareToResponse(sentiment, response)
 
-# TODO: plotSentimentResponse(sentiment$SentimentGI, response)
+plotSentimentResponse(sentiment$SentimentGI, response)
 ```
 
 ## Dictionary generation

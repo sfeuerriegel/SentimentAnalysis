@@ -66,7 +66,7 @@ scores into a factor object.
 # via vector of strings
 corpus <- c("Positive text", "Neutral but uncertain text", "Negative text")
 sentiment <- analyzeSentiment(corpus)
-compareToResponse(sentiment, c(+1, 0, -1))
+compareToResponse(sentiment, c(+1, 0, -2))
 
 # via Corpus from tm package
 library(tm)
@@ -77,9 +77,22 @@ reuters <- Corpus(DirSource(reut21578),
 # via DocumentTermMatrix (with stemmed entries)
 dtm <- DocumentTermMatrix(Corpus(VectorSource(c("posit posit", "negat neutral")))) 
 sentiment <- analyzeSentiment(dtm)
-compareToResponse(sentiment, c(TRUE, FALSE))
+compareToResponse(sentiment, convertToBinaryResponse(c(+1, -1)))
 
-# TODO add example with custom rule
+# By adapting the parameter rules, one can incorporate customized dictionaries
+# e.g. in order to adapt to arbitrary languages
+dictionaryAmplifiers <- SentimentDictionary(c("more", "much"))
+sentiment <- analyzeSentiment(documents,
+                              rules=list("Amplifiers"=list(ruleRatio,
+                                                           dictionaryAmplifiers)))
+
+# On can also restrict the number of computed methods to the ones of interest
+# in order to achieve performance optimizations
+sentiment <- analyzeSentiment(documents,
+                              rules=list("SentimentLM"=list(ruleSentiment, 
+                                                            loadDictionaryLM())))
+sentiment
+
 }
 \seealso{
 \code{\link{compareToResponse}} for evaluating the results, 

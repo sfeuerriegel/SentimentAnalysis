@@ -38,12 +38,11 @@ Several applications demonstrate the use cases of sentiment analysis for organiz
 
 As sentiment analysis is applied to a broad variety of domains and textual sources, research has devised various approaches to measure sentiment. A recent literature overview [@Pang.2008] provides a comprehensive domain-independent survey. 
 
-TODO: dictionary-based (with formula)
+On the one hand, machine learning approaches are prefered when one strives for a high prediction performance. However, machine learning usually works as a black-box; hence, making interpretations diffucult. On the other hand, dictionary-based approaches facilitate lists of positive and negative words. Their occurences are then combined into a single sentiment score. Therefore, the underlying decisions become traceable and researchers can understand the reasons resulting into a specific sentiment. 
 
-TODO: ML, including deep learning ref
+In addition to that, `SentimentAnalysis` allows to generate tailored dictionaries. These are customized to a specific domain, improve the prediction performance compared to pure dictionaries and allow full interpretability. Details for this methodology can be found in [@ECIS.2015]. 
 
-Common preprocessing
-
+On the road to performing sentiment analysis, one needs to convert the running text into a machine readable format. This is achieved by executing a series of preprocessing operations. First, the text is tokenized into single words, followed by what are common preprocessing steps: stopword removal, stemming, removal of punctuation and conversion to lower-case. These are also conducted by default in the `SentimentAnalysis`, but can be adapted to ones personal needs.
 
 # Setup of the SentimentAnalysis package
 
@@ -101,9 +100,11 @@ convertToDirection(sentiment$SentimentGI)
 
 response <- c(+1, +1, +1, -1, 0, -1)
 
-#TODO: compareToResponse(sentiment, response)
+compareToResponse(sentiment, response)
 
-#TODO: plotSentimentResponse(sentiment$SentimentGI, response)
+compareToResponse(sentiment, convertToBinaryResponse(response))
+
+plotSentimentResponse(sentiment$SentimentGI, response)
 ```
 
 The `SentimentAnalysis` package works very clever and neatly here in order to remove the effort
@@ -162,9 +163,9 @@ The `SentimentAnalysis` package entails three different dictionaries:
 
 * Harvard-IV dictionary as used in the General Inquirer program
 
-* Henry's Financial dictionary
+* Henry's Financial dictionary [@Henry.2008]
 
-* Loughran-McDonald Financial dictionary
+* Loughran-McDonald Financial dictionary [@Loughran.2011]
 
 All of them can be manually inspected and even accessed as follows:
 
@@ -236,6 +237,8 @@ summary(d)
 
 # Dictionary generation
 
+The following example shows how the `SentimentAnalysis`package can extract statistically relevant textual drivers based on an exogeneous response variable. The details of this methods are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization which implicitly performs variable selection. Thereby, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by the polarity according to their coefficient.
+
 ```{r}
 # Create a vector of strings
 documents <- c("This is a good thing!",
@@ -246,81 +249,68 @@ documents <- c("This is a good thing!",
 response <- c(1, 0.5, 0, -0.5, -1)
 
 # Generate dictionary with LASSO regularization
-#dict <- generateDictionary(documents, response)
+dict <- generateDictionary(documents, response)
 
-#dict
+dict
 
-#summary(dict)
-
-#TODO
-# compareDictionaries(dict,
-#                     loadDictionaryGI())
-# 
-# sentiment <- predict(dict, documents)
-# compareToResponse(sentiment, response)
-# plotSentimentResponse(sentiment, response)
+summary(dict)
 ```
 
-```{r}
-#test_documents <- c("This is neither good nor bad",
-#                    "What a good idea!",
-#                    "Not bad")
-#test_response <- c(0, 1, 1)
+In practice, users have several options for fine-tuning. Among them, they can disable the intercept \eqn{\alpha} and fix it to zero, or standardizing the response variable \eqn{R}. In addition, it is possible to replace the LASSO by any variant of the elastic net; simply by changing the argument `alpha`. 
 
-#pred <- predict(dict, test_documents)
+Finally, one can save and reload dictionaries using `read()` and `write()` as follows:
 
-#compareToResponse(pred, test_response)
-#plotSentimentResponse(pred, test_response)
-
-# TODO: compare to static dictionary
+```{r,eval=FALSE}
+write(dict, file="dictionary.dict")
+dict <- read("dictionary.dict")
 ```
+
 
 ## Performance evaluation
 
-## Visualizations
-
-## Aggregation of documents
-
-## Worked examples
-
-Reuters oil
+Ultimately, several routines allow to exlore the generated dictionary further. On the hand, a simple overview can be displayed by means of the `summary()`routine. On the other hand, a Kernel Density Estimation can also visualize the distribution of positive and negative words. For instance, one can identify if the opinionated words were skewed to either end of the polarity scale. Lastly, the `compareDictionary()` routine can compare the generated dictionary to dictionaries from the literature. It automatically computes various metrics, among them, the overlap or the correlation. 
 
 ```{r}
-library(tm)
-data(crude)
+compareDictionaries(dict,
+                    loadDictionaryGI())
 
-# Analyze sentiment
-sentiment <- analyzeSentiment(crude)
-
-# Count positive and negative news releases
-table(convertToBinaryResponse(sentiment$SentimentLM))
-
-# News releases with highest and lowest sentiment
-crude[[which.max(sentiment$SentimentLM)]]$meta$heading
-crude[[which.min(sentiment$SentimentLM)]]$meta$heading
-
-# View summary statistics of sentiment variable
-summary(sentiment$SentimentLM)
-
-# Visualize distribution of standardized sentiment variable
-hist(scale(sentiment$SentimentLM))
-
-# Compute cross-correlation 
-cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentGI")])
-
-# TODO: crude oil returns 1987-02-26 until 1987-03-02 with aggregate
-datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
-#plotSentiment(sentiment$SentimentLM)
-#plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
+sentiment <- predict(dict, documents)
+compareToResponse(sentiment, response)
+plotSentimentResponse(sentiment, response)
 ```
 
-ngram
+The following example demonstrates how a calculated dictionary can then be used for predicting the sentiment on out-of-sample data. In addition, the code then evaluates the prediction performance by comparing it to the built-in dictionaries.
 
-standardize and intercept
+```{r}
+test_documents <- c("This is neither good nor bad",
+                    "What a good idea!",
+                    "Not bad")
+test_response <- c(0, 1, 1)
 
-aggregate
+pred <- predict(dict, test_documents)
 
-customized preprocessing
+compareToResponse(pred, test_response)
+plotSentimentResponse(pred, test_response)
+
+compareToResponse(analyzeSentiment(test_documents), test_response)
+```
+
+## Configuration of preprocessing
+
+When desired, one can implemented a tailored preprocessing stage that adapts to specific needs. The following code snippets demonstrates such adaptation. In particular, the `SentimentAnalysis`` package ships a function `ngram_tokenize()` in order to extract \eqn{n}-grams from the corpus. This does not affect the results of the built-in dictionaries, but changes the behavior of dictionary generation.
+
+```{r}
+corpus <- Corpus(VectorSource(documents))
+tdm <- TermDocumentMatrix(corpus, 
+                          control=list(wordLengths=c(1,Inf), 
+                                       tokenize=function(x) ngram_tokenize(x, char=FALSE, 
+                                                                           ngmin=1, ngmax=2)))
+rownames(tdm)
+
+dict <- generateDictionary(tdm, response)
+summary(dict)
+dict
+```
 
 ## Performance optimization
 
@@ -361,6 +351,40 @@ Notes:
 * The argument `rules` is a named list of approaches, where each entry specifies a combination of a rule and a dictionary.
 
 * Caution is needed when working with stemming. The default routines of `SentimentAnalysis` automatically perform stemming. Therefore, it is necessary to included stemmed terms in the original dictionary. Once can easily achieve such a conversion by calling `tm::stemDocument()`.
+
+# Worked examples
+
+The following example shows the usage of `SentimentAnalysis`in an applied setting. More precisely, we utilize Reuters oil-related news from the `tm` package.
+
+```{r}
+library(tm)
+data(crude)
+
+# Analyze sentiment
+sentiment <- analyzeSentiment(crude)
+
+# Count positive and negative news releases
+table(convertToBinaryResponse(sentiment$SentimentLM))
+
+# News releases with highest and lowest sentiment
+crude[[which.max(sentiment$SentimentLM)]]$meta$heading
+crude[[which.min(sentiment$SentimentLM)]]$meta$heading
+
+# View summary statistics of sentiment variable
+summary(sentiment$SentimentLM)
+
+# Visualize distribution of standardized sentiment variable
+hist(scale(sentiment$SentimentLM))
+
+# Compute cross-correlation 
+cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentGI")])
+
+# crude oil news between  1987-02-26 until 1987-03-02
+datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
+
+plotSentiment(sentiment$SentimentLM)
+plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
+```
 
 # Outlook
 

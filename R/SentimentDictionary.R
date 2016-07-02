@@ -531,8 +531,21 @@ cat0 <- function(...) cat(..., "\n", sep="")
     cat0("Average sentiment: ", round(mean(d1$scores), 2), " vs ", round(mean(d2$scores), 2))
     
     return(cmp)
-  }
-  else {
+  } else if (inherits(d1, "SentimentDictionaryBinary") && inherits(d2, "SentimentDictionaryWeighted")) {
+    cat0("Comparing: wordlist vs weighted\n")
+    cmp <- compareOverlap(c(d1$positiveWords, d1$negativeWords), d2$words)
+    cmp <- compareClasses(cmp,
+                          d1$positiveWords, d1$negativeWords,
+                          d2$words[d2$scores < 0], d2$words[d2$scores >= 0])
+    is <- intersect(c(d1$positiveWords, d1$negativeWords), d2$words)
+    cmp$correlation <- cor(unlist(lapply(is, function(x) ifelse(x %in% d1$positiveWords, +1, -1))), 
+                           d2$scores[unlist(lapply(is, function(x) which(d2$words == x)))])
+    cat0("Correlation between scores of matching entries: ", round(cmp$correlation, 2))
+
+    return(cmp)
+  } else if (inherits(d1, "SentimentDictionaryWeighted") && inherits(d2, "SentimentDictionaryBinary")) {
+    compareDictionaries(d2, d1)
+  } else {
     stop("Not yet implemented!")
   }
 }
