@@ -82,13 +82,13 @@ compareToResponse(sentiment, convertToBinaryResponse(c(+1, -1)))
 # By adapting the parameter rules, one can incorporate customized dictionaries
 # e.g. in order to adapt to arbitrary languages
 dictionaryAmplifiers <- SentimentDictionary(c("more", "much"))
-sentiment <- analyzeSentiment(documents,
+sentiment <- analyzeSentiment(corpus,
                               rules=list("Amplifiers"=list(ruleRatio,
                                                            dictionaryAmplifiers)))
 
 # On can also restrict the number of computed methods to the ones of interest
 # in order to achieve performance optimizations
-sentiment <- analyzeSentiment(documents,
+sentiment <- analyzeSentiment(corpus,
                               rules=list("SentimentLM"=list(ruleSentiment, 
                                                             loadDictionaryLM())))
 sentiment
