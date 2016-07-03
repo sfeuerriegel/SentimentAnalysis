@@ -4,15 +4,17 @@
 \alias{plot.SentimentDictionaryWeighted}
 \title{KDE plot of estimated coefficients}
 \usage{
-\method{plot}{SentimentDictionaryWeighted}(d, color = "gray60",
-  theme = ggplot2::theme_bw())
+\method{plot}{SentimentDictionaryWeighted}(x, color = "gray60",
+  theme = ggplot2::theme_bw(), ...)
 }
 \arguments{
-\item{d}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}}
+\item{x}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}}
 
 \item{color}{Color for filling the density plot (default: gray color)}
 
 \item{theme}{Visualization theme for \code{\link[ggplot2]{ggplot}} (default: is a black-white theme)}
+
+\item{...}{Additional parameters passed to function.}
 }
 \value{
 Returns a plot of class \code{\link[ggplot2]{ggplot}}

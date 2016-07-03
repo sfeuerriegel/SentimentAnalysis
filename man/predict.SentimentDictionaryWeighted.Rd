@@ -4,11 +4,11 @@
 \alias{predict.SentimentDictionaryWeighted}
 \title{Prediction for given dictionary}
 \usage{
-\method{predict}{SentimentDictionaryWeighted}(d, newdata = NULL,
+\method{predict}{SentimentDictionaryWeighted}(object, newdata = NULL,
   language = "english", ...)
 }
 \arguments{
-\item{d}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}.}
+\item{object}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}.}
 
 \item{newdata}{A vector of characters, a \code{data.frame}, an object of type 
 \code{\link[tm]{Corpus}}, \code{\link[tm]{TermDocumentMatrix}} or

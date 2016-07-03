@@ -109,9 +109,10 @@ plotSentimentResponse <- function(sentiment, response,
 #' plot these using \code{\link[ggplot2]{ggplot}}. This type of plot allows to 
 #' inspect whether the distribution of coefficients is skew. This can reveal if there
 #' are more positive terms than negative or vice versa. 
-#' @param d Dictionary of class \code{\link{SentimentDictionaryWeighted}}
+#' @param x Dictionary of class \code{\link{SentimentDictionaryWeighted}}
 #' @param color Color for filling the density plot (default: gray color)
 #' @param theme Visualization theme for \code{\link[ggplot2]{ggplot}} (default: is a black-white theme)
+#' @param ... Additional parameters passed to function.
 #' @return Returns a plot of class \code{\link[ggplot2]{ggplot}}
 #' @examples 
 #' d <- SentimentDictionaryWeighted(character(100), rnorm(100), numeric(100))
@@ -127,9 +128,9 @@ plotSentimentResponse <- function(sentiment, response,
 #' @keywords evaluation plots
 #' @seealso \code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for further plotting options
 #' @export
-plot.SentimentDictionaryWeighted <- function(d, color="gray60", theme=ggplot2::theme_bw()) {
+plot.SentimentDictionaryWeighted <- function(x, color="gray60", theme=ggplot2::theme_bw(), ...) {
   scores <- NULL # surpress note "no visible binding"
-  p <- ggplot2::ggplot(data.frame(scores=d$scores), ggplot2::aes(x=scores)) + 
+  p <- ggplot2::ggplot(data.frame(scores=x$scores), ggplot2::aes(x=scores)) + 
     ggplot2::geom_density(alpha=0.4, fill=color, color=color) +
     ggplot2::xlab("Estimated coefficients") +
     ggplot2::ylab("Density") +

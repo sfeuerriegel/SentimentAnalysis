@@ -3,7 +3,7 @@
 #' Function takes a dictionary of class \code{\link{SentimentDictionaryWeighted}} with weights 
 #' as input. It then applies this dictionary to textual contents in order to calculate
 #' a sentiment score.
-#' @param d Dictionary of class \code{\link{SentimentDictionaryWeighted}}.
+#' @param object Dictionary of class \code{\link{SentimentDictionaryWeighted}}.
 #' @param newdata A vector of characters, a \code{data.frame}, an object of type 
 #' \code{\link[tm]{Corpus}}, \code{\link[tm]{TermDocumentMatrix}} or
 #' \code{\link[tm]{DocumentTermMatrix}} .
@@ -31,13 +31,13 @@
 #' @seealso \code{\link{SentimentDictionaryWeighted}}, \code{\link{generateDictionary}} and
 #' \code{\link{compareToResponse}} for default dictionary generations
 #' @export
-predict.SentimentDictionaryWeighted <- function(d, newdata=NULL, 
+predict.SentimentDictionaryWeighted <- function(object, newdata=NULL, 
                                                 language="english", ...) {
   if (missing(newdata) || is.null(newdata)) {
     stop("Argument 'newdata' is empty.")
   }
 
-  return(predictWeighted(newdata, d, language, ...))
+  return(predictWeighted(newdata, object, language, ...))
 } 
 
 predictWeighted <- function(x, d, language, ...) {
