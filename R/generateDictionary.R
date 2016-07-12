@@ -100,7 +100,7 @@
 #' @references Pr{\"o}llochs and Feuerriegel (2015). Generating Domain-Specific 
 #' Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
 #' Systems (ECIS 2015).
-#' @source \url{http://dx.doi.org/10.2139/ssrn.2522884}
+#' @source \url{https://dx.doi.org/10.2139/ssrn.2522884}
 #' @keywords sentiment evaluation dictionary
 #' @seealso \code{\link{analyzeSentiment}}, \code{\link{predict.SentimentDictionaryWeighted}}, 
 #' \code{\link{plot.SentimentDictionaryWeighted}} and \code{\link{compareToResponse}} for

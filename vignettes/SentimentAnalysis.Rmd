@@ -55,7 +55,7 @@ Using the `devtools` package, you can easily install the latest development vers
 ```{r,eval=FALSE}
 library(devtools)
 
-# Option 1: download and install latest version from GitHub
+# Option 1: download and install latest version from ‘GitHub’
 install_github("sfeuerriegel/SentimentAnalysis")
 
 # Option 2: install directly from bundled archive
@@ -125,9 +125,9 @@ The `SentimentAnalysis` package provides interfaces to several other input forma
 
 * Vector of strings.
 
-* DocumentTermMatrix and TermDocumentMatrix as implemented in the `tm` package [@Feinerer.2008].
+* `DocumentTermMatrix` and `TermDocumentMatrix` as implemented in the `tm` package [@Feinerer.2008].
 
-* Corpus object as implemented by the `tm` package [@Feinerer.2008].
+* `Corpus` object as implemented by the `tm` package [@Feinerer.2008].
 
 We provide examples in the following.
 
