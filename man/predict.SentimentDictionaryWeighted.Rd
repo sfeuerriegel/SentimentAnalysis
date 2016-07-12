@@ -5,7 +5,8 @@
 \title{Prediction for given dictionary}
 \usage{
 \method{predict}{SentimentDictionaryWeighted}(object, newdata = NULL,
-  language = "english", ...)
+  language = "english", weighting = function(x) tm::weightTfIdf(x, normalize
+  = FALSE), ...)
 }
 \arguments{
 \item{object}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}.}
@@ -16,6 +17,9 @@
 
 \item{language}{Language used for preprocessing operations (default: 
 English).}
+
+\item{weighting}{Function used for weighting of words; default is a a link to the 
+tf-idf scheme.}
 
 \item{...}{Additional parameters passed to function for e.g. 
 preprocessing.}

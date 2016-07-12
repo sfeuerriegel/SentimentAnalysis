@@ -7,7 +7,8 @@
 \url{http://dx.doi.org/10.2139/ssrn.2522884}
 }
 \usage{
-SentimentDictionaryWeighted(words, scores, idf, intercept = 0)
+SentimentDictionaryWeighted(words, scores, idf = rep(1, length(words)),
+  intercept = 0)
 }
 \arguments{
 \item{words}{is collection (vector) of different words as strings}
@@ -37,6 +38,10 @@ bias.
 d <- SentimentDictionaryWeighted(c("increase", "decrease", "exit"),
                                  c(+1, -1, -10),
                                  rep(NA, 3))
+summary(d)
+# alternative call
+d <- SentimentDictionaryWeighted(c("increase", "decrease", "exit"),
+                                 c(+1, -1, -10))
 summary(d)
 # alternative call
 d <- SentimentDictionary(c("increase", "decrease", "exit"),
