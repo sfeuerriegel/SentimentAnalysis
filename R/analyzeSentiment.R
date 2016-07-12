@@ -71,8 +71,7 @@
 #' @export
 "analyzeSentiment.Corpus" <- function(x, language="english", aggregate=NULL, 
                                       rules=defaultSentimentRules(), ...) {  
-  corpus <- preprocessCorpus(x, language)
-  dtm <- tm::DocumentTermMatrix(corpus)
+  dtm <- toDocumentTermMatrix(x, language=language, weighting=function(x) tm::weightTf(x))
   return(analyzeSentiment(dtm, language, aggregate, rules, ...))
 }
 

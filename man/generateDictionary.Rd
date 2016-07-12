@@ -9,7 +9,7 @@
 \alias{generateDictionary.data.frame}
 \title{Generates dictionary of decisive terms}
 \source{
-\url{http://dx.doi.org/10.2139/ssrn.2522884}
+\url{https://dx.doi.org/10.2139/ssrn.2522884}
 }
 \usage{
 generateDictionary(x, response, language = "english", alpha = 1,

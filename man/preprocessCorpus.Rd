@@ -2,7 +2,7 @@
 % Please edit documentation in R/preprocessCorpus.R
 \name{preprocessCorpus}
 \alias{preprocessCorpus}
-\title{Default preprocessing of corpus to generate a document-term matrix}
+\title{Default preprocessing of corpus}
 \usage{
 preprocessCorpus(corpus, language = "english", stemming = TRUE,
   verbose = FALSE)
@@ -10,20 +10,19 @@ preprocessCorpus(corpus, language = "english", stemming = TRUE,
 \arguments{
 \item{corpus}{\code{\link[tm]{Corpus}} object which should be processed}
 
-\item{language}{default language used for preprocessing (i.e. stop word removal and stemming)}
+\item{language}{Default language used for preprocessing (i.e. stop word removal and stemming)}
 
-\item{stemming}{perform stemming (default: TRUE)}
+\item{stemming}{Perform stemming (default: TRUE)}
 
-\item{verbose}{print preprocessing status information}
+\item{verbose}{Print preprocessing status information}
+}
+\value{
+Object of \code{\link[tm]{Corpus}}
 }
 \description{
 Preprocess existing corpus of type \code{\link[tm]{Corpus}} according to default operations. 
 This helper function groups all standard preprocessing steps such that the usage of the 
-package is more convenient. The result is a document-term matrix.
-}
-\seealso{
-\code{\link[tm]{DocumentTermMatrix}} and \code{\link[tm]{TermDocumentMatrix}} for
-the underlying class
+package is more convenient.
 }
 \keyword{corpus}
 \keyword{preprocessing}

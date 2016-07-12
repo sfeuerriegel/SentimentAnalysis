@@ -113,7 +113,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' @keywords dictionary
 #' @seealso \code{\link{SentimentDictionary}}
 #' @export
-"SentimentDictionaryWeighted" <-  function(words, scores, idf, intercept=0) {
+"SentimentDictionaryWeighted" <-  function(words, scores, idf=rep(1, length(words)), intercept=0) {
   if (is.null(words) || !is.character(words)) {
     stop("Input variable words does not match expected format")
   }

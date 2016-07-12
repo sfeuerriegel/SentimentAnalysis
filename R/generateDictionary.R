@@ -118,13 +118,8 @@ generateDictionary <- function(x, response, language="english",
 generateDictionary.Corpus <- function(x, response, language="english", 
                                       alpha=1, s="lambda.min", family="gaussian",
                                       minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  corpus <- preprocessCorpus(x, language)
-  
-  dtm <- tm::DocumentTermMatrix(corpus,
-                                control=list(minWordLength=minWordLength,
-                                             weighting=weighting))
-  dtm <- tm::removeSparseTerms(dtm, sparsity)
-  
+  dtm <- toDocumentTermMatrix(x, language=language, minWordLength=minWordLength, sparsity=sparsity, weighting=weighting)
+
   return(generateDictionary(dtm, response, language,
                             alpha, s, family,
                             minWordLength, sparsity, weighting, ...)) 

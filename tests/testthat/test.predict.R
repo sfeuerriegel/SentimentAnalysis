@@ -15,7 +15,7 @@ test_that("SentimentDictionaryWeighted is predicted correctly", {
                                             c(1, 1),
                                             1)
   
-  sentiment <- predict(dictionary, documents)
+  sentiment <- predict(dictionary, documents, weighting=function(x) tm::weightTf(x))
   
   expect_is(sentiment, "data.frame")
   expect_equal(colnames(sentiment), "Dictionary")
@@ -26,9 +26,20 @@ test_that("SentimentDictionaryWeighted is predicted correctly", {
                                             c(0.5, 2),
                                             1)
   
-  sentiment <- predict(dictionary, documents)
+  sentiment <- predict(dictionary, documents, weighting=function(x) tm::weightTf(x))
   
   expect_is(sentiment, "data.frame")
   expect_equal(colnames(sentiment), "Dictionary")
   expect_equal(sentiment$Dictionary, c(11, 3.5, 1, -3, 0))
+  
+  dictionary <- SentimentDictionaryWeighted(c("alpha", "beta"),
+                                            c(-2, 5),
+                                            c(1, 1),
+                                            1)
+  
+  sentiment <- predict(dictionary, documents, weighting=function(x) tm::weightTf(x))
+  
+  expect_is(sentiment, "data.frame")
+  expect_equal(colnames(sentiment), "Dictionary")
+  expect_equal(sentiment$Dictionary, c(1, 1, 1, 1, 1))
 })

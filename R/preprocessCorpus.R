@@ -1,16 +1,15 @@
-#' Default preprocessing of corpus to generate a document-term matrix
+#' Default preprocessing of corpus
 #' 
 #' Preprocess existing corpus of type \code{\link[tm]{Corpus}} according to default operations. 
 #' This helper function groups all standard preprocessing steps such that the usage of the 
-#' package is more convenient. The result is a document-term matrix.
+#' package is more convenient. 
 #' 
 #' @param corpus \code{\link[tm]{Corpus}} object which should be processed
-#' @param stemming perform stemming (default: TRUE)
-#' @param language default language used for preprocessing (i.e. stop word removal and stemming)
-#' @param verbose print preprocessing status information
+#' @param stemming Perform stemming (default: TRUE)
+#' @param language Default language used for preprocessing (i.e. stop word removal and stemming)
+#' @param verbose Print preprocessing status information
+#' @return Object of \code{\link[tm]{Corpus}}
 #' @keywords corpus preprocessing
-#' @seealso \code{\link[tm]{DocumentTermMatrix}} and \code{\link[tm]{TermDocumentMatrix}} for
-#' the underlying class
 #' @export
 "preprocessCorpus" <- function(corpus, language="english", stemming=TRUE, verbose=FALSE)  {  
   if (!inherits(corpus, "Corpus")) {
@@ -76,4 +75,37 @@
   }
   
   return(corpus)
+}
+
+#' Default preprocessing of corpus and conversion to document-term matrix
+#' 
+#' Preprocess existing corpus of type \code{\link[tm]{Corpus}} according to default operations. 
+#' This helper function groups all standard preprocessing steps such that the usage of the 
+#' package is more convenient. The result is a document-term matrix.
+#' 
+#' @param x \code{\link[tm]{Corpus}} object which should be processed
+#' @param language Default language used for preprocessing (i.e. stop word removal and stemming)
+#' @param minWordLength Minimum length of words used for cut-off; i.e. shorter words are 
+#' removed. Default is 3.
+#' @param weighting Function used for weighting of words; default is a a link to the tf-idf scheme.
+#' @param sparsity A numeric for the maximal allowed sparsity in the range from bigger zero to 
+#' smaller one. Default is \code{NULL} in order surpress this functionality.
+#' @keywords corpus preprocessing
+#' @return Object of \code{\link[tm]{DocumentTermMatrix}}
+#' @seealso \code{\link[tm]{DocumentTermMatrix}} for the underlying class
+#' @export
+toDocumentTermMatrix <- function(x, language="english",
+                                 minWordLength=3, sparsity=NULL, 
+                                 weighting=function(x) tm::weightTfIdf(x, normalize=FALSE)) {
+
+    corpus <- preprocessCorpus(x, language)
+    
+    dtm <- tm::DocumentTermMatrix(corpus,
+                                  control=list(minWordLength=minWordLength,
+                                               weighting=weighting))
+    if (!is.null(sparsity)) {
+      dtm <- tm::removeSparseTerms(dtm, sparsity)
+    }
+    
+    return(dtm)
 }

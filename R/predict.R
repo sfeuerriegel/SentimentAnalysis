@@ -9,6 +9,8 @@
 #' \code{\link[tm]{DocumentTermMatrix}} .
 #' @param language Language used for preprocessing operations (default: 
 #' English).
+#' @param weighting Function used for weighting of words; default is a a link to the 
+#' tf-idf scheme.
 #' @param ... Additional parameters passed to function for e.g. 
 #' preprocessing.
 #' @return \code{data.frame} with predicted sentiment scores.
@@ -32,41 +34,43 @@
 #' \code{\link{compareToResponse}} for default dictionary generations
 #' @export
 predict.SentimentDictionaryWeighted <- function(object, newdata=NULL, 
-                                                language="english", ...) {
+                                                language="english", 
+                                                weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), 
+                                                ...) {
   if (missing(newdata) || is.null(newdata)) {
     stop("Argument 'newdata' is empty.")
   }
 
-  return(predictWeighted(newdata, object, language, ...))
+  return(predictWeighted(newdata, object, language, weighting, ...))
 } 
 
-predictWeighted <- function(x, d, language, ...) {
+predictWeighted <- function(x, d, language, weighting, ...) {
   UseMethod("predictWeighted", x)
 }
 
-predictWeighted.Corpus <- function(x, d, language, ...) {
-  corpus <- preprocessCorpus(x, language, ...)
-  dtm <- tm::DocumentTermMatrix(corpus)
-  return(predictWeighted(dtm, d, language, ...))
+predictWeighted.Corpus <- function(x, d, language, weighting, ...) {
+  dtm <- toDocumentTermMatrix(x, language=language, weighting=weighting)
+  return(predictWeighted(dtm, d, language, weighting, ...))
 }
 
-predictWeighted.character <- function(x, d, language, ...) {
+predictWeighted.character <- function(x, d, language, weighting, ...) {
   corpus <- transformIntoCorpus(x, ...)
-  return(predictWeighted(corpus, d, language, ...))
+  return(predictWeighted(corpus, d, language, weighting, ...))
 }
 
-predictWeighted.data.frame <- function(x, d, language, ...) {
+predictWeighted.data.frame <- function(x, d, language, weighting, ...) {
   corpus <- transformIntoCorpus(x, ...)
-  return(predictWeighted(corpus, d, language, ...))
+  return(predictWeighted(corpus, d, language, weighting, ...))
 }
 
-predictWeighted.TermDocumentMatrix <- function(x, d, language, ...) {
-  return(predictWeighted(t(x), d, language, ...))
+predictWeighted.TermDocumentMatrix <- function(x, d, language, weighting, ...) {
+  return(predictWeighted(t(x), d, language, weighting, ...))
 }
 
-predictWeighted.DocumentTermMatrix <- function(x, d, language, ...) {
+predictWeighted.DocumentTermMatrix <- function(x, d, language, weighting, ...) {
   out <- rep(d$intercept)
-  out <- unname(out + (as.matrix(x[, d$words]) * d$idf) %*% d$scores)
+  in_both <- d$words %in% colnames(x)
+  out <- unname(out + (as.matrix(x[, d$words[in_both]]) * d$idf[in_both]) %*% d$scores[in_both])
   out <- data.frame(Dictionary=out)
   
   return(out)
