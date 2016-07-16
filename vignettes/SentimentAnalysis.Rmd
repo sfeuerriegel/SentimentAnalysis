@@ -1,4 +1,4 @@
----
+﻿---
 title: "SentimentAnalysis Vignette"
 author: 
 - "Stefan Feuerriegel"
@@ -14,39 +14,39 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms  based on an exogeneous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
+The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogeneous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
 
 # Introduction
 
-Sentiment analysis is a research branch located at the heart of natural language processing (NLP), computational linguistics and text mining. It refers to any measure that extract subjective information from textual documents. In other words, it extracts the polarity of the expressed opinion in the range from being positive to negative. As a result, one refers to sentiment analysis also as *opinion mining* [@Pang.2008].
+Sentiment analysis is a research branch located at the heart of natural language processing (NLP), computational linguistics and text mining. It refers to any measures by which subjective information is extracted from textual documents. In other words, it extracts the polarity of the expressed opinion in a range spanning from positive to negative. As a result, one may also refer to sentiment analysis as *opinion mining* [@Pang.2008].
 
 ## Applications in research
 
-Sentiment analysis has received great traction lately [@Ravi.2015; @Pang.2008], which we explore in the following. Current research in finance and the social sciences utilizes sentiment analysis to understand human decisions in response to textual materials. This immediately reveals manifold implications for practitioners, as well as those involved in the fields of finance research and the social sciences: researchers can use R to extract text components that are relevant for readers and test their hypotheses on this basis. By the same token, practitioners can measure which wording actually matters to their readership and enhance their writing accordingly [@ECIS.2015]. We demonstrate the added benefits in two case studies drawn from finance and the social sciences below.
+Sentiment analysis has received great traction lately [@Ravi.2015; @Pang.2008], which we explore in the following. Current research in finance and the social sciences utilizes sentiment analysis to understand human decisions in response to textual materials. This immediately reveals manifold implications for practitioners, as well as those involved in the fields of finance research and the social sciences: researchers can use R to extract text components that are relevant for readers and test their hypotheses on this basis. By the same token, practitioners can measure which wording actually matters to their readership and enhance their writing accordingly [@ECIS.2015]. We demonstrate below the added benefits in two case studies drawn from finance and the social sciences.
 
 ## Applications in practice
 
-Several applications demonstrate the use cases of sentiment analysis for organizations and enterprises:
+Several applications demonstrate the uses of sentiment analysis for organizations and enterprises:
 
-* **Finance:** Investors in financial markets refer to textual information in the form of financial news disclosures before exercising ownership in stocks. Interestingly, they not only rely on quantitiative numbers, but also soft information strongly influences stock prices, such as tone and sentiment [@Henry.2008; @Loughran.2011; @Tetlock.2007]. Automated traders then can automatically analyze the sentiment conveyed in financial disclosures in order to trigger investment decisions within milliseconds. 
+* **Finance:** Investors in financial markets refer to textual information in the form of financial news disclosures before exercising ownership in stocks. Interestingly, they rely not only on quantitative numbers, but also soft information, such as tone and sentiment [@Henry.2008; @Loughran.2011; @Tetlock.2007], which thereby strongly influences stock prices. By utilizing sentiment analysis, automated traders can automatically analyze the sentiment conveyed in financial disclosures in order to trigger investment decisions within milliseconds. 
 
-* **Marketing:** Marketing departments are often interested in tracking the brand image. For that purpose, they collect large volumes of user opinions from social media and evaluate the opinions of individuals towards brands, products and services. Furthermore, practioners from marketing can exploit the insights to enhance their wording according to the feedback of their readingship.
+* **Marketing:** Marketing departments are often interested in tracking brand image. For that purpose, they collect large volumes of user opinions from social media and evaluate the feelings of individuals towards brands, products and services. Practitioners in the field of marketing can exploit these insights to enhance their wording according to the feedback of their readership.
 
-* **Rating and review platforms:** Rating and review platforms support individuals by collecting user ratings or preferences towards products and services. Here, one can automatically process large volumes of user-generated content and exploit the knowledge there it. For example, one can identify which cues convey a positive and and negative opinion, or even automatically validate their credibility. 
+* **Rating and review platforms:** Rating and review platforms fulfill a valuable function by collecting user ratings or preferences for certain products and services. Here, one can automatically process large volumes of user-generated content and exploit the knowledge gained thereby. For example, one can identify which cues convey a positive or negative opinion, or even automatically validate their credibility. 
 
 # Methods for sentiment analysis
 
-As sentiment analysis is applied to a broad variety of domains and textual sources, research has devised various approaches to measure sentiment. A recent literature overview [@Pang.2008] provides a comprehensive domain-independent survey. 
+As sentiment analysis is applied to a broad variety of domains and textual sources, research has devised various approaches to measuring sentiment. A recent literature overview [@Pang.2008] provides a comprehensive, domain-independent survey. 
 
-On the one hand, machine learning approaches are prefered when one strives for a high prediction performance. However, machine learning usually works as a black-box; hence, making interpretations diffucult. On the other hand, dictionary-based approaches facilitate lists of positive and negative words. Their occurences are then combined into a single sentiment score. Therefore, the underlying decisions become traceable and researchers can understand the reasons resulting into a specific sentiment. 
+On the one hand, machine learning approaches are preferred when one strives for high prediction performance. However, machine learning usually works as a black-box, thereby making interpretations diffucult. On the other hand, dictionary-based approaches generate lists of positive and negative words. The respective occurrences of these words are then combined into a single sentiment score. Therefore, the underlying decisions become traceable and researchers can understand the factors that result in a specific sentiment. 
 
-In addition to that, `SentimentAnalysis` allows to generate tailored dictionaries. These are customized to a specific domain, improve the prediction performance compared to pure dictionaries and allow full interpretability. Details for this methodology can be found in [@ECIS.2015]. 
+In addition, `SentimentAnalysis` allows one to generate tailored dictionaries. These are customized to a specific domain, improve prediction performance compared to pure dictionaries and allow full interpretability. Details of this methodology can be found in [@ECIS.2015]. 
 
-On the road to performing sentiment analysis, one needs to convert the running text into a machine readable format. This is achieved by executing a series of preprocessing operations. First, the text is tokenized into single words, followed by what are common preprocessing steps: stopword removal, stemming, removal of punctuation and conversion to lower-case. These are also conducted by default in the `SentimentAnalysis`, but can be adapted to ones personal needs.
+In the process of performing sentiment analysis, one must convert the running text into a machine-readable format. This is achieved by executing a series of preprocessing operations. First, the text is tokenized into single words, followed by what are common preprocessing steps: stopword removal, stemming, removal of punctuation and conversion to lower-case. These operations are also conducted by default in `SentimentAnalysis`, but can be adapted to one's personal needs.
 
 # Setup of the SentimentAnalysis package
 
-Even though sentiment analysis has received great traction lately, the available tools are not yet living up to the needs of researchers. The `SentimentAnalysis` package is intended to partially close this gap and contributed capabilities that most research desires.
+Even though sentiment analysis has received great traction lately, the available tools are not yet living up to the needs of researchers. The `SentimentAnalysis` package is intended to partially close this gap and offer capabilities that most research demands.
 
 ## Installation
 
@@ -55,18 +55,18 @@ Using the `devtools` package, you can easily install the latest development vers
 ```{r,eval=FALSE}
 library(devtools)
 
-# Option 1: download and install latest version from ‘GitHub’
+# Option 1: download and install latest version from GitHub
 install_github("sfeuerriegel/SentimentAnalysis")
 
 # Option 2: install directly from bundled archive
 install_local("SentimentAnalysis_1.0.0.tar.gz")
 ```
 
-Note: that you have to specify the path either to the directory of `SentimentAnalysis` or to the bundled archive `SentimentAnalysis_1.0.0.tar.gz`.
+Note: You have to specify the path either to the directory of `SentimentAnalysis` or to the bundled archive `SentimentAnalysis_1.0.0.tar.gz`.
 
 ## Package loading
 
-Afterwards, one merely needs to load the `SentimentAnalysis` package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published the latest. 
+Afterwards, one merely needs to load the `SentimentAnalysis` package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published most recently. 
 
 ```{r}
 library(SentimentAnalysis)
@@ -76,7 +76,7 @@ library(SentimentAnalysis)
 
 ```{r}
 # Analyze a single string to obtain a binary response (positive / negative)
-sentiment <- analyzeSentiment("Yeah, this was a great soccer game of the German team!")
+sentiment <- analyzeSentiment("Yeah, this was a great soccer game for the German team!")
 convertToBinaryResponse(sentiment)$SentimentGI
 ```
 
@@ -87,7 +87,7 @@ documents <- c("Wow, I really like the new light sabers!",
                "R is a fantastic language.",
                "The service in this restaurant was miserable.",
                "This is neither positive or negative.",
-               "The waiter forget about my a dessert -- what a poor service!")
+               "The waiter forget about my dessert -- what poor service!")
 
 # Analyze sentiment
 sentiment <- analyzeSentiment(documents)
@@ -107,27 +107,27 @@ compareToResponse(sentiment, convertToBinaryResponse(response))
 plotSentimentResponse(sentiment$SentimentGI, response)
 ```
 
-The `SentimentAnalysis` package works very clever and neatly here in order to remove the effort
+The `SentimentAnalysis` package works very cleverly and neatly here in order to remove the effort
 for the user: it recognizes that the user has inserted
 a vector of strings and thus automatically performs a set of default preprocessing operations from
 text mining. Hence, it tokenizes each document and finally converts the input into a 
 document-term matrix. All of the previous operations are undertaken without manual specification. 
 The `analyzeSentiment()` routine also accepts other input formats in case the user has already
-performed a preprocessing or wants to specify a specific set of operations.
+performed a preprocessing step or wants to implement a specific set of operations.
 
 # Functionality
 
-The following sections present the functionality to work with different input formats and the underlying dictionaries.
+The following sections present the functionality in terms of working with different input formats and the underlying dictionaries.
 
 ## Interface
 
-The `SentimentAnalysis` package provides interfaces to several other input formats, among these are
+The `SentimentAnalysis` package provides interfaces with several other input formats, among which are
 
 * Vector of strings.
 
-* `DocumentTermMatrix` and `TermDocumentMatrix` as implemented in the `tm` package [@Feinerer.2008].
+* DocumentTermMatrix and TermDocumentMatrix as implemented in the `tm` package [@Feinerer.2008].
 
-* `Corpus` object as implemented by the `tm` package [@Feinerer.2008].
+* Corpus object as implemented by the `tm` package [@Feinerer.2008].
 
 We provide examples in the following.
 
@@ -155,7 +155,7 @@ dtm <- preprocessCorpus(corpus)
 convertToDirection(analyzeSentiment(dtm)$SentimentGI)
 ```
 
-Since the package can directly work with a document-term matrix, this allows to use customized preprocessing operations in the first place. Afterwards, one can utilize the `SentimentAnalysis` package for the computation of sentiment scores. For instance, one can replace the stopwords by a different list, or even perform tailored synonym merging among others. By default, the package uses the built-in routines `transformIntoCorpus()` to convert the input into a `Corpus` object and `preprocessCorpus()` to convert it into a `DocumentTermMatrix`.
+Since the package can work directly with a document-term matrix, this allows one to use customized preprocessing operations in the first place. Afterwards, one can utilize the `SentimentAnalysis` package for the computation of sentiment scores. For instance, one can replace the stopwords with those from a different list, or even perform tailored synonym merging, among other options. By default, the package uses the built-in routines `transformIntoCorpus()` to convert the input into a `Corpus` object and `preprocessCorpus()` to convert it into a `DocumentTermMatrix`.
 
 ## Built-in dictionaries
 
@@ -188,13 +188,13 @@ str(DictionaryLM)
 
 ## Dictionary functions
 
-The `SentimentAnalysis` packgae distinguishes between three different types of dictionaries. All of them differ by the data they store, which finally also controls what methods for sentiment analysis one can apply. The dictionaries are as follows:
+The `SentimentAnalysis` package distinguishes between three different types of dictionaries. All of them differ by the data they store, which ultimately also controls which methods of sentiment analysis one can apply. The dictionaries are as follows:
 
-* `SentimentDictionaryWordlist` contains a list of words belonging to a single category. For instance, it can bundle a list of uncertainty words in order to compute the ratio of uncertainty words in that documents. 
+* `SentimentDictionaryWordlist` contains a list of words belonging to a single category. For instance, it can bundle a list of uncertainty words in order to compute the ratio of uncertainty words in that particular document. 
 
-* `SentimentDictionaryBinary` stores two list of words, one for positive and one for negative entries. This allows to later compute the polarity of the document on a scale from very positive to very negative. However, each category is not further distinguished or rated, i.e. all positive words are assigned the same degree of positivity. 
+* `SentimentDictionaryBinary` stores two lists of words, one for positive and one for negative entries. This allows one to later compute the polarity of the document on a scale from very positive to very negative. However, the categories are not further distinguished or rated, i.e. all positive words are assigned the same degree of positivity. 
 
-* **SentimentDictionaryWeighted** allows words to take on continuous sentiment scores. This allows, for instance, to rate *increase* as being more positive than *improve*. These weights can then be transformed into a linear model. For that purpose, the **SentimentDictionaryWeighted** also entails an intercept. It can also store an additional factor in order to revert the weighting by an inverse document frequency. 
+* **SentimentDictionaryWeighted** allows words to take on continuous sentiment scores. This allows one, for instance, to rate *increase* as being more positive than *improve*. These weights can then be transformed into a linear model. For this purpose, the **SentimentDictionaryWeighted** also entails an intercept. It can also store an additional factor in order to revert the weighting by an inverse document frequency. 
 
 ### SentimentDictionaryWordlist
 
@@ -237,7 +237,7 @@ summary(d)
 
 # Dictionary generation
 
-The following example shows how the `SentimentAnalysis`package can extract statistically relevant textual drivers based on an exogeneous response variable. The details of this methods are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization which implicitly performs variable selection. Thereby, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by the polarity according to their coefficient.
+The following example shows how the `SentimentAnalysis` package can extract statistically relevant textual drivers based on an exogeneous response variable. The details of this method are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in the form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurrences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization, which implicitly performs variable selection. In so doing, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by polarity according to their coefficient.
 
 ```{r}
 # Create a vector of strings
@@ -256,7 +256,7 @@ dict
 summary(dict)
 ```
 
-In practice, users have several options for fine-tuning. Among them, they can disable the intercept \eqn{\alpha} and fix it to zero, or standardizing the response variable \eqn{R}. In addition, it is possible to replace the LASSO by any variant of the elastic net; simply by changing the argument `alpha`. 
+In practice, users have several options for fine-tuning. Among these, they can disable the intercept \eqn{\alpha} and fix it to zero, or standardize the response variable \eqn{R}. In addition, it is possible to replace the LASSO with any variant of the elastic net, simply by changing the argument `alpha`. 
 
 Finally, one can save and reload dictionaries using `read()` and `write()` as follows:
 
@@ -268,7 +268,7 @@ dict <- read("dictionary.dict")
 
 ## Performance evaluation
 
-Ultimately, several routines allow to exlore the generated dictionary further. On the hand, a simple overview can be displayed by means of the `summary()`routine. On the other hand, a Kernel Density Estimation can also visualize the distribution of positive and negative words. For instance, one can identify if the opinionated words were skewed to either end of the polarity scale. Lastly, the `compareDictionary()` routine can compare the generated dictionary to dictionaries from the literature. It automatically computes various metrics, among them, the overlap or the correlation. 
+Ultimately, several routines allow one to exlore the generated dictionary further. On the one hand, a simple overview can be displayed by means of the `summary()` routine. On the other hand, a Kernel Density Estimation can also visualize the distribution of positive and negative words. For instance, one can identify whether the opinionated words were skewed to either end of the polarity scale. Lastly, the `compareDictionary()` routine can compare the generated dictionary to dictionaries from the literature. It automatically computes various metrics, among which are the overlap or the correlation. 
 
 ```{r}
 compareDictionaries(dict,
@@ -279,7 +279,7 @@ compareToResponse(sentiment, response)
 plotSentimentResponse(sentiment, response)
 ```
 
-The following example demonstrates how a calculated dictionary can then be used for predicting the sentiment on out-of-sample data. In addition, the code then evaluates the prediction performance by comparing it to the built-in dictionaries.
+The following example demonstrates how a calculated dictionary can be used for predicting the sentiment of out-of-sample data. In addition, the code then evaluates the prediction performance by comparing it to the built-in dictionaries.
 
 ```{r}
 test_documents <- c("This is neither good nor bad",
@@ -297,7 +297,7 @@ compareToResponse(analyzeSentiment(test_documents), test_response)
 
 ## Configuration of preprocessing
 
-When desired, one can implemented a tailored preprocessing stage that adapts to specific needs. The following code snippets demonstrates such adaptation. In particular, the `SentimentAnalysis`` package ships a function `ngram_tokenize()` in order to extract \eqn{n}-grams from the corpus. This does not affect the results of the built-in dictionaries, but changes the behavior of dictionary generation.
+When desired, one can implement a tailored preprocessing stage that adapts to specific needs. The following code snippets demonstrate such adaptation. In particular, the `SentimentAnalysis` package ships a function `ngram_tokenize()` in order to extract \eqn{n}-grams from the corpus. This does not affect the results of the built-in dictionaries but rather changes the features used as part of dictionary generation.
 
 ```{r}
 corpus <- Corpus(VectorSource(documents))
@@ -314,7 +314,7 @@ dict
 
 ## Performance optimization
 
-Once the user has decided upon a preferred rule, he can adapt the `analyzeSentiment()` routine by restricting it to calculate only the rules of interest. Such behavior can be accomplished by changing the default value of the argument `rules`. See the following code snippets for an example:
+Once the user has decided upon a preferred rule, he can adapt the `analyzeSentiment()` routine by restricting it to calculate only the rules of interest. Such behavior can be implemented by changing the default value of the argument `rules`. See the following code snippets for an example:
 
 ```{r}
 sentiment <- analyzeSentiment(documents,
@@ -324,13 +324,13 @@ sentiment
 
 ## Language support and extensibility
 
-**SentimentAnalyiss** can be adapted for the use with languages other than English. For that, one needs to introduce changes at two points:
+**SentimentAnalysis** can be adapted for use with languages other than English. In order to do this, one needs to introduce changes at two points:
 
-* **Preprocessing:** The built-in routines use a parameter `language="english"` to perform all preprocessing operations for the English language. Instead, one might prefer to change stemming and stopwords to the specific language. If one wants to make further changes to the preprocessing, it might be beneficial to replace the automatic preprocessing by one's own routines which then return a `DocumentTermMatrix`.
+* **Preprocessing:** The built-in routines use a parameter `language="english"` to perform all preprocessing operations for the English language. Instead, one might prefer to change stemming and stopwords to a desired language. If one wishes to make further changes to the preprocessing, it might be beneficial to replace the automatic preprocessing with one's own routines, which then return a `DocumentTermMatrix`.
 
-* **Dictionary:** If one has a response or baseline variable, one can use from the dictionary generation approach that is shipped with `SentimentAnalysis`. This can then automatically generate a dictionary of positive and negative words that can be applied to the given language. Otherwise, if one has not baseline variable at hand, one needs to load a dictionary for that langauge. It might be worthwhile to search online for pre-defined lists of positive and negative words.
+* **Dictionary:** If one has a response or baseline variable, one can use the dictionary generation approach that is shipped with `SentimentAnalysis`. This can then automatically generate a dictionary of positive and negative words that can be applied to the given language. Otherwise, if one has no baseline variable at hand, one needs to load a dictionary for that langauge. It might be worthwhile to search online for pre-defined lists of positive and negative words.
 
-The following example demonstrates how `SentimentAnalysis` can be adapted to work with an example in German. Here, we supply a positive and negative document in the variable `documents`. Afterwards, we introduce a very small dictionary of positive and negative words, that is stored in `dictionaryGerman`. Finally, we use `analyzeSentiment()` to perform a sentiment analysis, where we introduce to changes as follows: on the hand, we supply `language="german"` to switch all preprocessing operations being made for the German language. On the other hand, we define our custom rule for `GermanSentiment` that uses our previous, customized dictionary. 
+The following example demonstrates how `SentimentAnalysis` can be adapted to work with a sample in German. Here, we supply a positive and negative document in the variable `documents`. Afterwards, we introduce a very small dictionary of positive and negative words, which is stored in `dictionaryGerman`. Finally, we use `analyzeSentiment()` to perform a sentiment analysis, where we introduce changes as follows: first of all, we supply `language="german"` to ensure that all preprocessing operations are being made for the German language. Additionally, we define our custom rule for `GermanSentiment` that uses our previous, customized dictionary. 
 
 ```{r}
 documents <- c("Das ist ein gutes Resultat",
@@ -350,11 +350,11 @@ Notes:
 
 * The argument `rules` is a named list of approaches, where each entry specifies a combination of a rule and a dictionary.
 
-* Caution is needed when working with stemming. The default routines of `SentimentAnalysis` automatically perform stemming. Therefore, it is necessary to included stemmed terms in the original dictionary. Once can easily achieve such a conversion by calling `tm::stemDocument()`.
+* Caution is needed when working with stemming. The default routines of `SentimentAnalysis` automatically perform stemming. Therefore, it is necessary to included stemmed terms in the original dictionary. One can easily achieve such a conversion by calling `tm::stemDocument()`.
 
 # Worked examples
 
-The following example shows the usage of `SentimentAnalysis`in an applied setting. More precisely, we utilize Reuters oil-related news from the `tm` package.
+The following example shows the usage of `SentimentAnalysis` in an applied setting. More precisely, we utilize Reuters oil-related news from the `tm` package.
 
 ```{r}
 library(tm)
@@ -388,11 +388,11 @@ plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
 
 # Outlook
 
-The current version still opens avenues for further enhancement. In the future, we see the following items as subject to improvements:
+The current version leaves open avenues for further enhancement. In the future, we see the following items as being potentially subject to improvements:
 
-* **Negations:** We envision a generic negation rule object, that can be injected to negate fixed windows or apply complex negation rules [@DSS.2016].
+* **Negations:** We envision a generic negation rule object that can be injected to negate fixed windows or apply complex negation rules [@DSS.2016].
 
-* **Multi-language support:** The current version has built-in dictionaries for the English language only. We think that the package can greatly benefit from support of further languages. As such, one does not need to adapt the preprocessing routines as the underlying `tm` package has already support for further languages [@Feinerer.2008]. Instead, it is only required to tailored dictionaries.
+* **Multi-language support:** The current version has built-in dictionaries for the English language only. We think that the package would benefit greatly from support of further languages. In such a setup, one would not need to adapt the preprocessing routines, as the underlying `tm` package would already have support for further languages [@Feinerer.2008]. Instead, it would only be required that the user tailor the applied dictionaries.
 
 We cordially invite everyone to contribute source code, dictionaries and further demos. 
 
