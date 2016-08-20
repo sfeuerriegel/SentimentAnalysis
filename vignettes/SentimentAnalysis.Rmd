@@ -194,7 +194,7 @@ The `SentimentAnalysis` package distinguishes between three different types of d
 
 * `SentimentDictionaryBinary` stores two lists of words, one for positive and one for negative entries. This allows one to later compute the polarity of the document on a scale from very positive to very negative. However, the categories are not further distinguished or rated, i.e. all positive words are assigned the same degree of positivity. 
 
-* **SentimentDictionaryWeighted** allows words to take on continuous sentiment scores. This allows one, for instance, to rate *increase* as being more positive than *improve*. These weights can then be transformed into a linear model. For this purpose, the **SentimentDictionaryWeighted** also entails an intercept. It can also store an additional factor in order to revert the weighting by an inverse document frequency. 
+* `SentimentDictionaryWeighted` allows words to take on continuous sentiment scores. This allows one, for instance, to rate *increase* as being more positive than *improve*. These weights can then be transformed into a linear model. For this purpose, the **SentimentDictionaryWeighted** also entails an intercept. It can also store an additional factor in order to revert the weighting by an inverse document frequency. 
 
 ### SentimentDictionaryWordlist
 
