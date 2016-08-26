@@ -199,3 +199,16 @@ test_that("conversion to direction works correctly for matrix", {
   expect_equivalent(colnames(r), c("X1", "X2", "X3"))
   expect_equivalent(unname(as.matrix(r)), m)
 })
+
+test_that("word counting works correctly", {
+  documents <- c("This is a test", "an one more")
+
+  # count words (without stopwords)
+  wc <- analyzeSentiment(documents, rules=list("WordCount"=list(ruleWordCount)))
+  expect_equal(wc$WordCount, c(1, 1))
+  
+  # count all words (including stopwords)
+  wc <- analyzeSentiment(documents, rules=list("WordCount"=list(ruleWordCount)), removeStopwords=FALSE)
+  expect_equal(wc$WordCount, c(2, 2))
+  # Note: the latter does not overwrite minWordLength (default: 3) because of which "is", "a", etc. is removed
+})

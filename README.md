@@ -34,7 +34,7 @@ install.packages("devtools")
 devtools::install_github("sfeuerriegel/SentimentAnalysis")
 
 # Option 2: install directly from bundled archive
-# devtoos::install_local("SentimentAnalysis_1.0.0.tar.gz")
+# devtoos::install_local("SentimentAnalysis_1.1.0.tar.gz")
 ```
 
 Notes:

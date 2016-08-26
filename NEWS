@@ -1,0 +1,7 @@
+# SentimentAnalysis 1.1-0
+
+# Version 1.1-0
+
+## New features and functions
+
+* Added new function `countWords()` to count words without default preprocessing rules

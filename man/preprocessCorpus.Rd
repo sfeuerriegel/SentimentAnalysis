@@ -5,7 +5,7 @@
 \title{Default preprocessing of corpus}
 \usage{
 preprocessCorpus(corpus, language = "english", stemming = TRUE,
-  verbose = FALSE)
+  verbose = FALSE, removeStopwords = TRUE)
 }
 \arguments{
 \item{corpus}{\code{\link[tm]{Corpus}} object which should be processed}
@@ -15,6 +15,8 @@ preprocessCorpus(corpus, language = "english", stemming = TRUE,
 \item{stemming}{Perform stemming (default: TRUE)}
 
 \item{verbose}{Print preprocessing status information}
+
+\item{removeStopwords}{Flag indicating whether to remove stopwords or not (default: yes)}
 }
 \value{
 Object of \code{\link[tm]{Corpus}}

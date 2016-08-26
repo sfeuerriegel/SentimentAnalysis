@@ -5,8 +5,8 @@
 \title{Default preprocessing of corpus and conversion to document-term matrix}
 \usage{
 toDocumentTermMatrix(x, language = "english", minWordLength = 3,
-  sparsity = NULL, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE))
+  sparsity = NULL, removeStopwords = TRUE, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE))
 }
 \arguments{
 \item{x}{\code{\link[tm]{Corpus}} object which should be processed}
@@ -18,6 +18,8 @@ removed. Default is 3.}
 
 \item{sparsity}{A numeric for the maximal allowed sparsity in the range from bigger zero to 
 smaller one. Default is \code{NULL} in order surpress this functionality.}
+
+\item{removeStopwords}{Flag indicating whether to remove stopwords or not (default: yes)}
 
 \item{weighting}{Function used for weighting of words; default is a a link to the tf-idf scheme.}
 }

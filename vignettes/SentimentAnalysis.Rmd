@@ -1,4 +1,4 @@
-﻿---
+---
 title: "SentimentAnalysis Vignette"
 author: 
 - "Stefan Feuerriegel"
@@ -59,10 +59,10 @@ library(devtools)
 install_github("sfeuerriegel/SentimentAnalysis")
 
 # Option 2: install directly from bundled archive
-install_local("SentimentAnalysis_1.0.0.tar.gz")
+install_local("SentimentAnalysis_1.1.0.tar.gz")
 ```
 
-Note: You have to specify the path either to the directory of `SentimentAnalysis` or to the bundled archive `SentimentAnalysis_1.0.0.tar.gz`.
+Note: You have to specify the path either to the directory of `SentimentAnalysis` or to the bundled archive `SentimentAnalysis_1.1.0.tar.gz`.
 
 ## Package loading
 
@@ -324,7 +324,7 @@ sentiment
 
 ## Language support and extensibility
 
-**SentimentAnalysis** can be adapted for use with languages other than English. In order to do this, one needs to introduce changes at two points:
+`SentimentAnalysis` can be adapted for use with languages other than English. In order to do this, one needs to introduce changes at two points:
 
 * **Preprocessing:** The built-in routines use a parameter `language="english"` to perform all preprocessing operations for the English language. Instead, one might prefer to change stemming and stopwords to a desired language. If one wishes to make further changes to the preprocessing, it might be beneficial to replace the automatic preprocessing with one's own routines, which then return a `DocumentTermMatrix`.
 
@@ -385,6 +385,20 @@ datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
 plotSentiment(sentiment$SentimentLM)
 plotSentiment(sentiment$SentimentLM, x=datetime, cumsum=TRUE)
 ```
+
+# Word couting
+
+`SentimentAnalysis` can also be used to count words with the help of `countWords()` in documents. 
+
+```{r}
+# count words (without stopwords)
+countWords(documents)
+
+# count all words (including stopwords)
+countWords(documents, removeStopwords=FALSE)
+```
+
+Note: The package has a built-in rule `ruleWordCount()`, which is used for the "WordCount" column when calling `analyzeSentiment()`. However, the former is likely to return different results as it is subject to the preprocessing rules of `analyzeSentiment()`. By default, it removes stopwords, excludes words with equal or less than 3 letters and might apply a sparsity operation. Hence, one should always use `countWords()` when working with word counts. 
 
 # Outlook
 
