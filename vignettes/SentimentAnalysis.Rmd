@@ -356,6 +356,7 @@ documents <- "dit is heel slecht"
 sentiment <- analyzeSentiment(documents,
                               language="dutch",
                               rules=list("DutchSentiment"=list(ruleLinearModel, dictionaryDutch)))
+sentiment
 ```
 
 
