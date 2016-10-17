@@ -346,6 +346,19 @@ sentiment
 convertToBinaryResponse(sentiment$GermanSentiment)
 ```
 
+Similarly, one can implement a dictionary with custom sentiment scores.
+
+```{r}
+woorden <- c("goed","slecht")
+scores <- c(0.8,-0.5)
+dictionaryDutch <- SentimentDictionaryWeighted(woorden, scores)
+documents <- "dit is heel slecht"
+sentiment <- analyzeSentiment(documents,
+                              language="dutch",
+                              rules=list("DutchSentiment"=list(ruleLinearModel, dictionaryDutch)))
+```
+
+
 Notes: 
 
 * The argument `rules` is a named list of approaches, where each entry specifies a combination of a rule and a dictionary.
