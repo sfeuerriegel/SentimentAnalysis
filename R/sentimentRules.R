@@ -117,8 +117,8 @@ defaultSentimentRules <- function() {
       r[[paste0("Ratio", n)]] <- list(ruleRatio, d)
     } else if (inherits(d, "SentimentDictionaryBinary")) {
       r[[paste0("Sentiment", n)]] <- list(ruleSentiment, d)
-      r[[paste0("Negativity", n)]] <- list(rulePositivity, d)
-      r[[paste0("Positivity", n)]] <- list(ruleNegativity, d)
+      r[[paste0("Negativity", n)]] <- list(ruleNegativity, d)
+      r[[paste0("Positivity", n)]] <- list(rulePositivity, d)
     } else if (inherits(d, "SentimentDictionaryWeighted")) {
       r[[paste0("lm.", n)]] <- list(ruleLinearModel, d)
     } else {
