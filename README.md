@@ -99,85 +99,85 @@ compareToResponse(sentiment, response)
 #> Warning in cor(x, y): the standard deviation is zero
 #> Warning in cor(sentiment, response): the standard deviation is zero
 #>                              WordCount SentimentGI NegativityGI
-#> cor                        -0.18569534   0.9900115    0.9429542
-#> cor.t.statistic            -0.37796447  14.0440465    5.6647055
-#> cor.p.value                -0.37796447  14.0440465    5.6647055
-#> lm.t.value                 -0.37796447  14.0440465    5.6647055
-#> r.squared                   0.03448276   0.9801228    0.8891626
-#> RMSE                        3.82970843   0.4501029    0.7136240
-#> MAE                         3.33333333   0.4000000    0.6666667
-#> Accuracy                    0.66666667   1.0000000    0.6666667
+#> cor                        -0.18569534   0.9900115  -0.99748901
+#> cor.t.statistic            -0.37796447  14.0440465 -28.16913204
+#> cor.p.value                -0.37796447  14.0440465 -28.16913204
+#> lm.t.value                 -0.37796447  14.0440465 -28.16913204
+#> r.squared                   0.03448276   0.9801228   0.99498433
+#> RMSE                        3.82970843   0.4501029   1.18665418
+#> MAE                         3.33333333   0.4000000   1.10000000
+#> Accuracy                    0.66666667   1.0000000   0.66666667
 #> Precision                          NaN   1.0000000          NaN
-#> Sensitivity                 0.00000000   1.0000000    0.0000000
-#> Specificity                 1.00000000   1.0000000    1.0000000
-#> F1                          0.00000000   0.5000000    0.0000000
-#> BalancedAccuracy            0.50000000   1.0000000    0.5000000
-#> avg.sentiment.pos.response  3.25000000   0.3333333    0.4166667
-#> avg.sentiment.neg.response  4.00000000  -0.6333333    0.0000000
+#> Sensitivity                 0.00000000   1.0000000   0.00000000
+#> Specificity                 1.00000000   1.0000000   1.00000000
+#> F1                          0.00000000   0.5000000   0.00000000
+#> BalancedAccuracy            0.50000000   1.0000000   0.50000000
+#> avg.sentiment.pos.response  3.25000000   0.3333333   0.08333333
+#> avg.sentiment.neg.response  4.00000000  -0.6333333   0.63333333
 #>                            PositivityGI SentimentHE NegativityHE
-#> cor                         -0.99748901   0.4152274    0.3315938
-#> cor.t.statistic            -28.16913204   0.9128709    0.7029595
-#> cor.p.value                -28.16913204   0.9128709    0.7029595
-#> lm.t.value                 -28.16913204   0.9128709    0.7029595
-#> r.squared                    0.99498433   0.1724138    0.1099545
-#> RMSE                         1.18665418   0.8416254    0.8525561
-#> MAE                          1.10000000   0.7500000    0.8055556
-#> Accuracy                     0.66666667   0.6666667    0.6666667
+#> cor                           0.9429542   0.4152274 -0.083045480
+#> cor.t.statistic               5.6647055   0.9128709 -0.166666667
+#> cor.p.value                   5.6647055   0.9128709 -0.166666667
+#> lm.t.value                    5.6647055   0.9128709 -0.166666667
+#> r.squared                     0.8891626   0.1724138  0.006896552
+#> RMSE                          0.7136240   0.8416254  0.922958207
+#> MAE                           0.6666667   0.7500000  0.888888889
+#> Accuracy                      0.6666667   0.6666667  0.666666667
 #> Precision                           NaN         NaN          NaN
-#> Sensitivity                  0.00000000   0.0000000    0.0000000
-#> Specificity                  1.00000000   1.0000000    1.0000000
-#> F1                           0.00000000   0.0000000    0.0000000
-#> BalancedAccuracy             0.50000000   0.5000000    0.5000000
-#> avg.sentiment.pos.response   0.08333333   0.1250000    0.2083333
-#> avg.sentiment.neg.response   0.63333333   0.0000000    0.0000000
+#> Sensitivity                   0.0000000   0.0000000  0.000000000
+#> Specificity                   1.0000000   1.0000000  1.000000000
+#> F1                            0.0000000   0.0000000  0.000000000
+#> BalancedAccuracy              0.5000000   0.5000000  0.500000000
+#> avg.sentiment.pos.response    0.4166667   0.1250000  0.083333333
+#> avg.sentiment.neg.response    0.0000000   0.0000000  0.000000000
 #>                            PositivityHE SentimentLM NegativityLM
-#> cor                        -0.083045480   0.7370455    0.6305283
-#> cor.t.statistic            -0.166666667   2.1811142    1.6247248
-#> cor.p.value                -0.166666667   2.1811142    1.6247248
-#> lm.t.value                 -0.166666667   2.1811142    1.6247248
-#> r.squared                   0.006896552   0.5432361    0.3975659
-#> RMSE                        0.922958207   0.7234178    0.7757911
-#> MAE                         0.888888889   0.6333333    0.7222222
-#> Accuracy                    0.666666667   0.8333333    0.6666667
+#> cor                           0.3315938   0.7370455  -0.40804713
+#> cor.t.statistic               0.7029595   2.1811142  -0.89389841
+#> cor.p.value                   0.7029595   2.1811142  -0.89389841
+#> lm.t.value                    0.7029595   2.1811142  -0.89389841
+#> r.squared                     0.1099545   0.5432361   0.16650246
+#> RMSE                          0.8525561   0.7234178   0.96186547
+#> MAE                           0.8055556   0.6333333   0.92222222
+#> Accuracy                      0.6666667   0.8333333   0.66666667
 #> Precision                           NaN   1.0000000          NaN
-#> Sensitivity                 0.000000000   0.5000000    0.0000000
-#> Specificity                 1.000000000   1.0000000    1.0000000
-#> F1                          0.000000000   0.3333333    0.0000000
-#> BalancedAccuracy            0.500000000   0.7500000    0.5000000
-#> avg.sentiment.pos.response  0.083333333   0.2500000    0.3333333
-#> avg.sentiment.neg.response  0.000000000  -0.1000000    0.0000000
+#> Sensitivity                   0.0000000   0.5000000   0.00000000
+#> Specificity                   1.0000000   1.0000000   1.00000000
+#> F1                            0.0000000   0.3333333   0.00000000
+#> BalancedAccuracy              0.5000000   0.7500000   0.50000000
+#> avg.sentiment.pos.response    0.2083333   0.2500000   0.08333333
+#> avg.sentiment.neg.response    0.0000000  -0.1000000   0.10000000
 #>                            PositivityLM RatioUncertaintyLM SentimentQDAP
-#> cor                         -0.40804713                 NA     0.9865356
-#> cor.t.statistic             -0.89389841                 NA    12.0642877
-#> cor.p.value                 -0.89389841                 NA    12.0642877
-#> lm.t.value                  -0.89389841                 NA    12.0642877
-#> r.squared                    0.16650246                 NA     0.9732526
-#> RMSE                         0.96186547          0.9128709     0.5398902
-#> MAE                          0.92222222          0.8333333     0.4888889
-#> Accuracy                     0.66666667          0.6666667     1.0000000
+#> cor                           0.6305283                 NA     0.9865356
+#> cor.t.statistic               1.6247248                 NA    12.0642877
+#> cor.p.value                   1.6247248                 NA    12.0642877
+#> lm.t.value                    1.6247248                 NA    12.0642877
+#> r.squared                     0.3975659                 NA     0.9732526
+#> RMSE                          0.7757911          0.9128709     0.5398902
+#> MAE                           0.7222222          0.8333333     0.4888889
+#> Accuracy                      0.6666667          0.6666667     1.0000000
 #> Precision                           NaN                NaN     1.0000000
-#> Sensitivity                  0.00000000          0.0000000     1.0000000
-#> Specificity                  1.00000000          1.0000000     1.0000000
-#> F1                           0.00000000          0.0000000     0.5000000
-#> BalancedAccuracy             0.50000000          0.5000000     1.0000000
-#> avg.sentiment.pos.response   0.08333333          0.0000000     0.3333333
-#> avg.sentiment.neg.response   0.10000000          0.0000000    -0.3666667
+#> Sensitivity                   0.0000000          0.0000000     1.0000000
+#> Specificity                   1.0000000          1.0000000     1.0000000
+#> F1                            0.0000000          0.0000000     0.5000000
+#> BalancedAccuracy              0.5000000          0.5000000     1.0000000
+#> avg.sentiment.pos.response    0.3333333          0.0000000     0.3333333
+#> avg.sentiment.neg.response    0.0000000          0.0000000    -0.3666667
 #>                            NegativityQDAP PositivityQDAP
-#> cor                             0.9429542    -0.94433955
-#> cor.t.statistic                 5.6647055    -5.74114834
-#> cor.p.value                     5.6647055    -5.74114834
-#> lm.t.value                      5.6647055    -5.74114834
-#> r.squared                       0.8891626     0.89177719
-#> RMSE                            0.7136240     1.06840137
-#> MAE                             0.6666667     1.01111111
-#> Accuracy                        0.6666667     0.66666667
+#> cor                           -0.94433955      0.9429542
+#> cor.t.statistic               -5.74114834      5.6647055
+#> cor.p.value                   -5.74114834      5.6647055
+#> lm.t.value                    -5.74114834      5.6647055
+#> r.squared                      0.89177719      0.8891626
+#> RMSE                           1.06840137      0.7136240
+#> MAE                            1.01111111      0.6666667
+#> Accuracy                       0.66666667      0.6666667
 #> Precision                             NaN            NaN
-#> Sensitivity                     0.0000000     0.00000000
-#> Specificity                     1.0000000     1.00000000
-#> F1                              0.0000000     0.00000000
-#> BalancedAccuracy                0.5000000     0.50000000
-#> avg.sentiment.pos.response      0.4166667     0.08333333
-#> avg.sentiment.neg.response      0.0000000     0.36666667
+#> Sensitivity                    0.00000000      0.0000000
+#> Specificity                    1.00000000      1.0000000
+#> F1                             0.00000000      0.0000000
+#> BalancedAccuracy               0.50000000      0.5000000
+#> avg.sentiment.pos.response     0.08333333      0.4166667
+#> avg.sentiment.neg.response     0.36666667      0.0000000
 
 plotSentimentResponse(sentiment$SentimentGI, response)
 ```

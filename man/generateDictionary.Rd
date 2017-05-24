@@ -13,34 +13,36 @@
 }
 \usage{
 generateDictionary(x, response, language = "english", alpha = 1,
-  s = "lambda.min", family = "gaussian", minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  s = "lambda.min", family = "gaussian", grouped = FALSE,
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{Corpus}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{character}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{data.frame}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{TermDocumentMatrix}(x, response,
   language = "english", alpha = 1, s = "lambda.min",
-  family = "gaussian", minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+  family = "gaussian", grouped = FALSE, minWordLength = 3,
+  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
+  FALSE), ...)
 
 \method{generateDictionary}{DocumentTermMatrix}(x, response,
   language = "english", alpha = 1, s = "lambda.min",
-  family = "gaussian", minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+  family = "gaussian", grouped = FALSE, minWordLength = 3,
+  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
+  FALSE), ...)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
@@ -66,6 +68,9 @@ results in a better performance than using the minimum value itself given by
 \item{family}{Distribution for response variable. Default is \code{family="gaussian"}.
 For non-negative counts, use \code{family="poisson"}. For binary variables
 \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
+
+\item{grouped}{Optional parameter for grouped LASSO passed on to 
+\code{\link[glmnet]{glmnet}} (default: \code{FALSE}).}
 
 \item{minWordLength}{Removes words given a specific minimum length (default: 3). This 
 preprocessing is applied when the input is a character vector or a corpus and the

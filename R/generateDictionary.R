@@ -21,6 +21,8 @@
 #' @param family Distribution for response variable. Default is \code{family="gaussian"}.
 #' For non-negative counts, use \code{family="poisson"}. For binary variables
 #' \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details. 
+#' @param grouped Optional parameter for grouped LASSO passed on to 
+#' \code{\link[glmnet]{glmnet}} (default: \code{FALSE}).
 #' @param minWordLength Removes words given a specific minimum length (default: 3). This 
 #' preprocessing is applied when the input is a character vector or a corpus and the
 #' document-term matrix is generated inside the routine. 
@@ -108,7 +110,7 @@
 #' @rdname generateDictionary
 #' @export
 generateDictionary <- function(x, response, language="english", 
-                               alpha=1, s="lambda.min", family="gaussian",
+                               alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   UseMethod("generateDictionary", x)
 }
@@ -116,44 +118,44 @@ generateDictionary <- function(x, response, language="english",
 #' @rdname generateDictionary
 #' @export
 generateDictionary.Corpus <- function(x, response, language="english", 
-                                      alpha=1, s="lambda.min", family="gaussian",
+                                      alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                       minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   dtm <- toDocumentTermMatrix(x, language=language, minWordLength=minWordLength, sparsity=sparsity, weighting=weighting)
 
   return(generateDictionary(dtm, response, language,
-                            alpha, s, family,
+                            alpha, s, family, grouped=grouped,
                             minWordLength, sparsity, weighting, ...)) 
 }
 
 #' @rdname generateDictionary
 #' @export
 generateDictionary.character <- function(x, response, language="english", 
-                                         alpha=1, s="lambda.min", family="gaussian",
+                                         alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                          minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   corpus <- transformIntoCorpus(x)
   return(generateDictionary(corpus, response, language,
-                            alpha, s, family,
+                            alpha, s, family, grouped=grouped,
                             minWordLength, sparsity, weighting, ...))
 }
 
 #' @rdname generateDictionary
 #' @export
 generateDictionary.data.frame <- function(x, response, language="english", 
-                                          alpha=1, s="lambda.min", family="gaussian",
+                                          alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                           minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   corpus <- transformIntoCorpus(x, ...)
   return(generateDictionary(corpus, response, language,
-                            alpha, s, family,
+                            alpha, s, family, grouped=grouped,
                             minWordLength, sparsity, weighting, ...))
 }
 
 #' @rdname generateDictionary
 #' @export
 generateDictionary.TermDocumentMatrix <- function(x, response, language="english", 
-                                                  alpha=1, s="lambda.min", family="gaussian",
+                                                  alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                                   minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   return(generateDictionary(t(x), response, language,
-                           alpha, s, family,
+                           alpha, s, family, grouped=grouped,
                            minWordLength, sparsity, weighting, ...))
 }
 
@@ -161,9 +163,9 @@ generateDictionary.TermDocumentMatrix <- function(x, response, language="english
 #' @rdname generateDictionary
 #' @export
 generateDictionary.DocumentTermMatrix <- function(x, response, language="english", 
-                                                  alpha=1, s="lambda.min", family="gaussian",
+                                                  alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
                                                   minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  cv.lasso <- glmnet::cv.glmnet(as.matrix(x), response, alpha=alpha, family=family, ...)
+  cv.lasso <- glmnet::cv.glmnet(as.matrix(x), response, alpha=alpha, family=family, grouped=grouped, ...)
   coefs <- coef(cv.lasso, s=s)
     
   words <- coefs@Dimnames[[1]][setdiff(coefs@i+1, 1)]
