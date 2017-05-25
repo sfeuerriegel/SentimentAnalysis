@@ -2,6 +2,7 @@ library(SentimentAnalysis)
 context("Dictionary generation")
 
 library(tm)
+library(spikeslab)
 
 test_that("dictionary generations works correctly", {
   # Create a vector of strings
@@ -35,7 +36,7 @@ test_that("dictionary generations works correctly", {
 
   # Dictionary generations works correctly together with lambda.min
   
-  dictionary <- generateDictionary(documents, response, s="lambda.min")
+  dictionary <- generateDictionary(documents, response, control = list(s="lambda.min"))
 
   expect_is(dictionary, "SentimentDictionaryWeighted")
   expect_equal(dictionary$words, c("bad", "good"))
@@ -50,6 +51,16 @@ test_that("dictionary generations works correctly", {
   expect_is(dictionary, "SentimentDictionaryWeighted")
   expect_equal(dictionary$words, c("bad", "good"))
   expect_equal(dictionary$scores, c(-0.4131132, 0.4131132), tolerance=0.001)
+  expect_equal(dictionary$idf, c(1, 1))
+  expect_equal(dictionary$intercept, 0)
+  
+  # Dictionary generations works correctly with spike-and-slab regression
+  set.seed(0)
+  dictionary <- generateDictionary(documents, response, modelType = "spikeslab")
+
+  expect_is(dictionary, "SentimentDictionaryWeighted")
+  expect_equal(dictionary$words, c("bad", "good"))
+  expect_equal(dictionary$scores, c(-0.4190744, 0.3955698), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 0)
 })

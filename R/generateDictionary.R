@@ -1,6 +1,6 @@
 #' Generates dictionary of decisive terms
 #' 
-#' Routine applies LASSO regularization to the document-term matrix in order to 
+#' Routine applies LASSO regularization or spike-and-slab regression to the document-term matrix in order to 
 #' extract decisive terms that have a statistically significant impact on the 
 #' response variable.
 #' @param x A vector of characters, a \code{data.frame}, an object of type 
@@ -9,20 +9,29 @@
 #' @param response Response variable including the given gold standard. 
 #' @param language Language used for preprocessing operations (default: 
 #' English).
-#' @param alpha Abstraction parameter for switching form LASSO regularization
+#' @param modelType A string denoting the estimation method. Allowed values are \code{lasso} or \code{spikeslab}.
+#' @param control (optional) A list of parameters defining the model used for dictionary generation.
+#' If \code{modelType=lasso} is selected, individual parameters are as follows:
+#' \itemize{
+#'  \item{"alpha"} {Abstraction parameter for switching from LASSO regularization
 #' (with default \code{alpha=1}) to ridge regression (\code{alpha=0}). As alternative
 #' options, one can also utilize to an elastic net with any continuous value 
-#' inbetween.
-#' @param s Value of the parameter lambda at which the LASSO is evaluated. Default
+#' inbetween.}
+#'  \item{"s"} {Value of the parameter lambda at which the LASSO is evaluated. Default
 #' is \code{s="lambda.1se"} which takes the calculated minimum value for \eqn{\lambda} 
 #' and then subtracts one standard error in order to avoid overfitting. This often
 #' results in a better performance than using the minimum value itself given by 
-#' \code{lambda="lambda.min"}.
-#' @param family Distribution for response variable. Default is \code{family="gaussian"}.
+#' \code{lambda="lambda.min"}.}
+#'  \item{"family"} {Distribution for response variable. Default is \code{family="gaussian"}.
 #' For non-negative counts, use \code{family="poisson"}. For binary variables
-#' \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details. 
-#' @param grouped Optional parameter for grouped LASSO passed on to 
-#' \code{\link[glmnet]{glmnet}} (default: \code{FALSE}).
+#' \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
+#'  \item{"grouped"} {Determines whether grouped LASSO is used (with default \code{FALSE}).}
+#' } 
+#' If \code{modelType=spikeslab} is selected, individual parameters are as follows:
+#' \itemize{
+#'  \item{"n.iter1"} {Number of burn-in Gibbs sampled values (i.e., discarded values). Default is 500.}
+#'  \item{"n.iter2"} {Number of Gibbs sampled values, following burn-in. Default is 500.}
+#' }
 #' @param minWordLength Removes words given a specific minimum length (default: 3). This 
 #' preprocessing is applied when the input is a character vector or a corpus and the
 #' document-term matrix is generated inside the routine. 
@@ -59,7 +68,11 @@
 #' compareToResponse(sentiment, response)
 #' plotSentimentResponse(sentiment, response)
 #' 
-#' # Generate new dictionary with tf weighting innstead of tf-idf
+#' # Generate new dictionary with spike-and-slab regression instead of LASSO regularization
+#' library(spikeslab)
+#' dictionary <- generateDictionary(documents, response, modelType="spikeslab")
+#' 
+#' # Generate new dictionary with tf weighting instead of tf-idf
 #' 
 #' library(tm)
 #' dictionary <- generateDictionary(documents, response, weighting=weightTf)
@@ -67,7 +80,7 @@
 #' compareToResponse(sentiment, response)
 #'
 #' # Use instead lambda.min from the LASSO estimation
-#' dictionary <- generateDictionary(documents, response, s="lambda.min")
+#' dictionary <- generateDictionary(documents, response, control=list(s="lambda.min"))
 #' sentiment <- predict(dictionary, documents)
 #' compareToResponse(sentiment, response)
 #' 
@@ -109,86 +122,77 @@
 #' advanced evaluations
 #' @rdname generateDictionary
 #' @export
-generateDictionary <- function(x, response, language="english", 
-                               alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary <- function(x, response, language="english", modelType="lasso",
+                               control = list(alpha=1, s="lambda.min", family="gaussian", grouped=FALSE),
                                minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   UseMethod("generateDictionary", x)
 }
 
 #' @rdname generateDictionary
 #' @export
-generateDictionary.Corpus <- function(x, response, language="english", 
-                                      alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary.Corpus <- function(x, response, language="english", modelType="lasso",
+                                      control = list(alpha=1, s="lambda.min", family="gaussian", grouped=FALSE),
                                       minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   dtm <- toDocumentTermMatrix(x, language=language, minWordLength=minWordLength, sparsity=sparsity, weighting=weighting)
 
-  return(generateDictionary(dtm, response, language,
-                            alpha, s, family, grouped=grouped,
+  return(generateDictionary(dtm, response, language, modelType,
+                            control,
                             minWordLength, sparsity, weighting, ...)) 
 }
 
 #' @rdname generateDictionary
 #' @export
-generateDictionary.character <- function(x, response, language="english", 
-                                         alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary.character <- function(x, response, language="english", modelType="lasso",
+                                         control = list(alpha=1, s="lambda.min", family="gaussian", grouped=FALSE),
                                          minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   corpus <- transformIntoCorpus(x)
-  return(generateDictionary(corpus, response, language,
-                            alpha, s, family, grouped=grouped,
+  return(generateDictionary(corpus, response, language, modelType,
+                            control,
                             minWordLength, sparsity, weighting, ...))
 }
 
 #' @rdname generateDictionary
 #' @export
-generateDictionary.data.frame <- function(x, response, language="english", 
-                                          alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary.data.frame <- function(x, response, language="english", modelType="lasso",
+                                          control = list(alpha=1, s="lambda.min", family="gaussian", grouped=FALSE),
                                           minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
   corpus <- transformIntoCorpus(x, ...)
-  return(generateDictionary(corpus, response, language,
-                            alpha, s, family, grouped=grouped,
+  return(generateDictionary(corpus, response, language, modelType,
+                            control,
                             minWordLength, sparsity, weighting, ...))
 }
 
 #' @rdname generateDictionary
 #' @export
-generateDictionary.TermDocumentMatrix <- function(x, response, language="english", 
-                                                  alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary.TermDocumentMatrix <- function(x, response, language="english", modelType="lasso",
+                                                  control = list(alpha=1, s="lambda.min", family="gaussian"),
                                                   minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  return(generateDictionary(t(x), response, language,
-                           alpha, s, family, grouped=grouped,
-                           minWordLength, sparsity, weighting, ...))
+  return(generateDictionary(t(x), response, language, modelType,
+                            control,
+                            minWordLength, sparsity, weighting, ...))
 }
 
-#' @importFrom stats coef
+
 #' @rdname generateDictionary
 #' @export
-generateDictionary.DocumentTermMatrix <- function(x, response, language="english", 
-                                                  alpha=1, s="lambda.min", family="gaussian", grouped=FALSE,
+generateDictionary.DocumentTermMatrix <- function(x, response, language="english", modelType="lasso",
+                                                  control = list(alpha=1, s="lambda.min", family="gaussian", grouped=FALSE),
                                                   minWordLength=3, sparsity=0.9, weighting=function(x) tm::weightTfIdf(x, normalize=FALSE), ...) {
-  cv.lasso <- glmnet::cv.glmnet(as.matrix(x), response, alpha=alpha, family=family, grouped=grouped, ...)
-  coefs <- coef(cv.lasso, s=s)
-    
-  words <- coefs@Dimnames[[1]][setdiff(coefs@i+1, 1)]
-  scores <- coefs@x
-  if (length(coefs@i) > 0 && coefs@i[1]==0) {
-    scores <- scores[-1]
-  }
-  intercept <- ifelse(length(coefs@i) > 0 && coefs@i[1]==0,
-                      coefs@x[1],
-                      0)
+
+  estimationMethod <- lookupEstimationMethod(modelType)
+  model <- estimationMethod(x, response, control, ...)
   
   if (identical(weighting, tm::weightTfIdf)) {
-    wordFrequency <- colSums(as.matrix(x[, words]) != 0)
+    wordFrequency <- colSums(as.matrix(x[, model$ScoreNames]) != 0)
     idf <- log(nrow(x)/wordFrequency)
   } else {
-    idf <- rep(1, length(scores))
+    idf <- rep(1, length(model$Scores))
   }
   
-  dict <- SentimentDictionaryWeighted(words,
-                                      scores,
+  dict <- SentimentDictionaryWeighted(model$ScoreNames,
+                                      model$Scores,
                                       idf,
-                                      intercept)
+                                      model$Intercept)
   
   return(dict)
 }
-

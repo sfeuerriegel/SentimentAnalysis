@@ -12,35 +12,34 @@
 \url{https://dx.doi.org/10.2139/ssrn.2522884}
 }
 \usage{
-generateDictionary(x, response, language = "english", alpha = 1,
-  s = "lambda.min", family = "gaussian", grouped = FALSE,
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+generateDictionary(x, response, language = "english", modelType = "lasso",
+  control = list(alpha = 1, s = "lambda.min", family = "gaussian", grouped =
+  FALSE), minWordLength = 3, sparsity = 0.9, weighting = function(x)
   tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{Corpus}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
+  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{character}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
+  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{data.frame}(x, response, language = "english",
-  alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE,
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
+  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{TermDocumentMatrix}(x, response,
-  language = "english", alpha = 1, s = "lambda.min",
-  family = "gaussian", grouped = FALSE, minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  language = "english", modelType = "lasso", control = list(alpha = 1, s =
+  "lambda.min", family = "gaussian"), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{DocumentTermMatrix}(x, response,
-  language = "english", alpha = 1, s = "lambda.min",
-  family = "gaussian", grouped = FALSE, minWordLength = 3,
+  language = "english", modelType = "lasso", control = list(alpha = 1, s =
+  "lambda.min", family = "gaussian", grouped = FALSE), minWordLength = 3,
   sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
   FALSE), ...)
 }
@@ -54,23 +53,30 @@ generateDictionary(x, response, language = "english", alpha = 1,
 \item{language}{Language used for preprocessing operations (default: 
 English).}
 
-\item{alpha}{Abstraction parameter for switching form LASSO regularization
+\item{modelType}{A string denoting the estimation method. Allowed values are \code{lasso} or \code{spikeslab}.}
+
+\item{control}{(optional) A list of parameters defining the model used for dictionary generation.
+If \code{modelType=lasso} is selected, individual parameters are as follows:
+\itemize{
+ \item{"alpha"} {Abstraction parameter for switching from LASSO regularization
 (with default \code{alpha=1}) to ridge regression (\code{alpha=0}). As alternative
 options, one can also utilize to an elastic net with any continuous value 
 inbetween.}
-
-\item{s}{Value of the parameter lambda at which the LASSO is evaluated. Default
+ \item{"s"} {Value of the parameter lambda at which the LASSO is evaluated. Default
 is \code{s="lambda.1se"} which takes the calculated minimum value for \eqn{\lambda} 
 and then subtracts one standard error in order to avoid overfitting. This often
 results in a better performance than using the minimum value itself given by 
 \code{lambda="lambda.min"}.}
-
-\item{family}{Distribution for response variable. Default is \code{family="gaussian"}.
+ \item{"family"} {Distribution for response variable. Default is \code{family="gaussian"}.
 For non-negative counts, use \code{family="poisson"}. For binary variables
 \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
-
-\item{grouped}{Optional parameter for grouped LASSO passed on to 
-\code{\link[glmnet]{glmnet}} (default: \code{FALSE}).}
+ \item{"grouped"} {Determines whether grouped LASSO is used (with default \code{FALSE}).}
+} 
+If \code{modelType=spikeslab} is selected, individual parameters are as follows:
+\itemize{
+ \item{"n.iter1"} {Number of burn-in Gibbs sampled values (i.e., discarded values). Default is 500.}
+ \item{"n.iter2"} {Number of Gibbs sampled values, following burn-in. Default is 500.}
+}}
 
 \item{minWordLength}{Removes words given a specific minimum length (default: 3). This 
 preprocessing is applied when the input is a character vector or a corpus and the
@@ -93,7 +99,7 @@ Result is a matrix which sentiment values for each document across
 all defined rules
 }
 \description{
-Routine applies LASSO regularization to the document-term matrix in order to 
+Routine applies LASSO regularization or spike-and-slab regression to the document-term matrix in order to 
 extract decisive terms that have a statistically significant impact on the 
 response variable.
 }
@@ -119,7 +125,11 @@ sentiment <- predict(dictionary, documents)
 compareToResponse(sentiment, response)
 plotSentimentResponse(sentiment, response)
 
-# Generate new dictionary with tf weighting innstead of tf-idf
+# Generate new dictionary with spike-and-slab regression instead of LASSO regularization
+library(spikeslab)
+dictionary <- generateDictionary(documents, response, modelType="spikeslab")
+
+# Generate new dictionary with tf weighting instead of tf-idf
 
 library(tm)
 dictionary <- generateDictionary(documents, response, weighting=weightTf)
@@ -127,7 +137,7 @@ sentiment <- predict(dictionary, documents)
 compareToResponse(sentiment, response)
 
 # Use instead lambda.min from the LASSO estimation
-dictionary <- generateDictionary(documents, response, s="lambda.min")
+dictionary <- generateDictionary(documents, response, control=list(s="lambda.min"))
 sentiment <- predict(dictionary, documents)
 compareToResponse(sentiment, response)
 
