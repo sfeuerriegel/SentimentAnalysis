@@ -16,10 +16,9 @@ test_that("sentiment analysis returns correct values for Reuters corpus", {
   expect_equal(ncol(sentiment), 14)
   expect_equal(rownames(sentiment), as.character(1:nrow(sentiment)))
 
-  expect_equal(sentiment$WordCount, c(123, 419, 92, 102, 118, 
-                                      421, 409, 172, 313, 338, 
-                                      371, 136, 141, 130, 136,
-                                      167, 210, 117, 287, 96))
+  expect_equal(sentiment$WordCount, c(78, 366, 47, 58, 74, 372, 356, 
+                                      124, 269, 288, 320, 80, 91, 83, 
+                                      91, 122, 165, 70, 234, 49))
 })
 
 test_that("sentiment analysis works with custom rules", {

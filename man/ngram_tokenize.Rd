@@ -24,7 +24,7 @@ encodings
 \examples{
 library(tm)
 en <- c("Romeo loves Juliet", "Romeo loves a girl")
-en.corpus <- Corpus(VectorSource(en))
+en.corpus <- VCorpus(VectorSource(en))
 tdm <- TermDocumentMatrix(en.corpus, 
                           control=list(wordLengths=c(1,Inf), 
                                        tokenize=function(x) ngram_tokenize(x, char=TRUE, 
@@ -32,7 +32,7 @@ tdm <- TermDocumentMatrix(en.corpus,
 inspect(tdm)
 
 ch <- c("abab", "aabb")
-ch.corpus <- Corpus(VectorSource(ch))
+ch.corpus <- VCorpus(VectorSource(ch))
 tdm <- TermDocumentMatrix(ch.corpus, 
                           control=list(wordLengths=c(1,Inf), 
                                        tokenize=function(x) ngram_tokenize(x, char=TRUE, 
