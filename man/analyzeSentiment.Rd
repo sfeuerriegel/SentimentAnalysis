@@ -69,6 +69,7 @@ negative). Hence, consider using the functions \code{\link{convertToBinaryRespon
 scores into a factor object.
 }
 \examples{
+\dontrun{
 library(tm)
 
 # via vector of strings
@@ -77,10 +78,8 @@ sentiment <- analyzeSentiment(corpus)
 compareToResponse(sentiment, c(+1, 0, -2))
 
 # via Corpus from tm package
-\dontrun{
 data("crude")
-  sentiment <- analyzeSentiment(crude)
-}
+sentiment <- analyzeSentiment(crude)
     
 # via DocumentTermMatrix (with stemmed entries)
 dtm <- DocumentTermMatrix(VCorpus(VectorSource(c("posit posit", "negat neutral")))) 
@@ -94,7 +93,6 @@ sentiment <- analyzeSentiment(corpus,
                               rules=list("Amplifiers"=list(ruleRatio,
                                                            dictionaryAmplifiers)))
                                                            
-\dontrun{
 # On can also restrict the number of computed methods to the ones of interest
 # in order to achieve performance optimizations
 sentiment <- analyzeSentiment(corpus,
