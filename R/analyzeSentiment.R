@@ -20,6 +20,8 @@
 #' @return Result is a matrix with sentiment values for each document across
 #' all defined rules
 #' @examples 
+#' library(tm)
+#' 
 #' # via vector of strings
 #' corpus <- c("Positive text", "Neutral but uncertain text", "Negative text")
 #' sentiment <- analyzeSentiment(corpus)
@@ -27,7 +29,6 @@
 #' 
 #' # via Corpus from tm package
 #' \dontrun{
-#' library(tm)
 #' data("crude")
 #'   sentiment <- analyzeSentiment(crude)
 #' }
