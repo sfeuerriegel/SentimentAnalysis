@@ -4,10 +4,8 @@ context("Main function for sentiment analysis")
 library(tm)
 
 test_that("sentiment analysis returns correct values for Reuters corpus", {
-  reut21578 <- system.file("texts", "crude", package="tm")
-  reuters <- Corpus(DirSource(reut21578),
-                    readerControl=list(reader=readReut21578XML))
-  reuters <- tm_map(reuters, PlainTextDocument)
+  data("crude")
+  reuters <- tm_map(crude, PlainTextDocument)
   reuters <- tm_map(reuters, content_transformer(tolower))
   dtm <- DocumentTermMatrix(reuters)
   

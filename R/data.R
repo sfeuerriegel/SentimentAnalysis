@@ -105,7 +105,7 @@ loadImdb <- function() {
   dirSource <- tm::DirSource(paste(tempDir, "scale_whole_review/Dennis+Schwartz/txt.parag", sep = "/"))
   dirSource$filelist <- sapply(id, function(x) dirSource$filelist[grepl(x, dirSource$filelist)])
   
-  corpus <- tm::Corpus(dirSource, readerControl=list(language="en", reader=tm::readPlain))
+  corpus <- tm::VCorpus(dirSource, readerControl=list(language="en", reader=tm::readPlain))
   
   return(list(Corpus=corpus, Rating=response))
 }

@@ -144,7 +144,7 @@ convertToDirection(analyzeSentiment(documents)$SentimentGI)
 
 ```{r}
 library(tm)
-corpus <- Corpus(VectorSource(documents))
+corpus <- VCorpus(VectorSource(documents))
 convertToDirection(analyzeSentiment(corpus)$SentimentGI)
 ```
 
@@ -300,7 +300,7 @@ compareToResponse(analyzeSentiment(test_documents), test_response)
 When desired, one can implement a tailored preprocessing stage that adapts to specific needs. The following code snippets demonstrate such adaptation. In particular, the `SentimentAnalysis` package ships a function `ngram_tokenize()` in order to extract \eqn{n}-grams from the corpus. This does not affect the results of the built-in dictionaries but rather changes the features used as part of dictionary generation.
 
 ```{r}
-corpus <- Corpus(VectorSource(documents))
+corpus <- VCorpus(VectorSource(documents))
 tdm <- TermDocumentMatrix(corpus, 
                           control=list(wordLengths=c(1,Inf), 
                                        tokenize=function(x) ngram_tokenize(x, char=FALSE, 
@@ -372,7 +372,7 @@ The following example shows the usage of `SentimentAnalysis` in an applied setti
 
 ```{r}
 library(tm)
-data(crude)
+data("crude")
 
 # Analyze sentiment
 sentiment <- analyzeSentiment(crude)

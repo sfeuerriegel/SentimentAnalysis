@@ -27,12 +27,11 @@
 #' 
 #' # via Corpus from tm package
 #' library(tm)
-#' reut21578 <- system.file("texts", "crude", package="tm")
-#' reuters <- Corpus(DirSource(reut21578),
-#'                   readerControl=list(reader=readReut21578XML))
+#' data("crude")
+#' sentiment <- analyzeSentiment(crude)
 #'     
 #' # via DocumentTermMatrix (with stemmed entries)
-#' dtm <- DocumentTermMatrix(Corpus(VectorSource(c("posit posit", "negat neutral")))) 
+#' dtm <- DocumentTermMatrix(VCorpus(VectorSource(c("posit posit", "negat neutral")))) 
 #' sentiment <- analyzeSentiment(dtm)
 #' compareToResponse(sentiment, convertToBinaryResponse(c(+1, -1)))
 #' 

@@ -23,7 +23,7 @@ rep_grams <- function(text, ngmin=1, ngmax=2) {
 #' @examples
 #' library(tm)
 #' en <- c("Romeo loves Juliet", "Romeo loves a girl")
-#' en.corpus <- Corpus(VectorSource(en))
+#' en.corpus <- VCorpus(VectorSource(en))
 #' tdm <- TermDocumentMatrix(en.corpus, 
 #'                           control=list(wordLengths=c(1,Inf), 
 #'                                        tokenize=function(x) ngram_tokenize(x, char=TRUE, 
@@ -31,7 +31,7 @@ rep_grams <- function(text, ngmin=1, ngmax=2) {
 #' inspect(tdm)
 #' 
 #' ch <- c("abab", "aabb")
-#' ch.corpus <- Corpus(VectorSource(ch))
+#' ch.corpus <- VCorpus(VectorSource(ch))
 #' tdm <- TermDocumentMatrix(ch.corpus, 
 #'                           control=list(wordLengths=c(1,Inf), 
 #'                                        tokenize=function(x) ngram_tokenize(x, char=TRUE, 

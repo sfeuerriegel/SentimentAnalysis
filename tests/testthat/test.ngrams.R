@@ -3,7 +3,7 @@ context("Testing n-gram tokenizer")
 
 test_that("character n-grams are generated correctly", {
   en <- c("abcdcd", "cde")
-  en.corpus <- Corpus(VectorSource(en))
+  en.corpus <- VCorpus(VectorSource(en))
   tdm <- TermDocumentMatrix(en.corpus, control=list(wordLengths=c(1,Inf), tokenize=function(x) ngram_tokenize(x, char=TRUE, ngmin=1, ngmax=2)))
   
   expect_equivalent(as.matrix(tdm["a",]), matrix(c(1, 0), nrow=1))
@@ -17,7 +17,7 @@ test_that("word n-grams are generated correctly", {
   library(tm)
   
   en <- c("Romeo loves Juliet", "Romeo loves a girl")
-  en.corpus <- Corpus(VectorSource(en))
+  en.corpus <- VCorpus(VectorSource(en))
   tdm <- TermDocumentMatrix(en.corpus, control=list(wordLengths=c(1,Inf), tokenize=function(x) ngram_tokenize(x, char=FALSE, ngmin=1, ngmax=3)))
   
   expect_equivalent(as.matrix(tdm["romeo",]), matrix(c(1, 1), nrow=1))

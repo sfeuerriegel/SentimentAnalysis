@@ -48,5 +48,5 @@ transformIntoCorpus <- function(x) {
     }
   }
   
-  return(tm::Corpus(tm::VectorSource(x)))
+  return(tm::VCorpus(tm::VectorSource(x)))
 }
