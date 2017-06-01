@@ -69,6 +69,8 @@ negative). Hence, consider using the functions \code{\link{convertToBinaryRespon
 scores into a factor object.
 }
 \examples{
+library(tm)
+
 # via vector of strings
 corpus <- c("Positive text", "Neutral but uncertain text", "Negative text")
 sentiment <- analyzeSentiment(corpus)
@@ -76,7 +78,6 @@ compareToResponse(sentiment, c(+1, 0, -2))
 
 # via Corpus from tm package
 \dontrun{
-library(tm)
 data("crude")
   sentiment <- analyzeSentiment(crude)
 }
