@@ -26,9 +26,9 @@
 #' compareToResponse(sentiment, c(+1, 0, -2))
 #' 
 #' # via Corpus from tm package
+#' \dontrun{
 #' library(tm)
 #' data("crude")
-#' \dontrun{
 #'   sentiment <- analyzeSentiment(crude)
 #' }
 #'     
@@ -43,13 +43,15 @@
 #' sentiment <- analyzeSentiment(corpus,
 #'                               rules=list("Amplifiers"=list(ruleRatio,
 #'                                                            dictionaryAmplifiers)))
-#' 
+#'                                                            
+#' \dontrun{
 #' # On can also restrict the number of computed methods to the ones of interest
 #' # in order to achieve performance optimizations
 #' sentiment <- analyzeSentiment(corpus,
 #'                               rules=list("SentimentLM"=list(ruleSentiment, 
 #'                                                             loadDictionaryLM())))
 #' sentiment
+#' }
 #' 
 #' @details This function returns a data.frame with continuous values. If one desires 
 #' other formats, one needs to convert these. Common examples of such formats are
