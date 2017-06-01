@@ -28,7 +28,9 @@
 #' # via Corpus from tm package
 #' library(tm)
 #' data("crude")
-#' sentiment <- analyzeSentiment(crude)
+#' \dontrun{
+#'   sentiment <- analyzeSentiment(crude)
+#' }
 #'     
 #' # via DocumentTermMatrix (with stemmed entries)
 #' dtm <- DocumentTermMatrix(VCorpus(VectorSource(c("posit posit", "negat neutral")))) 
