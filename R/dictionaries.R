@@ -15,7 +15,7 @@
 
 #' Loads Henry's finance-specific dictionary into object
 #' 
-#' Loads Henry's finance-specific dictionar into a standardized dictionary object
+#' Loads Henry's finance-specific dictionary into a standardized dictionary object
 #' @return object of class \code{\link{SentimentDictionary}}
 #' @note Result is a list of stemmed words in lower case
 #' @importFrom utils data

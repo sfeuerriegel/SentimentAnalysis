@@ -19,7 +19,7 @@
 \item{...}{Additional parameters passed to specific sub-routines}
 }
 \description{
-Prints entries of sentiment dictionary to the secreen
+Prints entries of sentiment dictionary to the screen
 }
 \examples{
 print(SentimentDictionary(c("uncertain", "possible", "likely")))

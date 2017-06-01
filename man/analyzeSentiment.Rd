@@ -44,7 +44,7 @@ This helpful when joining e.g. news from the same day or move reviews
 by the same author}
 
 \item{rules}{A named list containing individual sentiment metrics. 
-Therefore, each entry connsists itself of a list with first a method,
+Therefore, each entry consists itself of a list with first a method,
 followed by an optional dictionary.}
 
 \item{removeStopwords}{Flag indicating whether to remove stopwords or not (default: yes)}

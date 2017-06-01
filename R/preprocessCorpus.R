@@ -94,7 +94,7 @@
 #' @param removeStopwords Flag indicating whether to remove stopwords or not (default: yes)
 #' @param weighting Function used for weighting of words; default is a a link to the tf-idf scheme.
 #' @param sparsity A numeric for the maximal allowed sparsity in the range from bigger zero to 
-#' smaller one. Default is \code{NULL} in order surpress this functionality.
+#' smaller one. Default is \code{NULL} in order suppress this functionality.
 #' @keywords corpus preprocessing
 #' @return Object of \code{\link[tm]{DocumentTermMatrix}}
 #' @seealso \code{\link[tm]{DocumentTermMatrix}} for the underlying class

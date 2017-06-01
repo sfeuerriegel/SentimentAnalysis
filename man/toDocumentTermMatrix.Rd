@@ -17,7 +17,7 @@ toDocumentTermMatrix(x, language = "english", minWordLength = 3,
 removed. Default is 3.}
 
 \item{sparsity}{A numeric for the maximal allowed sparsity in the range from bigger zero to 
-smaller one. Default is \code{NULL} in order surpress this functionality.}
+smaller one. Default is \code{NULL} in order suppress this functionality.}
 
 \item{removeStopwords}{Flag indicating whether to remove stopwords or not (default: yes)}
 

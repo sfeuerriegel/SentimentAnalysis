@@ -1,6 +1,6 @@
 #' Line plot with sentiment scores
 #' 
-#' Simple line plot to visualize the evolvment of sentiment scores.
+#' Simple line plot to visualize the evolvement of sentiment scores.
 #' This is especially helpful when studying a time series of
 #' sentiment scores.
 #' @param sentiment \code{data.frame} or numeric vector with sentiment scores
@@ -57,7 +57,7 @@ plotSentiment <- function(sentiment,
 #' 
 #' Generates a scatterplot where points pairs of sentiment and
 #' the response variable. In addition, the plot addas a trend line
-#' in the form of a generalized additivie model (GAM). Other
+#' in the form of a generalized additive model (GAM). Other
 #' smoothing variables are possible based on \code{\link[ggplot2]{geom_smooth}}.
 #' This functions is helpful for visualization the relationship
 #' between computed sentiment scores and the gold standard. 

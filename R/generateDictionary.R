@@ -38,7 +38,7 @@
 #' @param sparsity A numeric for removing sparse terms in the document-term matrix. The
 #' argument \code{sparsity} specifies the maximal allowed sparsity. Default is 
 #' \code{sparsity=0.9}, however, this is only applied when the document-term matrix
-#' is calculated inside the rotuine.
+#' is calculated inside the routine.
 #' @param weighting Weights a document-term matrix by e.g. term frequency - inverse
 #' document frequency (default). Other variants can be used from 
 #' \code{\link[tm]{DocumentTermMatrix}}.

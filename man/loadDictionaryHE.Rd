@@ -10,7 +10,7 @@ loadDictionaryHE()
 object of class \code{\link{SentimentDictionary}}
 }
 \description{
-Loads Henry's finance-specific dictionar into a standardized dictionary object
+Loads Henry's finance-specific dictionary into a standardized dictionary object
 }
 \note{
 Result is a list of stemmed words in lower case

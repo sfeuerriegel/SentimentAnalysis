@@ -23,7 +23,7 @@ score of 0) are counted as positive.
 \details{
 If a matrix or data.frame is provided, this routine does not touch
 all columns. In fact, it scans for those where the colum name starts with
-"Sentiment" and changes these columns only. Hence, colums with pure 
+"Sentiment" and changes these columns only. Hence, columns with pure 
 negativity, positivity or ratios or word counts are ignored.
 }
 \examples{

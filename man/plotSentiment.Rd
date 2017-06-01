@@ -23,7 +23,7 @@ is plotted (default: \code{cumsum=FALSE}).}
 Returns a plot of class \code{\link[ggplot2]{ggplot}}
 }
 \description{
-Simple line plot to visualize the evolvment of sentiment scores.
+Simple line plot to visualize the evolvement of sentiment scores.
 This is especially helpful when studying a time series of
 sentiment scores.
 }

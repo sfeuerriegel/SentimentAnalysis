@@ -347,7 +347,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 
 #' Output content of sentiment dictionary
 #' 
-#' Prints entries of sentiment dictionary to the secreen
+#' Prints entries of sentiment dictionary to the screen
 #' @param x Sentiment dictionary of type \code{\link{SentimentDictionaryWordlist}}, 
 #' \code{\link{SentimentDictionaryBinary}} or \code{\link{SentimentDictionaryWeighted}}
 #' @param ... Additional parameters passed to specific sub-routines

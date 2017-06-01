@@ -12,7 +12,7 @@
 #' This helpful when joining e.g. news from the same day or move reviews
 #' by the same author
 #' @param rules A named list containing individual sentiment metrics. 
-#' Therefore, each entry connsists itself of a list with first a method,
+#' Therefore, each entry consists itself of a list with first a method,
 #' followed by an optional dictionary.
 #' @param removeStopwords Flag indicating whether to remove stopwords or not (default: yes)
 #' @param ... Additional parameters passed to function for e.g. 
@@ -140,7 +140,7 @@
 #' corresponding columns being exchanged.
 #' @details If a matrix or data.frame is provided, this routine does not touch
 #' all columns. In fact, it scans for those where the colum name starts with
-#' "Sentiment" and changes these columns only. Hence, colums with pure 
+#' "Sentiment" and changes these columns only. Hence, columns with pure 
 #' negativity, positivity or ratios or word counts are ignored.
 #' @examples 
 #' sentiment <- c(-1, -0.5, +1, 0.6, 0)
