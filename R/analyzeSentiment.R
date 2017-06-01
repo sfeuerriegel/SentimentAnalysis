@@ -139,7 +139,7 @@
 #' positive and negative content. Otherwise, it returns a data.frame with the 
 #' corresponding columns being exchanged.
 #' @details If a matrix or data.frame is provided, this routine does not touch
-#' all columns. In fact, it scans for those where the colum name starts with
+#' all columns. In fact, it scans for those where the column name starts with
 #' "Sentiment" and changes these columns only. Hence, columns with pure 
 #' negativity, positivity or ratios or word counts are ignored.
 #' @examples 
@@ -192,8 +192,8 @@ convertToBinaryResponse <- function(sentiment) {
 #' positive, neutral and negative content. Otherwise, it returns a data.frame with the 
 #' corresponding columns being exchanged.
 #' @details If a matrix or data.frame is provided, this routine does not touch
-#' all columns. In fact, it scans for those where the colum name starts with
-#' "Sentiment" and changes these columns only. Hence, colums with pure 
+#' all columns. In fact, it scans for those where the column name starts with
+#' "Sentiment" and changes these columns only. Hence, columns with pure 
 #' negativity, positivity or ratios or word counts are ignored. 
 #' @examples 
 #' sentiment <- c(-1, -0.5, +1, 0.6, 0)
