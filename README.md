@@ -3,7 +3,7 @@
 Sentiment Analysis
 ==================
 
-[![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](https://cran.r-project.org/package=SentimentAnalysis) [![Coverage Status](https://img.shields.io/codecov/c/github/sfeuerriegel/SentimentAnalysis/master.svg)](https://codecov.io/github/sfeuerriegel/SentimentAnalysis?branch=master)
+[![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](https://cran.r-project.org/package=SentimentAnalysis)
 
 **SentimentAnalysis** performs a **sentiment analysis** of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable.
 

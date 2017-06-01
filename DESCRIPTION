@@ -11,8 +11,8 @@ Author: Stefan Feuerriegel [aut, cre],
   Nicolas Proellochs [aut]
 Maintainer: Stefan Feuerriegel <stefan.feuerriegel@is.uni-freiburg.de>
 Description: Performs a sentiment analysis of textual contents in R. This implementation
-    utilizes various existing dictionaries, such as General Inquirer, Harvard IV or 
-    Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter 
+    utilizes various existing dictionaries, such as Harvard IV, QDAP or finance-specific 
+    dictionaries. Furthermore, it can also create customized dictionaries. The latter 
     uses LASSO regularization as a statistical approach to select relevant terms based on 
     an exogenous response variable. 
 License: MIT + file LICENSE

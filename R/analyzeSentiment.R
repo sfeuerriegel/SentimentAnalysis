@@ -20,6 +20,7 @@
 #' @return Result is a matrix with sentiment values for each document across
 #' all defined rules
 #' @examples 
+#' \dontrun{
 #' library(tm)
 #' 
 #' # via vector of strings
@@ -28,10 +29,8 @@
 #' compareToResponse(sentiment, c(+1, 0, -2))
 #' 
 #' # via Corpus from tm package
-#' \dontrun{
 #' data("crude")
-#'   sentiment <- analyzeSentiment(crude)
-#' }
+#' sentiment <- analyzeSentiment(crude)
 #'     
 #' # via DocumentTermMatrix (with stemmed entries)
 #' dtm <- DocumentTermMatrix(VCorpus(VectorSource(c("posit posit", "negat neutral")))) 
@@ -45,7 +44,6 @@
 #'                               rules=list("Amplifiers"=list(ruleRatio,
 #'                                                            dictionaryAmplifiers)))
 #'                                                            
-#' \dontrun{
 #' # On can also restrict the number of computed methods to the ones of interest
 #' # in order to achieve performance optimizations
 #' sentiment <- analyzeSentiment(corpus,
