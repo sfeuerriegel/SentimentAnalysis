@@ -28,4 +28,3 @@ transformIntoCorpus(data.frame("Document 1", "Document 2", "Document 3"))
 }
 \keyword{corpus}
 \keyword{preprocessing}
-

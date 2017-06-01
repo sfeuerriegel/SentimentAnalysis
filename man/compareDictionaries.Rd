@@ -52,4 +52,3 @@ cmp <- compareDictionaries(d1, d2)
 \code{\link{SentimentDictionaryWeighted}} for the specific classes
 }
 \keyword{dictionary}
-

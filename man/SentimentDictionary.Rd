@@ -20,4 +20,3 @@ Depending on the input, this function creates a new sentiment dictionary of diff
 \code{\link{SentimentDictionaryWeighted}}
 }
 \keyword{dictionary}
-

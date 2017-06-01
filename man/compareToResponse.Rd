@@ -2,10 +2,10 @@
 % Please edit documentation in R/analyzeSentiment.R
 \name{compareToResponse}
 \alias{compareToResponse}
-\alias{compareToResponse.data.frame}
+\alias{compareToResponse.logical}
 \alias{compareToResponse.factor}
 \alias{compareToResponse.integer}
-\alias{compareToResponse.logical}
+\alias{compareToResponse.data.frame}
 \alias{compareToResponse.numeric}
 \title{Compare sentiment values to existing response variable}
 \usage{
@@ -52,4 +52,3 @@ response <- c(TRUE, TRUE, FALSE, FALSE)
 compareToResponse(sentiment, response)
 }
 \keyword{evaluation}
-

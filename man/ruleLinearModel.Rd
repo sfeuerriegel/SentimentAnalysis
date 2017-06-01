@@ -18,4 +18,3 @@ Continuous sentiment score
 Sentiment score as denoted by a linear model.
 }
 \keyword{rules}
-

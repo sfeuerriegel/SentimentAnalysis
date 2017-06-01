@@ -27,4 +27,3 @@ summary(d)
 \code{\link{SentimentDictionary}}
 }
 \keyword{dictionary}
-

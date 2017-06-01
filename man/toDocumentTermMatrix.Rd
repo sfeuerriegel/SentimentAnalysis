@@ -36,4 +36,3 @@ package is more convenient. The result is a document-term matrix.
 }
 \keyword{corpus}
 \keyword{preprocessing}
-

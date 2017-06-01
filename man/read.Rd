@@ -45,4 +45,3 @@ unlink("example.dict")
 \code{\link{write}} for creating such a file
 }
 \keyword{dictionary}
-

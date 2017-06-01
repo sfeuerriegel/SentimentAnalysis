@@ -16,4 +16,3 @@ dictionary object
 \note{
 Result is a list of stemmed words in lower case
 }
-

@@ -41,4 +41,3 @@ convertToDirection(df)
 }
 \keyword{evaluation}
 \keyword{sentiment}
-

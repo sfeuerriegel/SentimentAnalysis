@@ -51,4 +51,3 @@ plotSentimentResponse(sentiment, response) + theme_void()
 }
 \keyword{evaluation}
 \keyword{plots}
-

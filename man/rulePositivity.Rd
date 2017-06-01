@@ -19,4 +19,3 @@ Ratio of words labeled as positive in that dictionary compared to the total
 number of words in the document. Here, it uses the entry \code{positiveWords}
 of the \code{\link{SentimentDictionaryBinary}}.
 }
-

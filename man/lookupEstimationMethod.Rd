@@ -15,4 +15,3 @@ Function that implements the specific estimation method.
 \description{
 Decides upon a estimation method for dictionary generation. Input is a name for the estimation method, output is the corresponding function object.
 }
-

@@ -26,4 +26,3 @@ for Sentiment Categorization with Respect to Rating Scales}, Proceeding of the
 ACL. See \url{http://www.cs.cornell.edu/people/pabo/movie-review-data}
 }
 \keyword{datasets}
-

@@ -58,4 +58,3 @@ Systems (ECIS 2015).
 \code{\link{SentimentDictionary}}
 }
 \keyword{dictionary}
-

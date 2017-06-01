@@ -3,10 +3,10 @@
 \name{analyzeSentiment}
 \alias{analyzeSentiment}
 \alias{analyzeSentiment.Corpus}
-\alias{analyzeSentiment.DocumentTermMatrix}
-\alias{analyzeSentiment.TermDocumentMatrix}
 \alias{analyzeSentiment.character}
 \alias{analyzeSentiment.data.frame}
+\alias{analyzeSentiment.TermDocumentMatrix}
+\alias{analyzeSentiment.DocumentTermMatrix}
 \title{Sentiment analysis}
 \usage{
 analyzeSentiment(x, language = "english", aggregate = NULL,
@@ -107,4 +107,3 @@ for getting binary results, \code{\link{generateDictionary}} for dictionary gene
 \code{\link{plotSentiment}} and \code{\link{plotSentimentResponse}} for visualization
 }
 \keyword{sentiment}
-

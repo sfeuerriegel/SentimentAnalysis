@@ -55,4 +55,3 @@ compareToResponse(sentiment, response)
 \keyword{dictionary}
 \keyword{evaluation}
 \keyword{sentiment}
-

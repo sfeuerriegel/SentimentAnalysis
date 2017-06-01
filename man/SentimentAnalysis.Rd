@@ -13,4 +13,3 @@ SentimentDictionary to store different variants of dictionaries
 user with routines for constructing domain-specific dictionaries and
 evaluating the performance of common rules for analyzing sentiment.
 }
-

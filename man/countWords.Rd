@@ -3,10 +3,10 @@
 \name{countWords}
 \alias{countWords}
 \alias{countWords.Corpus}
-\alias{countWords.DocumentTermMatrix}
-\alias{countWords.TermDocumentMatrix}
 \alias{countWords.character}
 \alias{countWords.data.frame}
+\alias{countWords.TermDocumentMatrix}
+\alias{countWords.DocumentTermMatrix}
 \title{Count words}
 \usage{
 countWords(x, aggregate = NULL, removeStopwords = TRUE,
@@ -59,4 +59,3 @@ countWords(documents)
 # count all words (including stopwords)
 countWords(documents, removeStopwords=FALSE)
 }
-

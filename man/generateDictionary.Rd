@@ -3,10 +3,10 @@
 \name{generateDictionary}
 \alias{generateDictionary}
 \alias{generateDictionary.Corpus}
-\alias{generateDictionary.DocumentTermMatrix}
-\alias{generateDictionary.TermDocumentMatrix}
 \alias{generateDictionary.character}
 \alias{generateDictionary.data.frame}
+\alias{generateDictionary.TermDocumentMatrix}
+\alias{generateDictionary.DocumentTermMatrix}
 \title{Generates dictionary of decisive terms}
 \source{
 \url{https://dx.doi.org/10.2139/ssrn.2522884}
@@ -183,4 +183,3 @@ advanced evaluations
 \keyword{dictionary}
 \keyword{evaluation}
 \keyword{sentiment}
-

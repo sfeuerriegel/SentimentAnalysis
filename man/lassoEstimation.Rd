@@ -37,4 +37,3 @@ Result is a list with coefficients, coefficient names and the model intercept.
 \description{
 Function estimates coefficients based on LASSO regularization.
 }
-

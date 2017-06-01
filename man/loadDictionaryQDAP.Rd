@@ -24,4 +24,3 @@ Result is a list of stemmed words in lower case
 Hu and Liu (2004). Mining Opinion Features in Customer Reviews. 
 National Conference on Artificial Intelligence.
 }
-

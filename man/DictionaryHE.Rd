@@ -26,4 +26,3 @@ Henry (2008): \emph{Are Investors Influenced By How Earnings Press
 Releases Are Written?}, Journal of Business Communication, 45:4, 363-407
 }
 \keyword{datasets}
-

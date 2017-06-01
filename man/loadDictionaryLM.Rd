@@ -16,4 +16,3 @@ object (here, categories positive and negative are considered)
 \note{
 Result is a list of stemmed words in lower case
 }
-

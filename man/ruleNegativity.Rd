@@ -20,4 +20,3 @@ number of words in the document. Here, it uses the entry \code{negativeWords}
 of the \code{\link{SentimentDictionaryBinary}}.
 }
 \keyword{rules}
-

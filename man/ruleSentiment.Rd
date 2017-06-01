@@ -26,4 +26,3 @@ in that document. Then, the sentiment ratio is defined as
 \code{positiveWords} of the \code{\link{SentimentDictionaryBinary}}.
 }
 \keyword{rules}
-

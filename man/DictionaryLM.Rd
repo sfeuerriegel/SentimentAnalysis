@@ -29,4 +29,3 @@ Loughran and McDonald (2011) \emph{When is a Liability not a Liability?
 Textual Analysis, Dictionaries, and 10-Ks}, Journal of Finance, 66:1, 35-65
 }
 \keyword{datasets}
-

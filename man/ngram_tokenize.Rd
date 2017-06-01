@@ -40,4 +40,3 @@ tdm <- TermDocumentMatrix(ch.corpus,
 inspect(tdm)
 }
 \keyword{preprocessing}
-

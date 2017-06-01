@@ -42,4 +42,3 @@ plot(d) + theme_void()
 }
 \keyword{evaluation}
 \keyword{plots}
-

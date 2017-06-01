@@ -25,4 +25,3 @@ data(DictionaryGI)
 summary(DictionaryGI)
 }
 \keyword{datasets}
-

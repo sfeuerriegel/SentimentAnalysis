@@ -20,4 +20,3 @@ Ratio of words in that dictionary compared to the total number of words in
 the document
 }
 \keyword{rules}
-

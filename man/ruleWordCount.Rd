@@ -16,4 +16,3 @@ Total number of words
 Counts total word frequencies in each document
 }
 \keyword{rules}
-

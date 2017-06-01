@@ -2,9 +2,9 @@
 % Please edit documentation in R/SentimentDictionary.R
 \name{write}
 \alias{write}
+\alias{write.SentimentDictionaryWordlist}
 \alias{write.SentimentDictionaryBinary}
 \alias{write.SentimentDictionaryWeighted}
-\alias{write.SentimentDictionaryWordlist}
 \title{Write dictionary to text file}
 \usage{
 write(d, file)
@@ -52,4 +52,3 @@ unlink("example.dict")
 \code{\link{read}} for later access
 }
 \keyword{dictionary}
-
