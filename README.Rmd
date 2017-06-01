@@ -99,7 +99,7 @@ response <- c(+1, +1, +1, -1, 0, -1)
 
 compareToResponse(sentiment, response)
 
-plotSentimentResponse(sentiment$SentimentGI, response)
+# Optional visualization: plotSentimentResponse(sentiment$SentimentGI, response)
 ```
 
 ## Dictionary generation

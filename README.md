@@ -179,10 +179,8 @@ compareToResponse(sentiment, response)
 #> avg.sentiment.pos.response     0.08333333      0.4166667
 #> avg.sentiment.neg.response     0.36666667      0.0000000
 
-plotSentimentResponse(sentiment$SentimentGI, response)
+# Optional visualization: plotSentimentResponse(sentiment$SentimentGI, response)
 ```
-
-![](README-unnamed-chunk-5-1.png)
 
 Dictionary generation
 ---------------------
