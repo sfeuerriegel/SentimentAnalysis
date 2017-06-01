@@ -13,7 +13,7 @@ SentimentDictionaryWeighted(words, scores, idf = rep(1, length(words)),
 \arguments{
 \item{words}{is collection (vector) of different words as strings}
 
-\item{scores}{are the corresponding socres or weights denoting the word's polarity}
+\item{scores}{are the corresponding scores or weights denoting the word's polarity}
 
 \item{idf}{provide further details on the frequency of words in the corpus as an
 additional source for normalization}

@@ -87,7 +87,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
 #' contains a number of words, each linked to a continuous score (i.e. weight) for
 #' specifying its polarity. The scores can later be interpreted as a linear model
 #' @param words is collection (vector) of different words as strings
-#' @param scores are the corresponding socres or weights denoting the word's polarity
+#' @param scores are the corresponding scores or weights denoting the word's polarity
 #' @param idf provide further details on the frequency of words in the corpus as an
 #' additional source for normalization
 #' @param intercept is an optional parameter for shifting the zero level (default: 0)
