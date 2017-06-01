@@ -19,8 +19,8 @@ test_that("dictionary generations works correctly", {
   dictionary <- generateDictionary(documents, response)
   
   expect_is(dictionary, "SentimentDictionaryWeighted")
-  expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.5119851, 0.5118801), tolerance=0.001)
+  expect_equal(dictionary$words, c("good", "bad"))
+  expect_equal(dictionary$scores, c(0.5119851, -0.5118801), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 5.55e-05, tolerance=0.001)
 
@@ -29,8 +29,8 @@ test_that("dictionary generations works correctly", {
   dictionary <- generateDictionary(documents, response, weighting=weightTf)
 
   expect_is(dictionary, "SentimentDictionaryWeighted")
-  expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.6768076, 0.6766687), tolerance=0.001)
+  expect_equal(dictionary$words, c("good", "bad"))
+  expect_equal(dictionary$scores, c(0.6768076, -0.6766687), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 5.55e-05, tolerance=0.001)
 
@@ -39,8 +39,8 @@ test_that("dictionary generations works correctly", {
   dictionary <- generateDictionary(documents, response, control = list(s="lambda.min"))
 
   expect_is(dictionary, "SentimentDictionaryWeighted")
-  expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.5119851, 0.5118801), tolerance=0.001)
+  expect_equal(dictionary$words, c("good", "bad"))
+  expect_equal(dictionary$scores, c(0.5119851, -0.5118801), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 5.55e-05, tolerance=0.001)
 
@@ -49,8 +49,8 @@ test_that("dictionary generations works correctly", {
   dictionary <- generateDictionary(documents, response, intercept=FALSE)
   
   expect_is(dictionary, "SentimentDictionaryWeighted")
-  expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.4131132, 0.4131132), tolerance=0.001)
+  expect_equal(dictionary$words, c("good", "bad"))
+  expect_equal(dictionary$scores, c(0.4131132, -0.4131132), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 0)
   
@@ -59,8 +59,8 @@ test_that("dictionary generations works correctly", {
   dictionary <- generateDictionary(documents, response, modelType = "spikeslab")
 
   expect_is(dictionary, "SentimentDictionaryWeighted")
-  expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.4190744, 0.3955698), tolerance=0.001)
+  expect_equal(dictionary$words, c("good", "bad"))
+  expect_equal(dictionary$scores, c(0.3955698, -0.4190744), tolerance=0.001)
   expect_equal(dictionary$idf, c(1, 1))
   expect_equal(dictionary$intercept, 0)
 })

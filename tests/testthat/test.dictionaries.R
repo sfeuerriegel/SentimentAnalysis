@@ -51,6 +51,6 @@ test_that("load functions access underlying data correctly", {
   expect_true("fall" %in% d$negativeWords)
   expect_true("negat" %in% d$negativeWords)
   
-  expect_equivalent(length(d$positiveWords), 1279)
-  expect_equivalent(length(d$negativeWords), 2954)  
+  expect_equivalent(length(d$positiveWords), 2954)
+  expect_equivalent(length(d$negativeWords), 1279)  
 })
