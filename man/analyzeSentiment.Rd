@@ -75,9 +75,9 @@ sentiment <- analyzeSentiment(corpus)
 compareToResponse(sentiment, c(+1, 0, -2))
 
 # via Corpus from tm package
+\dontrun{
 library(tm)
 data("crude")
-\dontrun{
   sentiment <- analyzeSentiment(crude)
 }
     
@@ -92,13 +92,15 @@ dictionaryAmplifiers <- SentimentDictionary(c("more", "much"))
 sentiment <- analyzeSentiment(corpus,
                               rules=list("Amplifiers"=list(ruleRatio,
                                                            dictionaryAmplifiers)))
-
+                                                           
+\dontrun{
 # On can also restrict the number of computed methods to the ones of interest
 # in order to achieve performance optimizations
 sentiment <- analyzeSentiment(corpus,
                               rules=list("SentimentLM"=list(ruleSentiment, 
                                                             loadDictionaryLM())))
 sentiment
+}
 
 }
 \seealso{
