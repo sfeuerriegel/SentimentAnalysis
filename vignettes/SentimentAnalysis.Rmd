@@ -14,7 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogeneous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
+The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
 
 # Introduction
 
@@ -237,7 +237,7 @@ summary(d)
 
 # Dictionary generation
 
-The following example shows how the `SentimentAnalysis` package can extract statistically relevant textual drivers based on an exogeneous response variable. The details of this method are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in the form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurrences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization, which implicitly performs variable selection. In so doing, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by polarity according to their coefficient.
+The following example shows how the `SentimentAnalysis` package can extract statistically relevant textual drivers based on an exogenous response variable. The details of this method are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in the form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurrences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization, which implicitly performs variable selection. In so doing, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by polarity according to their coefficient.
 
 ```{r}
 # Create a vector of strings

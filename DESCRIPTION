@@ -14,7 +14,7 @@ Description: Performs a sentiment analysis of textual contents in R. This implem
     utilizes various existing dictionaries, such as General Inquirer, Harvard IV or 
     Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter 
     uses LASSO regularization as a statistical approach to select relevant terms based on 
-    an exogeneous response variable. 
+    an exogenous response variable. 
 License: MIT + file LICENSE
 URL: https://github.com/sfeuerriegel/SentimentAnalysis
 BugReports: https://github.com/sfeuerriegel/SentimentAnalysis/issues
