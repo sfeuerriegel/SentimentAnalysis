@@ -41,7 +41,7 @@ test_that("sentiment analysis works with custom rules", {
                                 rules=list("GermanSentiment"=list(ruleSentiment, dictionaryGerman)))
   expect_is(sentiment, "data.frame")
   expect_equal(colnames(sentiment), "GermanSentiment")
-  expect_equal(sentiment$GermanSentiment, c(0.5, -0.5))
+  expect_equal(sentiment$GermanSentiment, c(0, -0.5))
 })
 
 test_that("comparison with response variable works correctly", {
