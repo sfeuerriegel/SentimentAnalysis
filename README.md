@@ -5,7 +5,7 @@ Sentiment Analysis
 
 [![Build Status](https://travis-ci.org/sfeuerriegel/SentimentAnalysis.svg?branch=master)](https://travis-ci.org/sfeuerriegel/SentimentAnalysis) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/SentimentAnalysis)](https://cran.r-project.org/package=SentimentAnalysis)
 
-**SentimentAnalysis** performs a **sentiment analysis** of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable.
+**SentimentAnalysis** performs a **sentiment analysis** of textual contents in R. This implementation utilizes various existing dictionaries, such as QDAP, Harvard IV or Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable.
 
 Overview
 --------
@@ -22,33 +22,14 @@ The most important functions in **SentimentAnalysis** are:
 
 To see examples of these functions in use, check out the help pages, the demos and the vignette.
 
-Installation
-------------
-
-Using the **devtools** package, you can easily install the latest development version of **SentimentAnalysis** with
-
-``` r
-install.packages("devtools")
-
-# Option 1: download and install latest version from ‘GitHub’
-devtools::install_github("sfeuerriegel/SentimentAnalysis")
-
-# Option 2: install directly from bundled archive
-# devtoos::install_local("SentimentAnalysis_1.1.0.tar.gz")
-```
-
-Notes:
-
--   In the case of option 2, you have to specify the path either to the directory of **SentimentAnalysis** or to the bundled archive **SentimentAnalysis\_1.0.0.tar.gz**
-
--   A CRAN version has not yet been released.
-
 Usage
 -----
 
-This section shows the basic functionality of how to perform a sentiment analysis. First, load the corresponding package **SentimentAnalysis**.
+This section shows the basic functionality of how to perform a sentiment analysis. First, install the package from CRAN. Then load the corresponding package **SentimentAnalysis**.
 
 ``` r
+# install.packages("SentimentAnalysis")
+
 library(SentimentAnalysis)
 ```
 
@@ -81,12 +62,12 @@ documents <- c("Wow, I really like the new light sabers!",
 # Analyze sentiment
 sentiment <- analyzeSentiment(documents)
 
-# Extract dictionary-based sentiment according to the Harvard-IV dictionary
-sentiment$SentimentGI
-#> [1]  0.3333333  0.5000000  0.5000000 -0.6666667  0.0000000 -0.6000000
+# Extract dictionary-based sentiment according to the QDAP dictionary
+sentiment$SentimentQDAP
+#> [1]  0.3333333  0.5000000  0.5000000 -0.3333333  0.0000000 -0.4000000
 
 # View sentiment direction (i.e. positive, neutral and negative)
-convertToDirection(sentiment$SentimentGI)
+convertToDirection(sentiment$SentimentQDAP)
 #> [1] positive positive positive negative neutral  negative
 #> Levels: negative neutral positive
 
@@ -179,7 +160,7 @@ compareToResponse(sentiment, response)
 #> avg.sentiment.pos.response     0.08333333      0.4166667
 #> avg.sentiment.neg.response     0.36666667      0.0000000
 
-# Optional visualization: plotSentimentResponse(sentiment$SentimentGI, response)
+# Optional visualization: plotSentimentResponse(sentiment$SentimentQDAP, response)
 ```
 
 Dictionary generation
@@ -196,4 +177,4 @@ License
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs
+Copyright (c) 2017 Stefan Feuerriegel & Nicolas Pröllochs

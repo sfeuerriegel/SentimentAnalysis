@@ -14,7 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as General Inquirer, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
+The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as QDAP, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
 
 # Introduction
 
@@ -48,27 +48,10 @@ In the process of performing sentiment analysis, one must convert the running te
 
 Even though sentiment analysis has received great traction lately, the available tools are not yet living up to the needs of researchers. The `SentimentAnalysis` package is intended to partially close this gap and offer capabilities that most research demands.
 
-## Installation
-
-Using the `devtools` package, you can easily install the latest development version of `SentimentAnalysis` with
-
-```{r,eval=FALSE}
-library(devtools)
-
-# Option 1: download and install latest version from GitHub
-install_github("sfeuerriegel/SentimentAnalysis")
-
-# Option 2: install directly from bundled archive
-install_local("SentimentAnalysis_1.1.0.tar.gz")
-```
-
-Note: You have to specify the path either to the directory of `SentimentAnalysis` or to the bundled archive `SentimentAnalysis_1.1.0.tar.gz`.
-
-## Package loading
-
-Afterwards, one merely needs to load the `SentimentAnalysis` package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published most recently. 
+First, simply install the package `SentimentAnalysis` from CRAN. Afterwards, one merely needs to load the `SentimentAnalysis` package as follows. This section shows the basic functionality to crawl for ad hoc filings. The following lines extract the ad hoc disclosure that was published most recently. 
 
 ```{r}
+# install.packages("SentimentAnalysis")
 library(SentimentAnalysis)
 ```
 
@@ -77,7 +60,7 @@ library(SentimentAnalysis)
 ```{r}
 # Analyze a single string to obtain a binary response (positive / negative)
 sentiment <- analyzeSentiment("Yeah, this was a great soccer game for the German team!")
-convertToBinaryResponse(sentiment)$SentimentGI
+convertToBinaryResponse(sentiment)$SentimentQDAP
 ```
 
 ```{r}
@@ -92,11 +75,11 @@ documents <- c("Wow, I really like the new light sabers!",
 # Analyze sentiment
 sentiment <- analyzeSentiment(documents)
 
-# Extract dictionary-based sentiment according to the Harvard-IV dictionary
-sentiment$SentimentGI
+# Extract dictionary-based sentiment according to the QDAP dictionary
+sentiment$SentimentQDAP
 
 # View sentiment direction (i.e. positive, neutral and negative)
-convertToDirection(sentiment$SentimentGI)
+convertToDirection(sentiment$SentimentQDAP)
 
 response <- c(+1, +1, +1, -1, 0, -1)
 
@@ -104,7 +87,7 @@ compareToResponse(sentiment, response)
 
 compareToResponse(sentiment, convertToBinaryResponse(response))
 
-plotSentimentResponse(sentiment$SentimentGI, response)
+plotSentimentResponse(sentiment$SentimentQDAP, response)
 ```
 
 The `SentimentAnalysis` package works very cleverly and neatly here in order to remove the effort
@@ -137,7 +120,7 @@ We provide examples in the following.
 documents <- c("This is good",
                "This is bad",
                "This is inbetween")
-convertToDirection(analyzeSentiment(documents)$SentimentGI)
+convertToDirection(analyzeSentiment(documents)$SentimentQDAP)
 ```
 
 ### Document-term matrix
@@ -145,14 +128,14 @@ convertToDirection(analyzeSentiment(documents)$SentimentGI)
 ```{r}
 library(tm)
 corpus <- VCorpus(VectorSource(documents))
-convertToDirection(analyzeSentiment(corpus)$SentimentGI)
+convertToDirection(analyzeSentiment(corpus)$SentimentQDAP)
 ```
 
 ### Corpus object
 
 ```{r}
 dtm <- preprocessCorpus(corpus)
-convertToDirection(analyzeSentiment(dtm)$SentimentGI)
+convertToDirection(analyzeSentiment(dtm)$SentimentQDAP)
 ```
 
 Since the package can work directly with a document-term matrix, this allows one to use customized preprocessing operations in the first place. Afterwards, one can utilize the `SentimentAnalysis` package for the computation of sentiment scores. For instance, one can replace the stopwords with those from a different list, or even perform tailored synonym merging, among other options. By default, the package uses the built-in routines `transformIntoCorpus()` to convert the input into a `Corpus` object and `preprocessCorpus()` to convert it into a `DocumentTermMatrix`.
@@ -161,26 +144,25 @@ Since the package can work directly with a document-term matrix, this allows one
 
 The `SentimentAnalysis` package entails three different dictionaries:
 
-* Harvard-IV dictionary as used in the General Inquirer program
+* Harvard-IV dictionary
 
 * Henry's Financial dictionary [@Henry.2008]
 
 * Loughran-McDonald Financial dictionary [@Loughran.2011]
 
+* QDAP dictionary from the package [`qdapDictionaries`](https://cran.r-project.org/package=qdapDictionaries)
+
 All of them can be manually inspected and even accessed as follows:
 
 ```{r}
 # Make dictionary available in the current R environment
-data(DictionaryGI)
+data(DictionarHE)
 # Display the internal structure 
-str(DictionaryGI)
-# Access dictionary as an object of type SentimentDictionary
-dict.GI <- loadDictionaryGI()
-# Print summary statistics of dictionary
-summary(dict.GI)
-
-data(DictionaryHE)
 str(DictionaryHE)
+# Access dictionary as an object of type SentimentDictionary
+dict.HE <- loadDictionaryHE()
+# Print summary statistics of dictionary
+summary(dict.HE)
 
 data(DictionaryLM)
 str(DictionaryLM)
@@ -272,7 +254,7 @@ Ultimately, several routines allow one to exlore the generated dictionary furthe
 
 ```{r}
 compareDictionaries(dict,
-                    loadDictionaryGI())
+                    loadDictionaryQDAP())
 
 sentiment <- predict(dict, documents)
 compareToResponse(sentiment, response)
@@ -391,7 +373,7 @@ summary(sentiment$SentimentLM)
 hist(scale(sentiment$SentimentLM))
 
 # Compute cross-correlation 
-cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentGI")])
+cor(sentiment[, c("SentimentLM", "SentimentHE", "SentimentQDAP")])
 
 # crude oil news between  1987-02-26 until 1987-03-02
 datetime <- do.call(c, lapply(crude, function(x) x$meta$datetimestamp))
