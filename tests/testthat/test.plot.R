@@ -31,7 +31,7 @@ test_that("plotting a scatterplot generates a ggplot object", {
 })
 
 test_that("plotting a weighted dictionary generates a ggplot object", {
-  d <- SentimentDictionaryWeighted(character(100), rnorm(100), numeric(100))
+  d <- SentimentDictionaryWeighted(paste0(character(100), 1:100), rnorm(100), numeric(100))
   p <- plot(d)
   
   expect_is(p, "gg")

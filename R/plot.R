@@ -115,7 +115,7 @@ plotSentimentResponse <- function(sentiment, response,
 #' @param ... Additional parameters passed to function.
 #' @return Returns a plot of class \code{\link[ggplot2]{ggplot}}
 #' @examples 
-#' d <- SentimentDictionaryWeighted(character(100), rnorm(100), numeric(100))
+#' d <- SentimentDictionaryWeighted(paste0(character(100), 1:100), rnorm(100), numeric(100))
 #' plot(d)
 #' 
 #' # Change color in plot

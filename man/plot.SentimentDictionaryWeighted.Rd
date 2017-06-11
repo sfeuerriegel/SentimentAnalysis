@@ -26,7 +26,7 @@ inspect whether the distribution of coefficients is skew. This can reveal if the
 are more positive terms than negative or vice versa.
 }
 \examples{
-d <- SentimentDictionaryWeighted(character(100), rnorm(100), numeric(100))
+d <- SentimentDictionaryWeighted(paste0(character(100), 1:100), rnorm(100), numeric(100))
 plot(d)
 
 # Change color in plot
