@@ -136,6 +136,9 @@ cat0 <- function(...) cat(..., "\n", sep="")
   if (length(words) != length(idf)) {
     stop("Arguments 'words' and 'idf' must be of same length.")
   }
+  if (anyDuplicated(words)) {
+    stop("Arguments 'words' must not contain duplicated entries.")
+  }
 
   d <- structure(list(words=words, scores=scores, idf=idf, intercept=intercept),
                  class="SentimentDictionaryWeighted")
