@@ -76,7 +76,7 @@ ruleNegativity <- function(dtm, d) {
 #' @details Given the number of positive words \eqn{P} and the number of 
 #' negative words \eqn{N}. Further, let \eqn{T} denote the total number of words
 #' in that document. Then, the sentiment ratio is defined as 
-#' \deqn{\frac{P+N}{T}}. Here, it uses the entries \code{negativeWords} and
+#' \deqn{\frac{P-N}{T}}. Here, it uses the entries \code{negativeWords} and
 #' \code{positiveWords} of the \code{\link{SentimentDictionaryBinary}}.
 #' @keywords rules
 #' @export
@@ -87,6 +87,31 @@ ruleSentiment <- function(dtm, d) {
   
   return((rowSums(as.matrix(dtm[, which(colnames(dtm) %in% d$positiveWords)])) 
           - rowSums(as.matrix(dtm[, which(colnames(dtm) %in% d$negativeWords)]))) / rowSums(as.matrix(dtm)))
+}
+
+#' Sentiment polarity score
+#' 
+#' Sentiment score defined as the difference between positive and negative
+#' word counts divided by the sum of positive and negative words.
+#' @param dtm Document-term matrix
+#' @param d Dictionary of type \code{\link{SentimentDictionaryBinary}}
+#' @return Sentiment score in the range of -1 to 1.
+#' @details Given the number of positive words \eqn{P} and the number of 
+#' negative words \eqn{N}. Then, the sentiment ratio is defined as 
+#' \deqn{\frac{P-N}{P+N}}. Here, it uses the entries \code{negativeWords} and
+#' \code{positiveWords} of the \code{\link{SentimentDictionaryBinary}}.
+#' @keywords rules
+#' @export
+ruleSentimentPolarity <- function(dtm, d) {
+  if (!inherits(d, "SentimentDictionaryBinary")) {
+    stop("Rule does not support dictionary type")
+  }
+  p <- rowSums(as.matrix(dtm[, which(colnames(dtm) %in% d$positiveWords)]))
+  n <- rowSums(as.matrix(dtm[, which(colnames(dtm) %in% d$negativeWords)]))
+  sum <-  p+n
+  diff <-  p-n
+  diff[diff != 0] <- diff[diff != 0] / sum[sum != 0]
+  return (diff)
 }
 
 #' Sentiment based on linear model
