@@ -110,7 +110,7 @@ ruleSentimentPolarity <- function(dtm, d) {
   n <- rowSums(as.matrix(dtm[, which(colnames(dtm) %in% d$negativeWords)]))
   sum <-  p+n
   diff <-  p-n
-  diff[diff != 0] <- diff[diff != 0] / sum[sum != 0]
+  diff[diff != 0] <- diff[diff != 0] / sum[diff != 0]
   return (diff)
 }
 
