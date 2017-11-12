@@ -13,35 +13,34 @@
 }
 \usage{
 generateDictionary(x, response, language = "english", modelType = "lasso",
-  control = list(alpha = 1, s = "lambda.min", family = "gaussian", grouped =
-  FALSE), minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+  filterTerms = NULL, control = list(), minWordLength = 3,
+  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
+  FALSE), ...)
 
 \method{generateDictionary}{Corpus}(x, response, language = "english",
-  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
-  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", filterTerms = NULL, control = list(),
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{character}(x, response, language = "english",
-  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
-  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", filterTerms = NULL, control = list(),
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{data.frame}(x, response, language = "english",
-  modelType = "lasso", control = list(alpha = 1, s = "lambda.min", family =
-  "gaussian", grouped = FALSE), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+  modelType = "lasso", filterTerms = NULL, control = list(),
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{TermDocumentMatrix}(x, response,
-  language = "english", modelType = "lasso", control = list(alpha = 1, s =
-  "lambda.min", family = "gaussian"), minWordLength = 3, sparsity = 0.9,
+  language = "english", modelType = "lasso", filterTerms = NULL,
+  control = list(), minWordLength = 3, sparsity = 0.9,
   weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{DocumentTermMatrix}(x, response,
-  language = "english", modelType = "lasso", control = list(alpha = 1, s =
-  "lambda.min", family = "gaussian", grouped = FALSE), minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+  language = "english", modelType = "lasso", filterTerms = NULL,
+  control = list(), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
@@ -53,15 +52,16 @@ generateDictionary(x, response, language = "english", modelType = "lasso",
 \item{language}{Language used for preprocessing operations (default: 
 English).}
 
-\item{modelType}{A string denoting the estimation method. Allowed values are \code{lasso} or \code{spikeslab}.}
+\item{modelType}{A string denoting the estimation method. Allowed values are \code{lasso}, \code{ridge}, 
+\code{enet}, \code{lm} or \code{glm} or \code{spikeslab}.}
+
+\item{filterTerms}{Optional vector of strings (default: \code{NULL}) to filter terms that are used
+for dictionary generation.}
 
 \item{control}{(optional) A list of parameters defining the model used for dictionary generation.
+
 If \code{modelType=lasso} is selected, individual parameters are as follows:
 \itemize{
- \item{"alpha"} {Abstraction parameter for switching from LASSO regularization
-(with default \code{alpha=1}) to ridge regression (\code{alpha=0}). As alternative
-options, one can also utilize to an elastic net with any continuous value 
-inbetween.}
  \item{"s"} {Value of the parameter lambda at which the LASSO is evaluated. Default
 is \code{s="lambda.1se"} which takes the calculated minimum value for \eqn{\lambda} 
 and then subtracts one standard error in order to avoid overfitting. This often
@@ -71,7 +71,46 @@ results in a better performance than using the minimum value itself given by
 For non-negative counts, use \code{family="poisson"}. For binary variables
 \code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
  \item{"grouped"} {Determines whether grouped LASSO is used (with default \code{FALSE}).}
+}
+
+If \code{modelType=ridge} is selected, individual parameters are as follows:
+\itemize{
+ \item{"s"} {Value of the parameter lambda at which the ridge is evaluated. Default
+is \code{s="lambda.1se"} which takes the calculated minimum value for \eqn{\lambda} 
+and then subtracts one standard error in order to avoid overfitting. This often
+results in a better performance than using the minimum value itself given by 
+\code{lambda="lambda.min"}.}
+ \item{"family"} {Distribution for response variable. Default is \code{family="gaussian"}.
+For non-negative counts, use \code{family="poisson"}. For binary variables
+\code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
+ \item{"grouped"} {Determines whether grouped function is used (with default \code{FALSE}).}
 } 
+
+If \code{modelType=enet} is selected, individual parameters are as follows:
+\itemize{
+ \item{"alpha"} {Abstraction parameter for swtiching between LASSO (with \code{alpha=1}) and
+ ridge regression (\code{alpha=0}). Default is \code{alpha=0.5}. Recommended option is to 
+ test different values between 0 and 1.}
+ \item{"s"} {Value of the parameter lambda at which the elastic net is evaluated. Default
+is \code{s="lambda.1se"} which takes the calculated minimum value for \eqn{\lambda} 
+and then subtracts one standard error in order to avoid overfitting. This often
+results in a better performance than using the minimum value itself given by 
+\code{lambda="lambda.min"}.}
+ \item{"family"} {Distribution for response variable. Default is \code{family="gaussian"}.
+For non-negative counts, use \code{family="poisson"}. For binary variables
+\code{family="binomial"}. See \code{\link[glmnet]{glmnet}} for further details.}
+ \item{"grouped"} {Determines whether grouped function is used (with default \code{FALSE}).}
+}
+ 
+If \code{modelType=lm} is selected, no parameters are passed on. 
+
+If \code{modelType=glm} is selected, individual parameters are as follows:
+\itemize{
+ \item{"family"} {Distribution for response variable. Default is \code{family="gaussian"}.
+For non-negative counts, use \code{family="poisson"}. For binary variables
+\code{family="binomial"}. See \code{\link{glm}} for further details.}
+} 
+
 If \code{modelType=spikeslab} is selected, individual parameters are as follows:
 \itemize{
  \item{"n.iter1"} {Number of burn-in Gibbs sampled values (i.e., discarded values). Default is 500.}
@@ -99,9 +138,10 @@ Result is a matrix which sentiment values for each document across
 all defined rules
 }
 \description{
-Routine applies LASSO regularization or spike-and-slab regression to the document-term matrix in order to 
-extract decisive terms that have a statistically significant impact on the 
-response variable.
+Routine applies method for dictionary generation (LASSO, ridge regularization, elastic net, 
+ordinary least squares, generalized linear model or spike-and-slab regression) to 
+the document-term matrix in order to extract decisive terms that 
+have a statistically significant impact on the response variable.
 }
 \examples{
 # Create a vector of strings
@@ -140,6 +180,21 @@ compareToResponse(sentiment, response)
 dictionary <- generateDictionary(documents, response, control=list(s="lambda.min"))
 sentiment <- predict(dictionary, documents)
 compareToResponse(sentiment, response)
+
+# Use instead OLS as estimation method
+dictionary <- generateDictionary(documents, response, modelType="lm")
+sentiment <- predict(dictionary, documents)
+sentiment
+
+dictionary <- generateDictionary(documents, response, modelType="lm", 
+                                 filterTerms = c("good", "bad"))
+sentiment <- predict(dictionary, documents)
+sentiment
+
+dictionary <- generateDictionary(documents, response, modelType="lm", 
+                                 filterTerms = extractWords(loadDictionaryGI()))
+sentiment <- predict(dictionary, documents)
+sentiment
 
 # Generate dictionary without LASSO intercept
 dictionary <- generateDictionary(documents, response, intercept=FALSE)

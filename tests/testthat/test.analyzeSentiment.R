@@ -209,3 +209,21 @@ test_that("word counting works correctly", {
   expect_equal(wc$WordCount, c(2, 2))
   # Note: the latter does not overwrite minWordLength (default: 3) because of which "is", "a", etc. is removed
 })
+
+test_that("foreign langauge without stemming works correctly", {
+  ##Create cusomized dictionary
+  words <- c("schoen", "freude", "toll", "kraftvoll")
+  scores <- c(0.2, 0.3, 0.4, 0.5)
+  dictionaryGer <- SentimentDictionaryWeighted(words, scores)
+  dictionaryGer
+  
+  ##create test-document
+  documents <- c("schoen", "freude", "toll", "kraftvoll")
+  
+  ##analyze test-document based on customized dictionary
+  sentiment <- analyzeSentiment(documents,
+                                language="german", stemming = FALSE,
+                                rules=list("dictionaryGer"=list(ruleLinearModel, dictionaryGer)))
+  
+  expect_equal(sentiment$dictionaryGer, c(0.2, 0.3, 0.4, 0.5), tolerance = 0.01)
+})

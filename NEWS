@@ -1,4 +1,16 @@
-# SentimentAnalysis 1.2-0
+# SentimentAnalysis 1.3-0
+
+# Version 1.3-0
+
+## New features and functions
+
+* Added new function `extractWords()` to retrieve all words from dictionary
+* Added new models for ridge regression, ordinary least squares and generalized linear model
+* Added flag to prefilter terms for dictionary generation
+
+## Changes
+
+* Fixed error in `ruleLinearModel`
 
 # Version 1.2-0
 

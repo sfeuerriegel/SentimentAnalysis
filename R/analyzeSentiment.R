@@ -15,6 +15,7 @@
 #' Therefore, each entry consists itself of a list with first a method,
 #' followed by an optional dictionary.
 #' @param removeStopwords Flag indicating whether to remove stopwords or not (default: yes)
+#' @param stemming Perform stemming (default: TRUE)
 #' @param ... Additional parameters passed to function for e.g. 
 #' preprocessing 
 #' @return Result is a matrix with sentiment values for each document across
@@ -67,7 +68,8 @@
 #' @export
 "analyzeSentiment" <- function(x, language="english", aggregate=NULL, 
                                rules=defaultSentimentRules(), 
-                               removeStopwords=TRUE, ...) {
+                               removeStopwords=TRUE, stemming=TRUE,
+                               ...) {
   UseMethod("analyzeSentiment", x)
 }
   
@@ -75,42 +77,49 @@
 #' @export
 "analyzeSentiment.Corpus" <- function(x, language="english", aggregate=NULL, 
                                       rules=defaultSentimentRules(), 
-                                      removeStopwords=TRUE, ...) {  
-  dtm <- toDocumentTermMatrix(x, language=language, removeStopwords=removeStopwords, weighting=function(x) tm::weightTf(x))
-  return(analyzeSentiment(dtm, language, aggregate, rules, removeStopwords, ...))
+                                      removeStopwords=TRUE, stemming=TRUE,
+                                      ...) {  
+  dtm <- toDocumentTermMatrix(x, language=language, 
+                              removeStopwords=removeStopwords, stemming=stemming,
+                              weighting=function(x) tm::weightTf(x))
+  return(analyzeSentiment(dtm, language, aggregate, rules, removeStopwords, stemming, ...))
 }
 
 #' @rdname analyzeSentiment
 #' @export
 "analyzeSentiment.character" <- function(x, language="english", aggregate=NULL, 
                                          rules=defaultSentimentRules(), 
-                                         removeStopwords=TRUE, ...) {
+                                         removeStopwords=TRUE, stemming=TRUE,
+                                         ...) {
   corpus <- transformIntoCorpus(x)
-  return(analyzeSentiment(corpus, language, aggregate, rules, removeStopwords, ...))
+  return(analyzeSentiment(corpus, language, aggregate, rules, removeStopwords, stemming, ...))
 }
 
 #' @rdname analyzeSentiment
 #' @export
 "analyzeSentiment.data.frame" <- function(x, language="english", aggregate=NULL, 
                                           rules=defaultSentimentRules(), 
-                                          removeStopwords=TRUE, ...) {
+                                          removeStopwords=TRUE, stemming=TRUE,
+                                          ...) {
   corpus <- transformIntoCorpus(x)
-  return(analyzeSentiment(corpus, language, aggregate, rules, removeStopwords, ...))  
+  return(analyzeSentiment(corpus, language, aggregate, rules, removeStopwords, stemming, ...))  
 }
 
 #' @rdname analyzeSentiment
 #' @export
 "analyzeSentiment.TermDocumentMatrix" <- function(x, language="english", aggregate=NULL, 
                                                   rules=defaultSentimentRules(), 
-                                                  removeStopwords=TRUE, ...) {
-  analyzeSentiment(t(x), language, aggregate, rules, removeStopwords, ...)
+                                                  removeStopwords=TRUE, stemming=TRUE,
+                                                  ...) {
+  analyzeSentiment(t(x), language, aggregate, rules, removeStopwords, stemming, ...)
 }
 
 #' @rdname analyzeSentiment
 #' @export
 "analyzeSentiment.DocumentTermMatrix" <- function(x, language="english", aggregate=NULL, 
                                                   rules=defaultSentimentRules(), 
-                                                  removeStopwords=TRUE, ...) {
+                                                  removeStopwords=TRUE, stemming=TRUE,
+                                                  ...) {
   sent <- list()
   
   for (n in names(rules)) {

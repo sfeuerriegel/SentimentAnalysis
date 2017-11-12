@@ -92,6 +92,7 @@
 #' @param minWordLength Minimum length of words used for cut-off; i.e. shorter words are 
 #' removed. Default is 3.
 #' @param removeStopwords Flag indicating whether to remove stopwords or not (default: yes)
+#' @param stemming Perform stemming (default: TRUE)
 #' @param weighting Function used for weighting of words; default is a a link to the tf-idf scheme.
 #' @param sparsity A numeric for the maximal allowed sparsity in the range from bigger zero to 
 #' smaller one. Default is \code{NULL} in order suppress this functionality.
@@ -101,9 +102,9 @@
 #' @export
 toDocumentTermMatrix <- function(x, language="english",
                                  minWordLength=3, sparsity=NULL, 
-                                 removeStopwords=TRUE,
+                                 removeStopwords=TRUE, stemming=TRUE,
                                  weighting=function(x) tm::weightTfIdf(x, normalize=FALSE)) {
-    corpus <- preprocessCorpus(x, language=language, removeStopwords=removeStopwords)
+    corpus <- preprocessCorpus(x, language=language, removeStopwords=removeStopwords, stemming=stemming)
     
     # wordLengths is a workaround for minWordLength; see:
     # https://stat.ethz.ch/pipermail/r-help/2012-May/313013.html

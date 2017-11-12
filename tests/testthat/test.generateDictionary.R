@@ -50,9 +50,9 @@ test_that("dictionary generations works correctly", {
   
   expect_is(dictionary, "SentimentDictionaryWeighted")
   expect_equal(dictionary$words, c("bad", "good"))
-  expect_equal(dictionary$scores, c(-0.4131132, 0.4131132), tolerance=0.001)
+  expect_equal(dictionary$scores, c(-0.5119851, 0.5118801), tolerance=0.01)
   expect_equal(dictionary$idf, c(1, 1))
-  expect_equal(dictionary$intercept, 0)
+  expect_equal(dictionary$intercept, 0, tolerance=0.001)
   
   # Dictionary generations works correctly with spike-and-slab regression
   set.seed(0)

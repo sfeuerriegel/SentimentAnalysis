@@ -7,7 +7,8 @@
 lookupEstimationMethod(type)
 }
 \arguments{
-\item{type}{A string denoting the estimation method. Allowed values are \code{lasso} or \code{spikeslab}.}
+\item{type}{A string denoting the estimation method. Allowed values are \code{lasso}, \code{ridge},
+\code{enet}, \code{lm}, \code{glm} or \code{spikeslab}.}
 }
 \value{
 Function that implements the specific estimation method.

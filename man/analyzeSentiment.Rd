@@ -10,26 +10,28 @@
 \title{Sentiment analysis}
 \usage{
 analyzeSentiment(x, language = "english", aggregate = NULL,
-  rules = defaultSentimentRules(), removeStopwords = TRUE, ...)
+  rules = defaultSentimentRules(), removeStopwords = TRUE,
+  stemming = TRUE, ...)
 
 \method{analyzeSentiment}{Corpus}(x, language = "english", aggregate = NULL,
-  rules = defaultSentimentRules(), removeStopwords = TRUE, ...)
+  rules = defaultSentimentRules(), removeStopwords = TRUE,
+  stemming = TRUE, ...)
 
 \method{analyzeSentiment}{character}(x, language = "english",
   aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, ...)
+  removeStopwords = TRUE, stemming = TRUE, ...)
 
 \method{analyzeSentiment}{data.frame}(x, language = "english",
   aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, ...)
+  removeStopwords = TRUE, stemming = TRUE, ...)
 
 \method{analyzeSentiment}{TermDocumentMatrix}(x, language = "english",
   aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, ...)
+  removeStopwords = TRUE, stemming = TRUE, ...)
 
 \method{analyzeSentiment}{DocumentTermMatrix}(x, language = "english",
   aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, ...)
+  removeStopwords = TRUE, stemming = TRUE, ...)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
@@ -48,6 +50,8 @@ Therefore, each entry consists itself of a list with first a method,
 followed by an optional dictionary.}
 
 \item{removeStopwords}{Flag indicating whether to remove stopwords or not (default: yes)}
+
+\item{stemming}{Perform stemming (default: TRUE)}
 
 \item{...}{Additional parameters passed to function for e.g. 
 preprocessing}

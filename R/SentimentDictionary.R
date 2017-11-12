@@ -265,6 +265,33 @@ cat0 <- function(...) cat(..., "\n", sep="")
   write.table(tbl, file=file, row.names=FALSE, col.names=FALSE, sep=",")
 }
 
+#' Extract words from dictionary
+#' 
+#' Returns all entries from a dictionary.
+#' @param d Dictionary of type \code{\link{SentimentDictionaryWordlist}},
+#' \code{\link{SentimentDictionaryBinary}} or
+#' \code{\link{SentimentDictionaryWeighted}}
+#' @examples 
+#' extractWords(SentimentDictionary(c("uncertain", "possible", "likely"))) # returns 3
+#' extractWords(SentimentDictionary(c("increase", "rise", "more"),
+#'                                  c("fall", "drop"))) # returns 5
+#' extractWords(SentimentDictionary(c("increase", "decrease", "exit"),
+#'                                  c(+1, -1, -10),
+#'                                  rep(NA, 3))) # returns 3
+#' @keywords dictionary
+#' @export
+extractWords <- function(d) {
+  if (inherits(d, "SentimentDictionaryBinary")) {
+    return(c(d$positiveWords, d$negativeWords))
+  } else if (inherits(d, "SentimentDictionaryWeighted")) {
+    return(d$words)
+  } else if (inherits(d, "SentimentDictionaryWordlist")) {
+    return(d$wordlist)
+  } else {
+    stop("Type not supported")
+  }
+}
+
 #' Number of words in dictionary
 #' 
 #' Counts total number of entries in dictionary.
