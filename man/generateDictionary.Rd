@@ -88,7 +88,7 @@ For non-negative counts, use \code{family="poisson"}. For binary variables
 
 If \code{modelType=enet} is selected, individual parameters are as follows:
 \itemize{
- \item{"alpha"} {Abstraction parameter for swtiching between LASSO (with \code{alpha=1}) and
+ \item{"alpha"} {Abstraction parameter for switching between LASSO (with \code{alpha=1}) and
  ridge regression (\code{alpha=0}). Default is \code{alpha=0.5}. Recommended option is to 
  test different values between 0 and 1.}
  \item{"s"} {Value of the parameter lambda at which the elastic net is evaluated. Default
