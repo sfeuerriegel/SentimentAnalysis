@@ -1,8 +1,8 @@
 Package: SentimentAnalysis
 Type: Package
 Title: Dictionary-Based Sentiment Analysis
-Version: 1.3-0
-Date: 2017-11-12
+Version: 1.3-1
+Date: 2018-04-07
 Authors@R: c(person("Stefan", "Feuerriegel", email="stefan.feuerriegel@is.uni-freiburg.de",
                     role=c("aut", "cre")),
              person("Nicolas", "Proellochs", email="nicolas.proellochs@is.uni-freiburg.de",
