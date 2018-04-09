@@ -7,9 +7,6 @@ Authors@R: c(person("Stefan", "Feuerriegel", email="sentiment@sfeuerriegel.com",
                     role=c("aut", "cre")),
              person("Nicolas", "Proellochs", email="nicolas.proellochs@is.uni-freiburg.de",
                     role=c("aut")))
-Author: Stefan Feuerriegel [aut, cre],
-  Nicolas Proellochs [aut]
-Maintainer: Stefan Feuerriegel <stefan.feuerriegel@is.uni-freiburg.de>
 Description: Performs a sentiment analysis of textual contents in R. This implementation
     utilizes various existing dictionaries, such as Harvard IV, or finance-specific 
     dictionaries. Furthermore, it can also create customized dictionaries. The latter 
