@@ -40,7 +40,7 @@ As sentiment analysis is applied to a broad variety of domains and textual sourc
 
 On the one hand, machine learning approaches are preferred when one strives for high prediction performance. However, machine learning usually works as a black-box, thereby making interpretations diffucult. On the other hand, dictionary-based approaches generate lists of positive and negative words. The respective occurrences of these words are then combined into a single sentiment score. Therefore, the underlying decisions become traceable and researchers can understand the factors that result in a specific sentiment. 
 
-In addition, `SentimentAnalysis` allows one to generate tailored dictionaries. These are customized to a specific domain, improve prediction performance compared to pure dictionaries and allow full interpretability. Details of this methodology can be found in [@ECIS.2015]. 
+In addition, `SentimentAnalysis` allows one to generate tailored dictionaries. These are customized to a specific domain, improve prediction performance compared to pure dictionaries and allow full interpretability. Details of this methodology can be found in [@PLOSONE.2018]. 
 
 In the process of performing sentiment analysis, one must convert the running text into a machine-readable format. This is achieved by executing a series of preprocessing operations. First, the text is tokenized into single words, followed by what are common preprocessing steps: stopword removal, stemming, removal of punctuation and conversion to lower-case. These operations are also conducted by default in `SentimentAnalysis`, but can be adapted to one's personal needs.
 
@@ -219,7 +219,7 @@ summary(d)
 
 # Dictionary generation
 
-The following example shows how the `SentimentAnalysis` package can extract statistically relevant textual drivers based on an exogenous response variable. The details of this method are presented in [@ECIS.2015], while we provide a brief summary here. Let \eqn{R} denote a response variable in the form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurrences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization, which implicitly performs variable selection. In so doing, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by polarity according to their coefficient.
+The following example shows how the `SentimentAnalysis` package can extract statistically relevant textual drivers based on an exogenous response variable. The details of this method are presented in [@PLOSONE.2018], while we provide a brief summary here. Let \eqn{R} denote a response variable in the form of a vector. Furthermore, variables \eqn{w_1, \ldots, w_n} give the number of occurrences of word \eqn{w_i} in a document. The methodology then estimates a linear model \deqn{R = \alpha + \beta_1 w_1 + \ldots + \beta_n w_n} with intercept \eqn{\alpha} and coefficients \eqn{\beta_1, \ldots, \beta_n}. The estimation routine is based on LASSO regularization, which implicitly performs variable selection. In so doing, it sets some of the coefficients \eqn{\beta_i} to exactly zero. The remaining words can then be ranked by polarity according to their coefficient.
 
 ```{r}
 # Create a vector of strings
@@ -409,6 +409,6 @@ We cordially invite everyone to contribute source code, dictionaries and further
 # License
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
-Copyright (c) 2016 Stefan Feuerriegel & Nicolas Pröllochs
+Copyright (c) 2019 Stefan Feuerriegel & Nicolas Pröllochs
 
 # References

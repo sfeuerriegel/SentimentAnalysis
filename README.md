@@ -170,11 +170,11 @@ Research in finance and social sciences nowadays utilizes content analysis to un
 
 The approach utilizes LASSO regularization to extract words from documents that statistically feature a positive and negative polarity. This immediately reveals manifold implications for practitioners, finance research and social sciences: researchers can use R to extract text components that are relevant for readers and test their hypothesis based on these.
 
--   Proellochs, Feuerriegel and Neumann (2015): Generating Domain-Specific Dictionaries Using Bayesian Learning, Proceedings of the 23rd European Conference on Information Systems (ECIS 2015), Muenster, Germany. [DOI: 10.2139/ssrn.2522884](https://dx.doi.org/10.2139/ssrn.2522884)
+-   Proellochs, Feuerriegel and Neumann (2018): Statistical inferences for polarity identification in natural language, PLOS ONE 13(12):e0209323. [DOI: 10.1371/journal.pone.0209323](https://doi.org/10.1371/journal.pone.0209323)
 
 License
 -------
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2017 Stefan Feuerriegel & Nicolas Pröllochs
+Copyright (c) 2019 Stefan Feuerriegel & Nicolas Pröllochs

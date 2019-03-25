@@ -318,7 +318,7 @@ convertToDirection <- function(sentiment) {
 "compareToResponse.numeric" <- function(sentiment, response) {
   result <- list("cor"=cor(sentiment, response)[,1],
                  "cor.t.statistic"=unlist(lapply(colnames(sentiment), function(x) cor.test(sentiment[, x], response)$statistic)),
-                 "cor.p.value"=unlist(lapply(colnames(sentiment), function(x) cor.test(sentiment[, x], response)$statistic)),
+                 "cor.p.value"=unlist(lapply(colnames(sentiment), function(x) cor.test(sentiment[, x], response)$p.val)),
 
                  "lm.t.value"=unlist(lapply(colnames(sentiment), function(x) {
                    tryCatch(
