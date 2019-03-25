@@ -12,10 +12,10 @@
 \url{https://dx.doi.org/10.2139/ssrn.2522884}
 }
 \usage{
-generateDictionary(x, response, language = "english", modelType = "lasso",
-  filterTerms = NULL, control = list(), minWordLength = 3,
-  sparsity = 0.9, weighting = function(x) tm::weightTfIdf(x, normalize =
-  FALSE), ...)
+generateDictionary(x, response, language = "english",
+  modelType = "lasso", filterTerms = NULL, control = list(),
+  minWordLength = 3, sparsity = 0.9, weighting = function(x)
+  tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{Corpus}(x, response, language = "english",
   modelType = "lasso", filterTerms = NULL, control = list(),
@@ -27,10 +27,10 @@ generateDictionary(x, response, language = "english", modelType = "lasso",
   minWordLength = 3, sparsity = 0.9, weighting = function(x)
   tm::weightTfIdf(x, normalize = FALSE), ...)
 
-\method{generateDictionary}{data.frame}(x, response, language = "english",
-  modelType = "lasso", filterTerms = NULL, control = list(),
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{data.frame}(x, response,
+  language = "english", modelType = "lasso", filterTerms = NULL,
+  control = list(), minWordLength = 3, sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
 
 \method{generateDictionary}{TermDocumentMatrix}(x, response,
   language = "english", modelType = "lasso", filterTerms = NULL,

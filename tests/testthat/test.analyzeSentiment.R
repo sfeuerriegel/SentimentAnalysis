@@ -53,7 +53,7 @@ test_that("comparison with response variable works correctly", {
   
   expect_equal(cmp["cor", "Sentiment"], 1/3)
   expect_equal(cmp["cor.t.statistic", "Sentiment"], 0.5)
-  expect_equal(cmp["cor.p.value", "Sentiment"], 0.5)
+  expect_equal(cmp["cor.p.value", "Sentiment"], 0.666666, tolerance = 0.001)
   expect_equal(cmp["lm.t.value", "Sentiment"], 0.5)
   expect_equal(cmp["r.squared", "Sentiment"], 1/9)
   expect_equal(cmp["RMSE", "Sentiment"], sqrt(2))

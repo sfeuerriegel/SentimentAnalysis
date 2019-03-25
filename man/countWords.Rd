@@ -12,14 +12,14 @@
 countWords(x, aggregate = NULL, removeStopwords = TRUE,
   language = "english", ...)
 
-\method{countWords}{Corpus}(x, aggregate = NULL, removeStopwords = TRUE,
-  language = "english", ...)
+\method{countWords}{Corpus}(x, aggregate = NULL,
+  removeStopwords = TRUE, language = "english", ...)
 
-\method{countWords}{character}(x, aggregate = NULL, removeStopwords = TRUE,
-  language = "english", ...)
+\method{countWords}{character}(x, aggregate = NULL,
+  removeStopwords = TRUE, language = "english", ...)
 
-\method{countWords}{data.frame}(x, aggregate = NULL, removeStopwords = TRUE,
-  language = "english", ...)
+\method{countWords}{data.frame}(x, aggregate = NULL,
+  removeStopwords = TRUE, language = "english", ...)
 
 \method{countWords}{TermDocumentMatrix}(x, aggregate = NULL,
   removeStopwords = TRUE, language = "english", ...)

@@ -13,9 +13,9 @@ analyzeSentiment(x, language = "english", aggregate = NULL,
   rules = defaultSentimentRules(), removeStopwords = TRUE,
   stemming = TRUE, ...)
 
-\method{analyzeSentiment}{Corpus}(x, language = "english", aggregate = NULL,
-  rules = defaultSentimentRules(), removeStopwords = TRUE,
-  stemming = TRUE, ...)
+\method{analyzeSentiment}{Corpus}(x, language = "english",
+  aggregate = NULL, rules = defaultSentimentRules(),
+  removeStopwords = TRUE, stemming = TRUE, ...)
 
 \method{analyzeSentiment}{character}(x, language = "english",
   aggregate = NULL, rules = defaultSentimentRules(),

@@ -4,8 +4,8 @@
 \alias{spikeslabEstimation}
 \title{Spike-and-slab estimation}
 \usage{
-spikeslabEstimation(x, response, control = list(n.iter1 = 500, n.iter2 = 500),
-  ...)
+spikeslabEstimation(x, response, control = list(n.iter1 = 500, n.iter2 =
+  500), ...)
 }
 \arguments{
 \item{x}{An object of type \code{\link[tm]{DocumentTermMatrix}}.}
