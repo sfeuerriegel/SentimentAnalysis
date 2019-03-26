@@ -124,7 +124,7 @@ cat0 <- function(...) cat(..., "\n", sep="")
   if (is.null(scores) || !is.numeric(scores)) {
     stop("Input variable scores does not match expected format")
   }
-  if (is.null(idf) || !all(is.numeric(idf) || is.na(idf))) {
+  if (is.null(idf) || !all(is.numeric(idf) || any(is.na(idf)))) {
     stop("Input variable idf does not match expected format")
   }
   if (is.null(intercept) || !is.numeric(intercept) || length(intercept) > 1) {
