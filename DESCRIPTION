@@ -23,16 +23,16 @@ Imports:
     ngramrr (>= 0.1),
     moments,
     stringdist,
-    SnowballC,
-    XML,
     glmnet,
-	spikeslab (>= 1.1),
-    ggplot2,
-    mgcv
+    spikeslab (>= 1.1),
+    ggplot2
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    SnowballC,
+    XML,
+    mgcv
 LazyData: true
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
