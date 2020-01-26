@@ -345,8 +345,8 @@ convertToDirection <- function(sentiment) {
   r <- c("Accuracy"=(cm[1,1]+cm[2,2])/(cm[1,1]+cm[1,2]+cm[2,1]+cm[2,2]),
          "Precision"=cm[1,1]/(cm[1,1]+cm[1,2]),
          "Sensitivity"=cm[1,1]/(cm[1,1]+cm[2,1]),
-         "Specificity"=cm[2,2]/(cm[1,2]+cm[2,2]),
-         "F1"=2*cm[1,1]/(2*cm[1,1]+cm[1,2]+cm[2,2]))
+         "Specificity"=cm[2,2]/(cm[1,2]+cm[2,2]))
+  r["F1"] <- (2*r["Sensitivity"]*r["Precision"])/(r["Sensitivity"]+r["Precision"])
   r["BalancedAccuracy"] <- (r["Sensitivity"]+r["Specificity"])/2
   
   return(r)
