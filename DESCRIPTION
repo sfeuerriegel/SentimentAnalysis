@@ -6,7 +6,8 @@ Date: 2019-03-25
 Authors@R: c(person("Stefan", "Feuerriegel", email="sentiment@sfeuerriegel.com",
                     role=c("aut", "cre")),
              person("Nicolas", "Proellochs", email="nicolas.proellochs@is.uni-freiburg.de",
-                    role=c("aut")))
+                    role=c("aut")),
+	person("Chung-hong", "Chan", email = "chainsawtiney@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6232-7530")))
 Description: Performs a sentiment analysis of textual contents in R. This implementation
     utilizes various existing dictionaries, such as Harvard IV, or finance-specific 
     dictionaries. Furthermore, it can also create customized dictionaries. The latter 
@@ -20,7 +21,7 @@ Depends:
 Imports: 
     tm (>= 0.6),
     qdapDictionaries,
-    ngramrr (>= 0.1),
+    tau,
     moments,
     stringdist,
     glmnet,
@@ -34,5 +35,5 @@ Suggests:
     XML,
     mgcv
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

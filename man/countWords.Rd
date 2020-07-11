@@ -9,23 +9,53 @@
 \alias{countWords.DocumentTermMatrix}
 \title{Count words}
 \usage{
-countWords(x, aggregate = NULL, removeStopwords = TRUE,
-  language = "english", ...)
+countWords(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 
-\method{countWords}{Corpus}(x, aggregate = NULL,
-  removeStopwords = TRUE, language = "english", ...)
+\method{countWords}{Corpus}(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 
-\method{countWords}{character}(x, aggregate = NULL,
-  removeStopwords = TRUE, language = "english", ...)
+\method{countWords}{character}(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 
-\method{countWords}{data.frame}(x, aggregate = NULL,
-  removeStopwords = TRUE, language = "english", ...)
+\method{countWords}{data.frame}(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 
-\method{countWords}{TermDocumentMatrix}(x, aggregate = NULL,
-  removeStopwords = TRUE, language = "english", ...)
+\method{countWords}{TermDocumentMatrix}(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 
-\method{countWords}{DocumentTermMatrix}(x, aggregate = NULL,
-  removeStopwords = TRUE, language = "english", ...)
+\method{countWords}{DocumentTermMatrix}(
+  x,
+  aggregate = NULL,
+  removeStopwords = TRUE,
+  language = "english",
+  ...
+)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
