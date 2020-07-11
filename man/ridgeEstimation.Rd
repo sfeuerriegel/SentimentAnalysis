@@ -4,8 +4,12 @@
 \alias{ridgeEstimation}
 \title{Ridge estimation}
 \usage{
-ridgeEstimation(x, response, control = list(s = "lambda.min", family =
-  "gaussian", grouped = FALSE), ...)
+ridgeEstimation(
+  x,
+  response,
+  control = list(s = "lambda.min", family = "gaussian", grouped = FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of type \code{\link[tm]{DocumentTermMatrix}}.}

@@ -4,8 +4,7 @@
 \alias{plot.SentimentDictionaryWeighted}
 \title{KDE plot of estimated coefficients}
 \usage{
-\method{plot}{SentimentDictionaryWeighted}(x, color = "gray60",
-  theme = ggplot2::theme_bw(), ...)
+\method{plot}{SentimentDictionaryWeighted}(x, color = "gray60", theme = ggplot2::theme_bw(), ...)
 }
 \arguments{
 \item{x}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}}

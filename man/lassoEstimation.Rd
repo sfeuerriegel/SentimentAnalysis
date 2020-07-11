@@ -4,8 +4,12 @@
 \alias{lassoEstimation}
 \title{Lasso estimation}
 \usage{
-lassoEstimation(x, response, control = list(alpha = 1, s = "lambda.min",
-  family = "gaussian", grouped = FALSE), ...)
+lassoEstimation(
+  x,
+  response,
+  control = list(alpha = 1, s = "lambda.min", family = "gaussian", grouped = FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of type \code{\link[tm]{DocumentTermMatrix}}.}

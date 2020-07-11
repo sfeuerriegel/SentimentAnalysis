@@ -5,7 +5,9 @@
 \alias{DictionaryGI}
 \title{Dictionary with opinionated words from the Harvard-IV dictionary as used in 
 the General Inquirer software}
-\format{A list with different terms according to Henry}
+\format{
+A list with different terms according to Henry
+}
 \source{
 \url{http://www.wjh.harvard.edu/~inquirer/}
 }

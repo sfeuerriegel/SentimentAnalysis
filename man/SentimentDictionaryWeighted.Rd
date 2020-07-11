@@ -7,8 +7,12 @@
 \url{http://dx.doi.org/10.2139/ssrn.2522884}
 }
 \usage{
-SentimentDictionaryWeighted(words, scores, idf = rep(1, length(words)),
-  intercept = 0)
+SentimentDictionaryWeighted(
+  words,
+  scores,
+  idf = rep(1, length(words)),
+  intercept = 0
+)
 }
 \arguments{
 \item{words}{is collection (vector) of different words as strings}

@@ -4,7 +4,9 @@
 \name{DictionaryLM}
 \alias{DictionaryLM}
 \title{Dictionary with opinionated words from Loughran-McDonald Financial dictionary}
-\format{A list with different terms according to Loughran-McDonald}
+\format{
+A list with different terms according to Loughran-McDonald
+}
 \source{
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}
 }

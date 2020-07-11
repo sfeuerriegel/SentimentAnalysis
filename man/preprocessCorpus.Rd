@@ -4,8 +4,13 @@
 \alias{preprocessCorpus}
 \title{Default preprocessing of corpus}
 \usage{
-preprocessCorpus(corpus, language = "english", stemming = TRUE,
-  verbose = FALSE, removeStopwords = TRUE)
+preprocessCorpus(
+  corpus,
+  language = "english",
+  stemming = TRUE,
+  verbose = FALSE,
+  removeStopwords = TRUE
+)
 }
 \arguments{
 \item{corpus}{\code{\link[tm]{Corpus}} object which should be processed}

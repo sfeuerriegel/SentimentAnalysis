@@ -4,8 +4,13 @@
 \alias{plotSentimentResponse}
 \title{Scatterplot with trend line between sentiment and response}
 \usage{
-plotSentimentResponse(sentiment, response, smoothing = "gam",
-  xlab = "Sentiment", ylab = "Response")
+plotSentimentResponse(
+  sentiment,
+  response,
+  smoothing = "gam",
+  xlab = "Sentiment",
+  ylab = "Response"
+)
 }
 \arguments{
 \item{sentiment}{\code{data.frame} with sentiment scores}
