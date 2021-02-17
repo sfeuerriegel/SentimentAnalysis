@@ -77,7 +77,7 @@ test_that("binary classifier is evaluated correctly", {
 
   r <- evalBinaryClassifier(convertToBinaryResponse(c(+1, +1, +1, +1)),
                             convertToBinaryResponse(c(+1, +1, +1, +1)))
-  expect_equivalent(as.numeric(r), c(1, NaN, NaN, 1, 0, NaN))
+  expect_equivalent(as.numeric(r), c(1, NaN, NaN, 1, NaN, NaN))
   
   r <- evalBinaryClassifier(convertToBinaryResponse(c(+1, -1, +1, -1)),
                             convertToBinaryResponse(c(-1, +1, +1, -1)))
