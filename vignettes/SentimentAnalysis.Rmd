@@ -9,12 +9,12 @@ output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Introduction to SentimentAnalysis}
+  %\VignetteIndexEntry{SentimentAnalysis Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as QDAP, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable. Finally, all methods can be easility compared using built-in evaluation routines.
+The `SentimentAnalysis` package introduces a powerful toolchain facilitating the sentiment analysis of textual contents in R. This implementation utilizes various existing dictionaries, such as QDAP, Harvard IV and Loughran-McDonald. Furthermore, it can also create customized dictionaries. The latter function uses LASSO regularization as a statistical approach to select relevant terms based on an exogenous response variable. Finally, all methods can be easily compared using built-in evaluation routines.
 
 # Introduction
 
@@ -409,6 +409,6 @@ We cordially invite everyone to contribute source code, dictionaries and further
 # License
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
-Copyright (c) 2019 Stefan Feuerriegel & Nicolas PrÃ¶llochs
+Copyright (c) 2021 Stefan Feuerriegel & Nicolas Pröllochs
 
 # References
