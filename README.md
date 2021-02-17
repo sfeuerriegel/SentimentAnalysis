@@ -177,4 +177,4 @@ License
 
 **SentimentAnalysis** is released under the [MIT License](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2019 Stefan Feuerriegel & Nicolas Pröllochs
+Copyright (c) 2021 Stefan Feuerriegel & Nicolas Pröllochs
