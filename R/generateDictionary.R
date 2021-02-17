@@ -167,10 +167,9 @@
 #' pred_sentiment <- predict(dict_imdb, imdb$Corpus)
 #' compareToResponse(pred_sentiment, imdb$Rating)
 #' }
-#' @references Pr{\"o}llochs and Feuerriegel (2015). Generating Domain-Specific 
-#' Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
-#' Systems (ECIS 2015).
-#' @source \url{https://dx.doi.org/10.2139/ssrn.2522884}
+#' @references Pr{\"o}llochs and Feuerriegel (2018). Statistical inferences for 
+#' Polarity Identification in Natural Language, PloS One 13(12). 
+#' @source \doi{10.1371/journal.pone.0209323}
 #' @keywords sentiment evaluation dictionary
 #' @seealso \code{\link{analyzeSentiment}}, \code{\link{predict.SentimentDictionaryWeighted}}, 
 #' \code{\link{plot.SentimentDictionaryWeighted}} and \code{\link{compareToResponse}} for

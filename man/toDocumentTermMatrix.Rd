@@ -4,9 +4,15 @@
 \alias{toDocumentTermMatrix}
 \title{Default preprocessing of corpus and conversion to document-term matrix}
 \usage{
-toDocumentTermMatrix(x, language = "english", minWordLength = 3,
-  sparsity = NULL, removeStopwords = TRUE, stemming = TRUE,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE))
+toDocumentTermMatrix(
+  x,
+  language = "english",
+  minWordLength = 3,
+  sparsity = NULL,
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE)
+)
 }
 \arguments{
 \item{x}{\code{\link[tm]{Corpus}} object which should be processed}

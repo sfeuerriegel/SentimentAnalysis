@@ -4,7 +4,9 @@
 \name{DictionaryHE}
 \alias{DictionaryHE}
 \title{Dictionary with opinionated words from Henry's Financial dictionary}
-\format{A list with different wordlists according to Henry}
+\format{
+A list with different wordlists according to Henry
+}
 \usage{
 data(DictionaryHE)
 }

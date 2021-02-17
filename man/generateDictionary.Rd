@@ -9,38 +9,86 @@
 \alias{generateDictionary.DocumentTermMatrix}
 \title{Generates dictionary of decisive terms}
 \source{
-\url{https://dx.doi.org/10.2139/ssrn.2522884}
+\doi{10.1371/journal.pone.0209323}
 }
 \usage{
-generateDictionary(x, response, language = "english",
-  modelType = "lasso", filterTerms = NULL, control = list(),
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+generateDictionary(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 
-\method{generateDictionary}{Corpus}(x, response, language = "english",
-  modelType = "lasso", filterTerms = NULL, control = list(),
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{Corpus}(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 
-\method{generateDictionary}{character}(x, response, language = "english",
-  modelType = "lasso", filterTerms = NULL, control = list(),
-  minWordLength = 3, sparsity = 0.9, weighting = function(x)
-  tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{character}(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 
-\method{generateDictionary}{data.frame}(x, response,
-  language = "english", modelType = "lasso", filterTerms = NULL,
-  control = list(), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{data.frame}(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 
-\method{generateDictionary}{TermDocumentMatrix}(x, response,
-  language = "english", modelType = "lasso", filterTerms = NULL,
-  control = list(), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{TermDocumentMatrix}(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 
-\method{generateDictionary}{DocumentTermMatrix}(x, response,
-  language = "english", modelType = "lasso", filterTerms = NULL,
-  control = list(), minWordLength = 3, sparsity = 0.9,
-  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE), ...)
+\method{generateDictionary}{DocumentTermMatrix}(
+  x,
+  response,
+  language = "english",
+  modelType = "lasso",
+  filterTerms = NULL,
+  control = list(),
+  minWordLength = 3,
+  sparsity = 0.9,
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 
@@ -226,9 +274,8 @@ compareToResponse(pred_sentiment, imdb$Rating)
 }
 }
 \references{
-Pr{\"o}llochs and Feuerriegel (2015). Generating Domain-Specific 
-Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
-Systems (ECIS 2015).
+Pr{\"o}llochs and Feuerriegel (2018). Statistical inferences for 
+Polarity Identification in Natural Language, PloS One 13(12).
 }
 \seealso{
 \code{\link{analyzeSentiment}}, \code{\link{predict.SentimentDictionaryWeighted}}, 

@@ -34,5 +34,5 @@ Suggests:
     XML,
     mgcv
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr

@@ -23,6 +23,6 @@ dictionary <- generateDictionary(imdb$Corpus, imdb$Rating)
 \references{
 Pang and Lee (2015) \emph{Seeing Stars: Exploiting Class Relationships 
 for Sentiment Categorization with Respect to Rating Scales}, Proceeding of the 
-ACL. See \url{http://www.cs.cornell.edu/people/pabo/movie-review-data}
+ACL. See \url{http://www.cs.cornell.edu/people/pabo/movie-review-data/}
 }
 \keyword{datasets}

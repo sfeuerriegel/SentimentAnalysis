@@ -4,9 +4,13 @@
 \alias{predict.SentimentDictionaryWeighted}
 \title{Prediction for given dictionary}
 \usage{
-\method{predict}{SentimentDictionaryWeighted}(object, newdata = NULL,
-  language = "english", weighting = function(x) tm::weightTfIdf(x,
-  normalize = FALSE), ...)
+\method{predict}{SentimentDictionaryWeighted}(
+  object,
+  newdata = NULL,
+  language = "english",
+  weighting = function(x) tm::weightTfIdf(x, normalize = FALSE),
+  ...
+)
 }
 \arguments{
 \item{object}{Dictionary of class \code{\link{SentimentDictionaryWeighted}}.}

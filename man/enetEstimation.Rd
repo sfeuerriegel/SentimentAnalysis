@@ -4,8 +4,12 @@
 \alias{enetEstimation}
 \title{Elastic net estimation}
 \usage{
-enetEstimation(x, response, control = list(alpha = 0.5, s = "lambda.min",
-  family = "gaussian", grouped = FALSE), ...)
+enetEstimation(
+  x,
+  response,
+  control = list(alpha = 0.5, s = "lambda.min", family = "gaussian", grouped = FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of type \code{\link[tm]{DocumentTermMatrix}}.}

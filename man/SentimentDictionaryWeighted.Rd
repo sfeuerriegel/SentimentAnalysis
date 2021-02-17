@@ -4,11 +4,15 @@
 \alias{SentimentDictionaryWeighted}
 \title{Create a sentiment dictionary of words linked to a score}
 \source{
-\url{http://dx.doi.org/10.2139/ssrn.2522884}
+\doi{10.1371/journal.pone.0209323}
 }
 \usage{
-SentimentDictionaryWeighted(words, scores, idf = rep(1, length(words)),
-  intercept = 0)
+SentimentDictionaryWeighted(
+  words,
+  scores,
+  idf = rep(1, length(words)),
+  intercept = 0
+)
 }
 \arguments{
 \item{words}{is collection (vector) of different words as strings}
@@ -50,9 +54,8 @@ d <- SentimentDictionary(c("increase", "decrease", "exit"),
 summary(d)                                
 }
 \references{
-Pr{\"o}llochs and Feuerriegel (2015). Generating Domain-Specific 
-Dictionaries Using Bayesian Learning. 23rd European Conference on Information 
-Systems (ECIS 2015).
+Pr{\"o}llochs and Feuerriegel (2018). Statistical inferences for 
+Polarity Identification in Natural Language, PloS One 13(12).
 }
 \seealso{
 \code{\link{SentimentDictionary}}

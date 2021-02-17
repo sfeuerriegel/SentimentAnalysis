@@ -9,29 +9,65 @@
 \alias{analyzeSentiment.DocumentTermMatrix}
 \title{Sentiment analysis}
 \usage{
-analyzeSentiment(x, language = "english", aggregate = NULL,
-  rules = defaultSentimentRules(), removeStopwords = TRUE,
-  stemming = TRUE, ...)
+analyzeSentiment(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 
-\method{analyzeSentiment}{Corpus}(x, language = "english",
-  aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, stemming = TRUE, ...)
+\method{analyzeSentiment}{Corpus}(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 
-\method{analyzeSentiment}{character}(x, language = "english",
-  aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, stemming = TRUE, ...)
+\method{analyzeSentiment}{character}(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 
-\method{analyzeSentiment}{data.frame}(x, language = "english",
-  aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, stemming = TRUE, ...)
+\method{analyzeSentiment}{data.frame}(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 
-\method{analyzeSentiment}{TermDocumentMatrix}(x, language = "english",
-  aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, stemming = TRUE, ...)
+\method{analyzeSentiment}{TermDocumentMatrix}(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 
-\method{analyzeSentiment}{DocumentTermMatrix}(x, language = "english",
-  aggregate = NULL, rules = defaultSentimentRules(),
-  removeStopwords = TRUE, stemming = TRUE, ...)
+\method{analyzeSentiment}{DocumentTermMatrix}(
+  x,
+  language = "english",
+  aggregate = NULL,
+  rules = defaultSentimentRules(),
+  removeStopwords = TRUE,
+  stemming = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{A vector of characters, a \code{data.frame}, an object of type 

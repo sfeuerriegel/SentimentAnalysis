@@ -63,7 +63,7 @@
 #' and \code{Rating} is the corresponding scaled rating.
 #' @references Pang and Lee (2015) \emph{Seeing Stars: Exploiting Class Relationships 
 #' for Sentiment Categorization with Respect to Rating Scales}, Proceeding of the 
-#' ACL. See \url{http://www.cs.cornell.edu/people/pabo/movie-review-data}
+#' ACL. See \url{http://www.cs.cornell.edu/people/pabo/movie-review-data/}
 #' @keywords datasets
 #' @examples
 #' \dontrun{

@@ -4,8 +4,13 @@
 \alias{plotSentiment}
 \title{Line plot with sentiment scores}
 \usage{
-plotSentiment(sentiment, x = NULL, cumsum = FALSE, xlab = "",
-  ylab = "Sentiment")
+plotSentiment(
+  sentiment,
+  x = NULL,
+  cumsum = FALSE,
+  xlab = "",
+  ylab = "Sentiment"
+)
 }
 \arguments{
 \item{sentiment}{\code{data.frame} or numeric vector with sentiment scores}

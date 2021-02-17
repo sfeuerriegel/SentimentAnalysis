@@ -3,7 +3,6 @@
 \docType{package}
 \name{SentimentAnalysis}
 \alias{SentimentAnalysis}
-\alias{SentimentAnalysis-package}
 \title{SentimentAnalysis: A package for analyzing sentiment of texts}
 \description{
 The \code{SentimentAnalysis} package provides routines to quickly measure
