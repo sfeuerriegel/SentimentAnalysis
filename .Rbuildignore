@@ -7,3 +7,5 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^cran-comments\.md$
+^doc$
+^Meta$
