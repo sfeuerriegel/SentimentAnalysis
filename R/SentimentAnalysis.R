@@ -7,6 +7,5 @@
 #' user with routines for constructing domain-specific dictionaries and
 #' evaluating the performance of common rules for analyzing sentiment.
 #'
-#' @docType package
-#' @name SentimentAnalysis
-NULL
+#' @keywords internal 
+"_PACKAGE"

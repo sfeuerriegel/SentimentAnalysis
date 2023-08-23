@@ -9,7 +9,7 @@ the General Inquirer software}
 A list with different terms according to Henry
 }
 \source{
-\url{http://www.wjh.harvard.edu/~inquirer/}
+\url{https://inquirer.sites.fas.harvard.edu/homecat.htm}
 }
 \usage{
 data(DictionaryGI)

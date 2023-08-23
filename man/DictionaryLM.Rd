@@ -8,7 +8,7 @@
 A list with different terms according to Loughran-McDonald
 }
 \source{
-\url{http://www3.nd.edu/~mcdonald/Word_Lists.html}
+\url{https://sraf.nd.edu/loughranmcdonald-master-dictionary/}
 }
 \usage{
 data(DictionaryLM)

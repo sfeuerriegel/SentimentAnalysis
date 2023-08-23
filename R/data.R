@@ -12,7 +12,7 @@
 #' @keywords datasets
 #' @references Loughran and McDonald (2011) \emph{When is a Liability not a Liability? 
 #' Textual Analysis, Dictionaries, and 10-Ks}, Journal of Finance, 66:1, 35-65
-#' @source \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}
+#' @source \url{https://sraf.nd.edu/loughranmcdonald-master-dictionary/}
 #' @examples
 #' data(DictionaryLM)
 #' summary(DictionaryLM)
@@ -30,7 +30,7 @@
 #' @format A list with different terms according to Henry
 #' @note All words are in lower case and non-stemmed
 #' @keywords datasets
-#' @source \url{http://www.wjh.harvard.edu/~inquirer/}
+#' @source \url{https://inquirer.sites.fas.harvard.edu/homecat.htm}
 #' @examples
 #' data(DictionaryGI)
 #' summary(DictionaryGI)
