@@ -26,7 +26,7 @@ The most important functions in **SentimentAnalysis** are:
 
 * If desired, convert the continuous scores to either binary sentiment classes (negative or positive) or tertiary directions (negative, neutral or positive). This conversion can be done with `convertToBinary()` or `convertToDirection()` respectively.
 
-* Compare the calculated sentiment socres with a baseline (i.e. a gold standard). Here,  `compareToResponse()` performs a statistical evaluation, while `plotSentimentResponse()` enables a visual comparison.
+* Compare the calculated sentiment scores with a baseline (i.e. a gold standard). Here,  `compareToResponse()` performs a statistical evaluation, while `plotSentimentResponse()` enables a visual comparison.
 
 * Generate customized dictionaries with the help of `generateDictionary()` as part of an advanced analysis. However, this prerequisites a response variable (i.e. the baseline). 
 
